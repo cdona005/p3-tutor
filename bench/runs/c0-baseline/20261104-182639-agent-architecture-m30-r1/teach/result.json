@@ -1,0 +1,152 @@
+{
+  "duration_api_ms": 163311,
+  "stop_reason": "end_turn",
+  "session_id": "05269f6c-a78d-4767-8599-8d8feadf4c7c",
+  "total_cost_usd": 0.5317736,
+  "usage": {
+    "input_tokens": 18,
+    "cache_creation_input_tokens": 61313,
+    "cache_read_input_tokens": 330849,
+    "output_tokens": 21786,
+    "output_tokens_details": {
+      "thinking_tokens": 1850
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 61313,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 573,
+        "cache_read_input_tokens": 67847,
+        "cache_creation_input_tokens": 4102,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 4102
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 18,
+      "outputTokens": 21786,
+      "cacheReadInputTokens": 330849,
+      "cacheCreationInputTokens": 61313,
+      "webSearchRequests": 0,
+      "costUSD": 0.4962329,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1850,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 61313,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    },
+    "claude-haiku-5-5": {
+      "inputTokens": 40652,
+      "outputTokens": 2951,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 3,
+      "costUSD": 0.0355407,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 837,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-haiku-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 24,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "The 30-minute lesson on O3 is written, with a quiz and key, a cheat sheet and updated notes. I haven't opened the lesson in a browser. I also haven't run any word count; I estimate about 3,800 words, which fits the 30-minute range.\n\n- **Lesson:** `lessons/0001-context-and-memory.html`. It opens with the win: you can decide whether each piece of information in the makerspace assistant belongs in the context window, in saved notes, or in a searchable library. It covers:\n  - what the context window and tokens are, and why the model only sees what is inside it;\n  - why every step re-sends the full history, with a worked token-cost example;\n  - what to do when the window fills up;\n  - notes as memory between sessions, using a student's training status;\n  - retrieval of manual chunks and how it fails;\n  - a table for choosing where each item lives, then a worked sorting example and a \"your turn\" exercise.\n- **Quiz:** `quizzes/0002.json` has five items on O3, and the key is `keys/0002.json`. It's ready when you are.\n- **Cheat sheet:** `cheatsheets/context-and-memory.html`.\n- **Workspace:** `RESOURCES.md` is new, and `NOTES.md` now records two new misconception ids, M7 and M8.\n\nEverything is cited from the Anthropic pages that came up in my searches. I only saw excerpts of them, so I left out their specific benchmark figures. I found no high-trust page on retrieval basics for manuals; `RESOURCES.md` lists that as a gap.\n\nYou can ask me anything about the lesson here in the chat.\n\nWhich would help most next: a lesson on writing a tool description, or one on workflow versus agent for the booking flow?",
+  "ttft_ms": 1446,
+  "type": "result",
+  "duration_ms": 152794,
+  "uuid": "d68daffb-a54b-4492-ab4c-f2eea24bab8d",
+  "ttft_stream_ms": 1138,
+  "time_to_request_ms": 250,
+  "first_content_frame_ms": 1138,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 18,
+      "outputTokens": 21786,
+      "cacheReadInputTokens": 330849,
+      "cacheCreationInputTokens": 61313,
+      "webSearchRequests": 0,
+      "costUSD": 0.4962329,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1850,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 61313,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    },
+    "claude-haiku-5-5": {
+      "inputTokens": 40652,
+      "outputTokens": 2951,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 3,
+      "costUSD": 0.0355407,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 837,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-haiku-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "credential_expires_at": "2026-11-19T11:33:50.141Z"
+}

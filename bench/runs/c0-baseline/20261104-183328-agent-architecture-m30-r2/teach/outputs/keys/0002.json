@@ -1,0 +1,32 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "b",
+      "rationale": "The model keeps nothing between calls, so the program resends the instructions and the whole growing message list each time. Picking a or d shows the idea that the model remembers earlier steps itself."
+    },
+    {
+      "id": "q2",
+      "answer": 7500,
+      "tolerance": 0,
+      "rationale": "Call 1: 2,000. Call 2: 2,000 + 50 + 450 = 2,500. Call 3: 2,500 + 50 + 450 = 3,000. Total 7,500. An answer of 3,000 counts only the final context and misses that each call resends everything."
+    },
+    {
+      "id": "q3",
+      "answer": "d",
+      "rationale": "Training status is small, must survive between visits and is needed in later sessions, so it is a saved note. The manual belongs in retrieval; the transcript of tool results is too bulky; the calendar listing is task-only working memory and goes stale."
+    },
+    {
+      "id": "q4",
+      "answer": "The search returned a different, higher-scoring chunk (for example because the wording did not match), so the model answered from the wrong text.",
+      "accepted": ["it retrieved the wrong chunk", "the search returned the wrong passage", "the wrong chunk scored higher", "the right page was not in the top results", "wording mismatch so the right chunk was missed", "the manual was split so the answer was cut across chunks"],
+      "rationale": "Retrieval returns the best-scoring chunks, not guaranteed-correct ones. Wording mismatch, a chunk boundary splitting the answer, or too few results can all leave out page 41, and the model then answers from what it was given."
+    },
+    {
+      "id": "q5",
+      "answer": "a",
+      "rationale": "A summary is lossy: a detail the task needs later may not be in it. The tools still work, the window size is fixed, and saved records live outside the context so they are untouched."
+    }
+  ]
+}

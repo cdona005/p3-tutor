@@ -1,0 +1,39 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "a",
+      "rationale": "The model is blank on every call; the program resends the whole history, so each later call reads more tokens. The model has no memory to reread (b), and per-token rates do not rise with the step number (c).",
+      "distractors": {"b": "M3"}
+    },
+    {
+      "id": "q2",
+      "answer": "b",
+      "rationale": "Nothing carries over between sessions unless it is saved outside the context and loaded back; a database read by the program or a tool is reliable for a hard fact. Trusting the model to recall (a) or enlarging the window (c) ignores that a new session starts blank, and a system prompt cannot change training data (d).",
+      "distractors": {"a": "M3", "c": "M7", "d": "M3"}
+    },
+    {
+      "id": "q3",
+      "answer": 1300,
+      "tolerance": 0,
+      "rationale": "The final call reads the whole history once: 100 + 600 + 600 = 1,300 tokens. 1,200 leaves out the question; 1,900 or more adds earlier calls' inputs together as if repeated inside one call.",
+      "distractors": {}
+    },
+    {
+      "id": "q4",
+      "answer": "c",
+      "rationale": "Every call is billed for all the tokens in the context, so twelve manuals paid for on every call is costly, and a very full context can reduce recall (context rot). A big window is allowed (a), and the model does not forget between steps within a run since the program resends the text (b).",
+      "distractors": {"b": "M3", "a": "M7"}
+    },
+    {
+      "id": "q5",
+      "answer": "It puts only the few passages that match the question into the context, and leaves out the rest of the manual (and the other manuals).",
+      "accepted": [
+        "Only the relevant chunks of the manual go into the context; the rest of the manual stays outside.",
+        "A few matching chunks are added; the whole manual is not."
+      ],
+      "rationale": "Full credit needs both parts: a few relevant passages in, the rest of the manual out. Only one half is partial. Saying the whole manual goes in, or that the model searches the files itself and keeps them, is wrong."
+    }
+  ]
+}

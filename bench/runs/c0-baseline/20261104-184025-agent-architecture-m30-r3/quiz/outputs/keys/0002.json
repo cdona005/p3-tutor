@@ -1,0 +1,49 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "c",
+      "rationale": "The difference is who owns the control flow: in a workflow, predefined code decides which step runs next; in an agent, the model decides its own next step and which tools to use. Model size (a), the mere presence of tools (b) and timing (d) do not separate the two; a workflow can use tools and models too.",
+      "distractors": {"b": "M8"}
+    },
+    {
+      "id": "q2",
+      "answer": "a",
+      "rationale": "The code decides every step (search, one model call, stop), so this is a workflow, even though it uses a tool and a model. Using a tool and a model (b) does not make a system an agent; the model writing its own wording (c) is not control of the flow, because it never chooses a step. Nothing here loops (d).",
+      "distractors": {"b": "M8", "c": "M8"}
+    },
+    {
+      "id": "q3",
+      "answer": 1,
+      "tolerance": 0,
+      "rationale": "In a workflow the code makes the decisions: it runs check_calendar and book_slot itself, with no model call, and the model is called once, only to write the confirmation. Answering 3 counts the tool calls as model calls, as if a model were needed to run each step (M8); answering 2 or 4 treats the model as an agent loop that decides each step.",
+      "distractors": {}
+    },
+    {
+      "id": "q4",
+      "answer": "b",
+      "rationale": "When the steps are known in advance and never change, a fixed workflow is the better choice: code runs them the same way every time, which is cheaper, faster and easier to test. Agents are not automatically better (a, M7), and handing known steps to a model adds cost and risk rather than safety (c, M7). A workflow can still call a model for one step, and then it costs something (d, M9).",
+      "distractors": {"a": "M7", "c": "M7", "d": "M9"}
+    },
+    {
+      "id": "q5",
+      "answer": "The code fixes the number of model calls in advance, so cost is small and predictable, while an agent loops an unknown number of times and each call re-reads the growing context.",
+      "accepted": [
+        "A workflow makes a known, small number of model calls, but an agent keeps looping and every step adds more to the context, so it uses more tokens.",
+        "The workflow's steps are fixed in code so there are fewer model calls; an agent may take many steps, each costing tokens."
+      ],
+      "rationale": "Full credit: a workflow's steps are fixed, so the number of model calls is small and known; an agent takes as many steps as it decides, each paid for in tokens, often with a growing context. Saying only 'agents are more expensive' without a reason is partial. Saying workflows do not use a model at all is wrong (M9)."
+    },
+    {
+      "id": "q6",
+      "answer": "Its steps cannot be known in advance, because what to do next depends on what earlier steps turn up.",
+      "accepted": [
+        "It is open-ended, so the steps can't be fixed ahead of time and the model must decide them as it goes.",
+        "The path depends on intermediate results, so the model has to choose the next step each time.",
+        "The number and order of steps are unpredictable."
+      ],
+      "rationale": "An agent pays off when the path cannot be written down in advance, so the model must choose each next step from what it has learned so far. Saying the task is 'harder' or 'more important' is not enough: a hard task with known steps is still a good workflow (M7)."
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat sheet: context and memory in an agent</title>
+  <style>
+    body { max-width: 44rem; margin: 0 auto; padding: 1.5rem 1rem; font-family: Charter, Georgia, serif; line-height: 1.5; color: #1f1d1a; background: #fffdf8; }
+    h1 { font-size: 1.5rem; } h2 { font-size: 1.1rem; margin-top: 1.5rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    th, td { text-align: left; vertical-align: top; padding: 0.35rem 0.5rem; border-bottom: 1px solid #e4dfd4; }
+    @media (prefers-color-scheme: dark) { body { background: #171614; color: #e9e5dc; } th, td { border-color: #36332e; } }
+  </style>
+</head>
+<body>
+  <h1>Context and memory in an agent</h1>
+  <p>From <a href="../lessons/0001-context-and-memory-in-an-agent.html">lesson 1</a>.</p>
+  <h2>Terms</h2>
+  <ul>
+    <li><strong>Context window</strong>: the limit on tokens in one model call (system prompt, tool definitions, messages, tool results, and the reply).</li>
+    <li><strong>Context rot</strong>: accuracy falls as the context grows.</li>
+    <li><strong>Memory</strong>: information stored outside the window and loaded back in.</li>
+    <li><strong>Retrieval</strong>: finding relevant stored material and putting it in the context.</li>
+  </ul>
+  <h2>Facts to remember</h2>
+  <ul>
+    <li>The model keeps nothing between calls; the program resends the message list each time.</li>
+    <li>Early tokens are paid for again on every later call, so clear bulky results once used.</li>
+    <li>Nothing survives a session unless saved and loaded again.</li>
+    <li>The model only asks for a search or a file operation; the program runs it.</li>
+  </ul>
+  <h2>Where does it go?</h2>
+  <table>
+    <tr><th>Kind of information</th><th>Put it in</th></tr>
+    <tr><td>Small, stays true, matters later (training status)</td><td>Saved record, loaded at session start</td></tr>
+    <tr><td>Changes constantly (calendar)</td><td>Live tool call</td></tr>
+    <tr><td>Long and shared (manuals)</td><td>Library; retrieve the top few chunks</td></tr>
+    <tr><td>Already used (raw results)</td><td>Clear or drop</td></tr>
+  </table>
+  <p>Source: <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Effective context engineering for AI agents</a>.</p>
+</body>
+</html>

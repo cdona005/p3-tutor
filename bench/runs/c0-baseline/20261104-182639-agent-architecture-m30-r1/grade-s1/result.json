@@ -1,0 +1,120 @@
+{
+  "duration_api_ms": 32895,
+  "stop_reason": "end_turn",
+  "session_id": "bda05db5-d3e3-40a0-8b91-404e571c3e88",
+  "total_cost_usd": 0.1598908,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 28856,
+    "cache_read_input_tokens": 101908,
+    "output_tokens": 3426,
+    "output_tokens_details": {
+      "thinking_tokens": 189
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 28856,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 617,
+        "cache_read_input_tokens": 37248,
+        "cache_creation_input_tokens": 2244,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 2244
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 3426,
+      "cacheReadInputTokens": 101908,
+      "cacheCreationInputTokens": 28856,
+      "webSearchRequests": 0,
+      "costUSD": 0.1598908,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 189,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 28856,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 15,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "I graded Riley's submission s1 for quiz 0001 and wrote the grades to `grades/0001-s1.json`: 2 correct, 2 partial, 2 wrong.\n\n| Item | Verdict | Feedback |\n|---|---|---|\n| q1 | Correct | The loop is what makes a system an agent. |\n| q2 | Wrong (M4) | A model only writes text. Here it writes a request naming check_calendar, and the program runs it. |\n| q3 | Correct | A step limit is the right safeguard against a repeating loop. |\n| q4 | Wrong (M4) | The answer is 4 model calls, not 1. The program runs the tools, and the model is called once for the question and once after each of the three tool results. |\n| q5 | Partial | Riley gave what happens, that the result goes back to the model. They left out why: the model needs it to choose its next step or answer. |\n| q6 | Partial (M3) | The first half is right: the model picks a tool from its name and description. The second half is wrong: the model does not remember earlier sessions on its own. |\n\n**Summary:** Riley has the loop, the need for a stopping condition, and tool choice from descriptions. The thing to fix is who does what: the model only writes text, and the program runs the tools and calls the model again. That mix-up cost q2 and q4 and also shaped Riley's view of memory in q6.\n\nI also added `learning-records/0003-who-runs-the-tools.md` and updated `NOTES.md`.\n\n**Next step for Riley:** redraw the laser-cutter trace with two columns, \"model\" and \"program\", put every step in one of them, and count the model calls. After that we can move on to what the model sees on each call, which is where memory comes in.\n\nI haven't graded `submissions/s2.json` (the retake four days later). Do you want me to grade it next, so we can see whether the M4 mix-up has changed?",
+  "ttft_ms": 2301,
+  "type": "result",
+  "duration_ms": 33075,
+  "uuid": "a7e34d17-c905-46ed-8782-43720d1f8d01",
+  "ttft_stream_ms": 1939,
+  "time_to_request_ms": 145,
+  "first_content_frame_ms": 1939,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 3426,
+      "cacheReadInputTokens": 101908,
+      "cacheCreationInputTokens": 28856,
+      "webSearchRequests": 0,
+      "costUSD": 0.1598908,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 189,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 28856,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "credential_expires_at": "2026-11-19T11:33:50.141Z"
+}

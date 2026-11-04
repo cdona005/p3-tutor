@@ -1,0 +1,52 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "b",
+      "rationale": "The difference is who owns the control flow: in a workflow, code written in advance decides the steps and their order; in an agent, the model decides what to do next, step by step. Counting model calls (a) or tools (c) does not tell them apart, since workflows can use both, and a workflow can contain a model (d).",
+      "distractors": {"a": "M7", "c": "M8", "d": "M9"}
+    },
+    {
+      "id": "q2",
+      "answer": "c",
+      "rationale": "The code fixes the steps and their order, so the code owns the control flow and this is a workflow, even though it uses a tool and a model call. Using a tool or a model (a, b) does not make a system an agent; the model has no say over what happens next. The number of calls (d) is not the test.",
+      "distractors": {"a": "M8", "b": "M8", "d": "M7"}
+    },
+    {
+      "id": "q3",
+      "answer": 6,
+      "tolerance": 0,
+      "rationale": "The agent makes 4 + 1 = 5 model calls, which is 10 cents. The workflow makes 2 calls, which is 4 cents. The difference is 6 cents. An answer of 8 counts only the tool requests and misses the final-answer call."
+    },
+    {
+      "id": "q4",
+      "answer": "d",
+      "rationale": "Booking with known machine, date and time has steps that are the same every time, so code can run them in a fixed order, cheaply and predictably. The other three are open-ended: the steps depend on what is found along the way, which is where an agent earns its extra cost.",
+      "distractors": {"a": "M10", "b": "M10", "c": "M10"}
+    },
+    {
+      "id": "q5",
+      "answer": "When the steps are known in advance, code can run them with fewer model calls, so it costs less and behaves predictably.",
+      "accepted": [
+        "It is cheaper because it needs fewer model calls.",
+        "It costs less and is more predictable than an agent.",
+        "It is cheaper and more reliable because the steps are fixed.",
+        "The model does not need to decide the steps, so there are fewer model calls and lower cost.",
+        "It is predictable and easier to test."
+      ],
+      "rationale": "Any one of lower cost (fewer model calls), predictability or reliability, or ease of testing earns full credit, given that the steps are fixed. Claiming a workflow is smarter or more capable than an agent is wrong."
+    },
+    {
+      "id": "q6",
+      "answer": "Flexibility: it cannot adapt its steps to a request it was not built for.",
+      "accepted": [
+        "Flexibility",
+        "The ability to adapt to unexpected requests",
+        "The model cannot choose different steps for different requests",
+        "It can't handle open-ended tasks where the steps are not known in advance"
+      ],
+      "rationale": "A workflow's steps are fixed in code, so it cannot choose a different path when a request does not fit; that flexibility is what an agent adds, at the cost of more model calls and less predictability. Answers about accuracy or intelligence do not follow from the choice."
+    }
+  ]
+}

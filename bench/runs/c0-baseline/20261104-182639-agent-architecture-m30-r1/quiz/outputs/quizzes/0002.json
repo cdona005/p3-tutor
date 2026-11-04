@@ -1,0 +1,68 @@
+{
+  "id": "0002",
+  "objective": "O4",
+  "title": "Workflows, agents, and who owns the control flow",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Control flow means the decision of what step comes next. Which question best separates a workflow from an agent?",
+      "options": [
+        {"id": "a", "text": "How many different tools the system is able to call"},
+        {"id": "b", "text": "How large the language model inside the system is"},
+        {"id": "c", "text": "Whether the code or the model decides the next step"},
+        {"id": "d", "text": "How many model calls one student request will need"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Program A is Python code that always runs three steps in this order: a model call that rewrites the student's question, a search_manuals call, then a model call that writes the answer. Program B gives a model the tools search_manuals and check_calendar and loops until the model says it is done. Which statement is correct?",
+      "options": [
+        {"id": "a", "text": "A is a workflow, because its code fixes the order of steps in advance"},
+        {"id": "b", "text": "A is an agent, because it calls a model twice and uses a tool"},
+        {"id": "c", "text": "B is a workflow, because its code repeats the same loop every time"},
+        {"id": "d", "text": "Both are agents, because each of them uses a model and a tool"}
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Every booking request in the makerspace assistant needs the same four steps in the same order: verify the student's training, check the calendar, create the booking, send the confirmation. The team has a small model budget. What is the best design for this part?",
+      "options": [
+        {"id": "a", "text": "An agent, because a model can adapt if the booking steps ever change"},
+        {"id": "b", "text": "An agent, because bookings matter and a model can judge each step"},
+        {"id": "c", "text": "An agent, because it can be given all four tools in a single loop"},
+        {"id": "d", "text": "A workflow, because the steps are known and a fixed path is cheaper"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "numeric",
+      "objective": "O4",
+      "stem": "A fixed workflow answers a manual question with exactly 3 model calls. An agent handles the same kind of question; each of its model calls requests exactly one tool or writes the final answer. On one question the agent requests 6 tools in a row and then writes its final answer. How many more model calls did the agent make than the workflow did?",
+      "unit": "model calls"
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O4",
+      "stem": "In one sentence, what must be true about a task's steps for an agent to be worth its extra cost over a fixed workflow?"
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "The assistant has two jobs. Job 1: book equipment, which always follows the same four steps. Job 2: help a student whose machine is failing, where the number of manual searches and calendar checks depends on what each result turns up, and cannot be listed in advance. Which design fits both jobs best?",
+      "options": [
+        {"id": "a", "text": "Agents for both jobs, so one design handles every request"},
+        {"id": "b", "text": "A workflow for Job 1 and an agent for Job 2"},
+        {"id": "c", "text": "An agent for Job 1 and a workflow for Job 2"},
+        {"id": "d", "text": "Workflows for both jobs, so every cost stays predictable"}
+      ]
+    }
+  ]
+}

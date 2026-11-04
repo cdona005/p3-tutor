@@ -1,0 +1,56 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your assistant's loop has just run a tool and is about to call the model a second time in the same request. How does the model know what happened in the first call?",
+      "options": [
+        {"id": "a", "text": "The program sends the earlier messages again as part of the input"},
+        {"id": "b", "text": "The model keeps a private memory of its earlier call until it ends"},
+        {"id": "c", "text": "The model looks up its earlier call in the provider's saved logs"},
+        {"id": "d", "text": "The tool sends its result straight into the model's stored memory"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "In one request, the system prompt and tool descriptions take 800 tokens and the student's question takes 200. The model's first call outputs a 30-token tool request, the tool returns a 600-token result, and a second call writes the final answer. Counting only input tokens, how many tokens are sent to the model across the two calls?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "A student finishes bandsaw training today and comes back next month. Which design lets the assistant know about the training then?",
+      "options": [
+        {"id": "a", "text": "A model with a window big enough to hold today's whole chat"},
+        {"id": "b", "text": "A short saved record, loaded into the context at session start"},
+        {"id": "c", "text": "A system prompt that tells the model to remember each student"},
+        {"id": "d", "text": "A chat history kept inside the model after the session closes"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O3",
+      "stem": "Your teammate suggests pasting all twelve machine manuals into the system prompt of every request. Give one reason, in a sentence or two, why retrieving a few relevant chunks is better."
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "A student's session ends. Which of these is gone when the next session starts, unless your program saved it somewhere else?",
+      "options": [
+        {"id": "a", "text": "The manuals stored in the search index"},
+        {"id": "b", "text": "The booking records kept in the calendar system"},
+        {"id": "c", "text": "The tool results held in that session's messages list"},
+        {"id": "d", "text": "The notes file the program wrote to disk"}
+      ]
+    }
+  ]
+}

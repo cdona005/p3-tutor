@@ -1,0 +1,62 @@
+{
+  "id": "0002",
+  "objective": "O4",
+  "title": "Workflows, agents and who owns the control flow",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Which statement best separates a workflow from an agent?",
+      "options": [
+        {"id": "a", "text": "A workflow makes one model call; an agent makes several in a row"},
+        {"id": "b", "text": "In a workflow, code fixes the steps; in an agent, the model picks them"},
+        {"id": "c", "text": "A workflow cannot use any tools; an agent is the only design that can"},
+        {"id": "d", "text": "A workflow has no model inside it; an agent is built around a model"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "In your makerspace assistant, the Python code always calls search_manuals with the student's question, then makes one model call that writes an answer from the top three passages, then returns it. Nothing else can happen. What is this design?",
+      "options": [
+        {"id": "a", "text": "An agent, because it calls a tool and then calls a language model"},
+        {"id": "b", "text": "An agent, because the model chooses the wording of the final answer"},
+        {"id": "c", "text": "A workflow, because the code decides every step and its order"},
+        {"id": "d", "text": "A workflow, because it makes fewer than five calls to the model"}
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "objective": "O4",
+      "stem": "Assume every model call costs 2 cents, and tool runs cost nothing. A fixed workflow answers a booking request with exactly 2 model calls. An agent handles the same request with one model call per step: one call for each of its 4 tool requests, plus one call for the final answer. How many cents more does the agent cost per request than the workflow?",
+      "unit": "cents"
+    },
+    {
+      "id": "q4",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Which part of the makerspace assistant is the best candidate for a fixed workflow rather than an agent?",
+      "options": [
+        {"id": "a", "text": "Working out why a student's 3D print keeps failing halfway through"},
+        {"id": "b", "text": "Answering open questions that may need several manuals and the calendar"},
+        {"id": "c", "text": "Helping a student plan which machines a new project will need"},
+        {"id": "d", "text": "Booking a slot once machine, date and time are known: check, book, confirm"}
+      ]
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O4",
+      "stem": "Your sponsor gave you a small model budget. In one sentence, give one reason a fixed workflow is a good fit for a task whose steps are the same every time."
+    },
+    {
+      "id": "q6",
+      "type": "short",
+      "objective": "O4",
+      "stem": "In one sentence, what is the main thing you give up by choosing a fixed workflow instead of an agent for a task?"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "c",
+      "rationale": "In a workflow, code written in advance decides the path; in an agent, the model decides its own next step and tool use. Number of tools, model size and number of calls can all vary within either kind of system.",
+      "distractors": {"a": "M7", "b": "M7", "d": "M7"}
+    },
+    {
+      "id": "q2",
+      "answer": "a",
+      "rationale": "Program A has a path fixed by code before any request arrives, which makes it a workflow even though it calls a model. Program B lets the model choose which tool to call next and when to stop, so the model owns the control flow and B is an agent. Using a model and a tool does not make a system an agent.",
+      "distractors": {"b": "M8", "c": "M8", "d": "M8"}
+    },
+    {
+      "id": "q3",
+      "answer": "d",
+      "rationale": "When the steps are known in advance, a fixed workflow gives the same result with fewer model calls, lower cost and more predictable behaviour. An agent's flexibility is wasted here, and it would add cost and the chance of skipping or reordering a step.",
+      "distractors": {"a": "M9", "b": "M9", "c": "M9"}
+    },
+    {
+      "id": "q4",
+      "answer": 4,
+      "tolerance": 0,
+      "rationale": "The agent makes one model call per tool request (6) plus one for the final answer: 7 calls. The workflow makes 3, so the difference is 7 - 3 = 4. This is the cost of flexibility: an agent's call count depends on the request, while a workflow's is fixed."
+    },
+    {
+      "id": "q5",
+      "answer": "The steps cannot be known in advance, because which step comes next depends on what earlier results turn up.",
+      "accepted": [
+        "The steps are unpredictable and depend on intermediate results",
+        "The path cannot be listed in advance",
+        "The number and order of steps depend on what earlier steps find",
+        "It is open-ended, so the needed steps can't be fixed beforehand",
+        "The steps cannot be predicted ahead of time"
+      ],
+      "rationale": "An agent pays off when the path cannot be written down ahead of time, because each next step depends on what earlier steps returned. If the steps can be listed in advance, a workflow does the job more cheaply and predictably. Answers like 'the task is hard', 'important' or 'uses many tools' miss the point (M9)."
+    },
+    {
+      "id": "q6",
+      "answer": "b",
+      "rationale": "Choose per job: the booking steps are known, so a fixed workflow is cheaper and more predictable; troubleshooting has an unpredictable path, so the model needs to own the control flow. Using agents for both (a) pays for flexibility the booking job does not need (M9); workflows for both (d) cannot handle the open-ended job; swapping them (c) reverses the logic.",
+      "distractors": {"a": "M9", "c": "M9"}
+    }
+  ]
+}

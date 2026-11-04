@@ -1,0 +1,34 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "a",
+      "rationale": "Every model call is separate and the model keeps no state; the program re-sends the history (the messages list) on each call. Options b, c and d each assume the model or provider holds memory between calls (M7).",
+      "distractors": {"b": "M7", "c": "M7", "d": "M7"}
+    },
+    {
+      "id": "q2",
+      "answer": 2630,
+      "tolerance": 0,
+      "rationale": "Call 1 sends 800 + 200 = 1,000 tokens. Call 2 re-sends all of that plus the 30-token request and 600-token result: 1,630. Total 1,000 + 1,630 = 2,630. An answer of 1,830 (adding only the new text once) shows the history is not re-sent each call (M7)."
+    },
+    {
+      "id": "q3",
+      "answer": "b",
+      "rationale": "Memory between sessions is text the program saves outside the window and loads in later. A large window (a) cannot outlast the session (M8); a prompt instruction (c) gives the model nothing to remember; a model does not keep chats after a session (d, M7).",
+      "distractors": {"a": "M8", "c": "M7", "d": "M7"}
+    },
+    {
+      "id": "q4",
+      "answer": "It is cheaper and more focused: every token in the context is paid for on every call, and irrelevant text crowds the window and distracts the model, so only the few relevant chunks should go in.",
+      "accepted": ["cheaper", "it costs fewer tokens", "fewer tokens per call", "the manuals may not fit in the window", "they would fill the context window", "less irrelevant text for the model to sort through"],
+      "rationale": "Full credit for any one valid reason: cost (tokens re-sent on every call), the window limit, or noise from irrelevant text. Saying a larger window makes pasting fine shows M8."
+    },
+    {
+      "id": "q5",
+      "answer": "c",
+      "rationale": "The messages list and tool results live in the context, which ends with the session. The search index, calendar system and notes file are stored outside it and persist."
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "duration_api_ms": 18244,
+  "stop_reason": "end_turn",
+  "session_id": "4eb98faf-b451-4361-b04a-702f0cea3776",
+  "total_cost_usd": 0.13053720000000002,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 24795,
+    "cache_read_input_tokens": 99312,
+    "output_tokens": 2141,
+    "output_tokens_details": {
+      "thinking_tokens": 783
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 24795,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 547,
+        "cache_read_input_tokens": 34549,
+        "cache_creation_input_tokens": 882,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 882
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 2141,
+      "cacheReadInputTokens": 99312,
+      "cacheCreationInputTokens": 24795,
+      "webSearchRequests": 0,
+      "costUSD": 0.13053720000000002,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 783,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 24795,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 10,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Here's a fresh angle, with no code.\n\n**Picture a manager in a windowless office.** They can't leave the room, and they can't see the makerspace. Next to them is a runner who can go anywhere in the building. On the desk is a **menu card** from the runner. It lists the errands they'll do, for example \"Check the booking calendar: tell me which machine and which date.\"\n\nA student slides a question under the door: \"Is the laser cutter free tomorrow?\"\n\n1. The manager can't look at the calendar. They write a **slip**: \"Check the calendar: laser cutter, tomorrow's date.\" Then they stop and wait.\n2. The runner reads the slip and does the errand. The manager never does it, and neither does the slip.\n3. The runner puts a **result slip** on the desk: \"Booked 2–4 pm.\"\n4. The manager reads everything on the desk again, from the student's question down to the result slip. They either write another errand slip or write the answer for the student.\n\nThe manager's only skills are reading and writing. All they know about the runner's abilities is what's written on the menu card, so a vague card gets errands requested wrongly or not at all.\n\n**Where the analogy breaks:** a real manager would remember yesterday. The model remembers nothing, so the program hands it the whole pile of paper every time. A longer pile costs more, which matters for your budget.\n\nTry this to check it landed: in your own words, who actually does the errand, and what does the manager learn from the menu card?\n\nIf you'd like, I can turn this into a 15-minute lesson that walks through the calendar example step by step. Your quiz 0001 is still waiting to be graded. I'm keeping this to the general idea and not discussing its items until it is.",
+  "ttft_ms": 1018,
+  "type": "result",
+  "duration_ms": 18425,
+  "uuid": "cd79d48f-590a-47c3-bbf6-7385d49d6c16",
+  "ttft_stream_ms": 990,
+  "time_to_request_ms": 146,
+  "first_content_frame_ms": 990,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 2141,
+      "cacheReadInputTokens": 99312,
+      "cacheCreationInputTokens": 24795,
+      "webSearchRequests": 0,
+      "costUSD": 0.13053720000000002,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 783,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 24795,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "credential_expires_at": "2026-11-19T11:33:50.141Z"
+}

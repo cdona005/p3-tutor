@@ -1,0 +1,68 @@
+{
+  "id": "0002",
+  "objective": "O4",
+  "title": "Workflows and agents: who owns the control flow?",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Which statement best separates a workflow from an agent?",
+      "options": [
+        {"id": "a", "text": "A workflow uses tools to act, while an agent only writes text"},
+        {"id": "b", "text": "A workflow calls the model one time, while an agent calls it more"},
+        {"id": "c", "text": "In a workflow the code fixes the steps, while in an agent the model picks them"},
+        {"id": "d", "text": "A workflow runs without any model, while an agent always has a model"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "For every student message, a makerspace assistant does this. Step 1: one model call labels the message 'manual question' or 'booking request'. Step 2: if the label is 'manual question', the code searches the manuals and makes a second model call to write the answer; if it is 'booking request', the code runs a fixed booking routine. Who owns the control flow, and what is this system?",
+      "options": [
+        {"id": "a", "text": "The model owns it, so this is an agent, because its label picks the branch"},
+        {"id": "b", "text": "The code owns it, so this is a workflow, because the code defines every branch"},
+        {"id": "c", "text": "The model owns it, so this is an agent, because it calls the model twice"},
+        {"id": "d", "text": "The code owns it, so this is a workflow, because it never uses any tool"}
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Which of these makerspace tasks is the worst fit for a fixed workflow, because its steps cannot be written down in advance?",
+      "options": [
+        {"id": "a", "text": "Telling a student the laser cutter's opening hours from one manual page"},
+        {"id": "b", "text": "Booking a slot once the student has confirmed the time they asked for"},
+        {"id": "c", "text": "Sending a reminder the day before each booking, always in the same form"},
+        {"id": "d", "text": "Finding why a student's print failed, where each next check depends on the last result"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "numeric",
+      "objective": "O4",
+      "stem": "A fixed workflow for booking always makes 2 model calls per request. An agent doing the same job averages 6 model calls per request. Assume every model call costs $0.004 and nothing else costs money. How many dollars does the workflow save over 500 requests?",
+      "unit": "dollars"
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O4",
+      "stem": "A program takes a student's question and makes one model call to draft an answer. Its code then always makes a second model call to check the draft against the manual, and then returns the result. Answer with one word: is this a workflow or an agent?"
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "At the design review, a teammate says: 'Booking should be an agent, because agents are more advanced.' Booking always means checking the calendar, then writing the booking, then confirming it. Which reply best defends a fixed workflow?",
+      "options": [
+        {"id": "a", "text": "The steps are known in advance, so code can run them with fewer model calls and fewer surprises"},
+        {"id": "b", "text": "Agents are more accurate on every task, but the sponsor's budget is too small to pay for that"},
+        {"id": "c", "text": "A workflow is the better choice only when the model is too weak to decide the next step"},
+        {"id": "d", "text": "An agent cannot call a calendar tool, because only code that is fixed in advance can call tools"}
+      ]
+    }
+  ]
+}

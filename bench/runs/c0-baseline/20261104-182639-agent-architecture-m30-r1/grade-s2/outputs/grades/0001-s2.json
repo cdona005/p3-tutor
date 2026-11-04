@@ -1,0 +1,43 @@
+{
+  "quiz": "0001",
+  "submission": "s2",
+  "items": [
+    {
+      "id": "q1",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Right. What makes a system an agent is the loop: the model picks an action, the program runs it, and the result comes back for the next step. A longer prompt or a bigger model changes what one call can do, not the structure."
+    },
+    {
+      "id": "q2",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Right. The model only writes a request that names check_calendar with the laser cutter and tomorrow's date as arguments. The program around it runs the tool. This is a change from your first attempt, where you picked the option that had the model open the booking system itself."
+    },
+    {
+      "id": "q3",
+      "verdict": "wrong",
+      "misconception": "M6",
+      "feedback": "You picked 'left to run longer, it will eventually fix the bug'. That is tempting because a person who keeps trying often does get there. But this agent got the same failing test 40 times in a row, so another 40 steps will give the same result and cost money. The fix is a stopping condition, such as a step limit that ends the loop and reports what happened (option b). You got this one right on your first attempt, so it is worth rereading why. For your budget, a step limit is also what caps the cost of a single request."
+    },
+    {
+      "id": "q4",
+      "verdict": "partial",
+      "misconception": "M4",
+      "feedback": "Your 4 is right, and so is the order of the calls. The reason is off, though: you wrote that the model 'runs' each tool itself. It doesn't. In each of the first three calls the model only writes a request for one tool, the program runs the tool, and the result goes back in. The fourth call writes the answer. So the count is 3 requests + 1 answer = 4 model calls, and the three tool runs are not model calls at all."
+    },
+    {
+      "id": "q5",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Right, and you gave both halves: the result goes back in as the model's next input, and the model then takes its turn with it in front of it so it can decide what to do next. Your group-chat comparison works well. One addition: the model keeps no memory between calls, so this is the only way it learns what the tool returned."
+    },
+    {
+      "id": "q6",
+      "verdict": "partial",
+      "misconception": null,
+      "feedback": "The name is part of it, but it isn't enough on its own. The model gets a description for each tool: the name, what the tool does, and the parameters it takes, and it picks the tool whose description fits the request. On your first attempt you had this fuller version, so you know it. A name alone can mislead: a tool called 'check' could mean anything. This is why the descriptions you write for the makerspace tools matter."
+    }
+  ],
+  "summary": "You have the core of the agent loop down: q1, q2 and q5 are correct, and your answer to q2 is now correct where your first attempt was not. Two things to work on. First, the model never runs a tool; it writes a request and the program runs it. Your q4 answer still said 'runs', even though the count was right. Second, an agent needs a stopping condition: you chose the 'it will eventually fix it' option on q3, and that option is wrong. Next step: trace one makerspace request on paper, marking each line as 'model writes' or 'program runs', then add a step limit and say what happens when it is reached."
+}

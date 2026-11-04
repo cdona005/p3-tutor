@@ -1,0 +1,50 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your assistant's program calls the model three times to answer one question. Between the second and third call, what does the model itself carry over from the second call?",
+      "options": [
+        {"id": "a", "text": "Everything in the second call, held inside the model until the session ends"},
+        {"id": "b", "text": "Only the tool results, which it stores until the final answer is written"},
+        {"id": "c", "text": "Nothing; the program resends the message list, including the new result"},
+        {"id": "d", "text": "A summary it writes for itself, saved inside the model between the calls"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "A request uses a system prompt and tool definitions totalling 2,000 tokens. The student's question is 100 tokens. The model makes two tool requests of 50 tokens each, and each tool returns a 1,000-token result. Nothing is cleared. The model is called three times, and each call is sent the full list so far. Counting only input tokens, how many tokens are sent in total across the three calls?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "A student finished the 3D printer training on Monday and returns on Thursday for a new session. The program saved nothing after Monday. What can the assistant do on Thursday?",
+      "options": [
+        {"id": "a", "text": "Recall the training, because the model learned it from Monday's chat"},
+        {"id": "b", "text": "Recall the training, because a long context window keeps old sessions"},
+        {"id": "c", "text": "Recall the training, because the tools reveal what the model said before"},
+        {"id": "d", "text": "Not know of the training unless the student or a tool provides it"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O3",
+      "stem": "In one sentence, give a reason why putting all the machine manuals into every model call is a poor design, even if they fit in the context window."
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O3",
+      "stem": "Your assistant could save either (1) each student's training completions or (2) the current booking calendar for next week, so it does not have to look them up. Which should it save between sessions, and why is the other a bad thing to save?"
+    }
+  ]
+}

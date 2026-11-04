@@ -1,0 +1,56 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "An agent run has made five model calls. Why does the fifth call cost more to read than the first, even if the fifth tool result is tiny?",
+      "options": [
+        {"id": "a", "text": "The program resends the earlier messages, so the fifth call reads all of them"},
+        {"id": "b", "text": "The model remembers the earlier calls and must reread its own memory"},
+        {"id": "c", "text": "Later calls are always billed at a higher rate per token than the first"},
+        {"id": "d", "text": "The window shrinks with each call, so the model reads each token twice"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "A student finishes laser-cutter training on Tuesday. On Thursday, in a brand-new session, the assistant must know this. Which design makes that reliable?",
+      "options": [
+        {"id": "a", "text": "Trust the model to recall Tuesday, since it was told once already"},
+        {"id": "b", "text": "Save the status in a database and load it when the session starts"},
+        {"id": "c", "text": "Enlarge the context window so that Tuesday's session still fits inside"},
+        {"id": "d", "text": "Write the status into the system prompt of the model's training data"}
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "Ignoring the system prompt and tool descriptions, a student's question is 100 tokens and the program makes two tool calls, each result 600 tokens. Counting only the question and the two results, how many tokens does the model read on its final call, which writes the answer?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q4",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your team proposes pasting all twelve machine manuals into the system prompt of every request, since the model's window is large enough to hold them. What is the best objection?",
+      "options": [
+        {"id": "a", "text": "Large windows are an error; the request would be refused outright"},
+        {"id": "b", "text": "The model would forget the manuals after the first answer it gives"},
+        {"id": "c", "text": "Every call would pay for all that text, and recall may worsen"},
+        {"id": "d", "text": "The model cannot read text placed in a system prompt at all"}
+      ]
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O3",
+      "stem": "In one or two sentences: when the assistant answers a question using a manual, what does retrieval put into the context, and what does it leave out?"
+    }
+  ]
+}

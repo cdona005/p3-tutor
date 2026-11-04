@@ -1,0 +1,33 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "c",
+      "rationale": "The model keeps nothing between calls; the program holds the message list and resends it each time. Picking a, b or d shows the belief that the model stores state itself."
+    },
+    {
+      "id": "q2",
+      "answer": 9450,
+      "tolerance": 0,
+      "rationale": "Call 1: 2,000 + 100 = 2,100. Call 2 adds a 50-token request and a 1,000-token result: 3,150. Call 3 adds another 50 and 1,000: 4,200. Total 2,100 + 3,150 + 4,200 = 9,450. An answer of 4,200 counts only the last call and forgets that earlier material is resent each time."
+    },
+    {
+      "id": "q3",
+      "answer": "d",
+      "rationale": "Nothing is remembered between sessions by default. Without saved information loaded back into the context, or the student restating it, the assistant cannot know."
+    },
+    {
+      "id": "q4",
+      "answer": "It costs more on every call, because the text is resent each time, and a fuller context can reduce accuracy (context rot).",
+      "accepted": ["it is expensive and lowers accuracy", "cost and context rot", "too many tokens cost more on every call and can hurt accuracy", "they are resent every call so cost rises, and too much context hurts accuracy"],
+      "rationale": "Any answer naming the per-call cost of resending lots of tokens, or the loss of accuracy with a bloated context, is right. Best answers name both."
+    },
+    {
+      "id": "q5",
+      "answer": "Save the training completions, since they are small and stay true; the calendar changes constantly, so a saved copy would go stale and be wrong.",
+      "accepted": ["training completions; the calendar goes stale", "save training records because the calendar changes", "training status, because calendar data changes and would be out of date"],
+      "rationale": "Stable facts that matter later belong in saved memory; fast-changing facts are fetched live. An answer that saves the calendar, or that picks training without a reason, is not fully correct."
+    }
+  ]
+}

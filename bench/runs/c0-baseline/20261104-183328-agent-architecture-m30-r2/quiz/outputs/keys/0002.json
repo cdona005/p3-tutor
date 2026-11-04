@@ -1,0 +1,41 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "c",
+      "rationale": "The difference is who owns the control flow: in a workflow the developer's code fixes the path of steps; in an agent the model decides the next step and when to stop. Both can use tools (a, M7) and both can call the model several times (b, M8), and a workflow can still use a model (d).",
+      "distractors": {"a": "M7", "b": "M8"}
+    },
+    {
+      "id": "q2",
+      "answer": "b",
+      "rationale": "This is routing, a workflow pattern: the model's label only chooses between branches the code already defines, and code runs everything else. A model making a decision inside the path does not make the system an agent (a, M9), and the number of model calls does not decide it either (c, M8). Workflows can use tools; here the manual search and booking routine are tools, so d is also wrong (M7).",
+      "distractors": {"a": "M9", "c": "M8", "d": "M7"}
+    },
+    {
+      "id": "q3",
+      "answer": "d",
+      "rationale": "Diagnosing a failed print has no fixed sequence: each next check depends on what the last one showed, so the model must choose the steps, which is what an agent does. The other three have steps known in advance and suit a fixed workflow.",
+      "distractors": {"a": "M10", "b": "M10", "c": "M10"}
+    },
+    {
+      "id": "q4",
+      "answer": 8,
+      "tolerance": 0.01,
+      "rationale": "The workflow uses 4 fewer calls per request (6 - 2), so 4 x 500 = 2000 calls saved, and 2000 x $0.004 = $8. A fixed workflow also makes cost predictable, since the number of calls is set by the code, while an agent's call count varies with how long its loop runs."
+    },
+    {
+      "id": "q5",
+      "answer": "workflow",
+      "accepted": ["a workflow", "a fixed workflow", "fixed workflow", "workflow."],
+      "rationale": "The code fixes the sequence (draft, check, return), so the code owns the control flow even though the model is called twice; this is a prompt chain, a workflow. Answering agent shows M8 (more than one call makes an agent) or M9."
+    },
+    {
+      "id": "q6",
+      "answer": "a",
+      "rationale": "When the steps are known in advance, a fixed workflow gets the same result with fewer model calls, lower and more predictable cost, and no chance of the model wandering; that is the case for it. Agents are not always more accurate (b, M10), a workflow is not just for weak models (c, M11), and agents can call tools (d, M7).",
+      "distractors": {"b": "M10", "c": "M11", "d": "M7"}
+    }
+  ]
+}

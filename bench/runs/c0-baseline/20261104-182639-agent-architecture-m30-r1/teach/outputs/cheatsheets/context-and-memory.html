@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat sheet: context and memory</title>
+  <style>
+    body { max-width: 40rem; margin: 0 auto; padding: 2rem 1rem; font-family: Georgia, serif; line-height: 1.5; }
+    h1 { font-size: 1.6rem; } h2 { font-size: 1.15rem; margin-top: 1.5rem; }
+    table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+    th, td { text-align: left; vertical-align: top; padding: 0.35rem 0.5rem; border-bottom: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+<h1>Context and memory: one page</h1>
+<h2>Terms</h2>
+<ul>
+  <li><strong>Context:</strong> all text the model sees for one call (system prompt, tool descriptions, messages, tool results).</li>
+  <li><strong>Context window:</strong> the limit on that text, counted in tokens. Tokens also set the price.</li>
+  <li><strong>Session:</strong> one conversation; the context ends with it.</li>
+  <li><strong>Notes:</strong> text saved outside the window and loaded back later.</li>
+  <li><strong>Retrieval:</strong> search a document collection and put the few best chunks in the context.</li>
+</ul>
+<h2>Rules</h2>
+<ul>
+  <li>The model keeps nothing between calls; the program re-sends the history every time.</li>
+  <li>Input tokens for a run = sum over calls of (everything sent that call).</li>
+  <li>Keep tool output small; clear or summarise old results in long runs.</li>
+  <li>Saved notes lose to the official record if they disagree.</li>
+</ul>
+<h2>Where does it live?</h2>
+<table>
+  <tr><th>Place</th><th>Lasts</th><th>Use for</th></tr>
+  <tr><td>Context</td><td>One session</td><td>Current question, fresh tool results, rules</td></tr>
+  <tr><td>Notes</td><td>Across sessions</td><td>Per-student facts, short summaries</td></tr>
+  <tr><td>Retrieval</td><td>As long as the documents</td><td>Long manuals and policies</td></tr>
+  <tr><td>Tool call</td><td>At the moment of need</td><td>Fast-changing facts, like bookings</td></tr>
+</table>
+<p>Full lesson: <a href="../lessons/0001-context-and-memory.html">Context and memory in an agent</a>.</p>
+</body>
+</html>

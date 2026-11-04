@@ -1,0 +1,56 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your makerspace agent is on its sixth model call of one task, after five tool calls. What does the program send to the model for this sixth call?",
+      "options": [
+        {"id": "a", "text": "Only the newest tool result, since the model already processed the rest"},
+        {"id": "b", "text": "The instructions plus all earlier requests and results from this task"},
+        {"id": "c", "text": "Only a short note saying which tools were already called earlier"},
+        {"id": "d", "text": "Nothing new, because the model keeps the first five calls stored"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "An agent's starting context (instructions, tool descriptions and the question) is 2,000 tokens. It makes two tool requests of 50 tokens each, and each tool returns 450 tokens, then the model writes its final answer on the third call. Every call resends everything so far. How many input tokens are sent across the three calls in total?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Which of these should your design save between sessions as a per-student note, instead of retrieving it or leaving it in the context?",
+      "options": [
+        {"id": "a", "text": "The full text of the 200-page vinyl cutter manual"},
+        {"id": "b", "text": "Every tool result produced during the student's last chat"},
+        {"id": "c", "text": "The calendar listing that was checked a moment ago"},
+        {"id": "d", "text": "The machines the student has completed safety training on"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O3",
+      "stem": "The correct answer to a student's question is on page 41 of a manual, yet the assistant answers wrongly with confidence after searching the manual. Give one way the retrieval step could have caused this."
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "A long task nears the context limit, so your program replaces the history with a model-written summary and continues. What is the main risk of this step?",
+      "options": [
+        {"id": "a", "text": "A detail needed later may have been left out of the summary"},
+        {"id": "b", "text": "The model forgets how to use all of its tools afterwards"},
+        {"id": "c", "text": "The context window limit becomes smaller for later model calls"},
+        {"id": "d", "text": "The student's saved training record is erased from storage"}
+      ]
+    }
+  ]
+}

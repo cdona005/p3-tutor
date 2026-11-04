@@ -1,0 +1,120 @@
+{
+  "duration_api_ms": 17868,
+  "stop_reason": "end_turn",
+  "session_id": "5252613a-68d8-4383-837e-cd93ffa83e09",
+  "total_cost_usd": 0.116348,
+  "usage": {
+    "input_tokens": 6,
+    "cache_creation_input_tokens": 22893,
+    "cache_read_input_tokens": 64840,
+    "output_tokens": 1828,
+    "output_tokens_details": {
+      "thinking_tokens": 678
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 22893,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 490,
+        "cache_read_input_tokens": 32657,
+        "cache_creation_input_tokens": 872,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 872
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 1828,
+      "cacheReadInputTokens": 64840,
+      "cacheCreationInputTokens": 22893,
+      "webSearchRequests": 0,
+      "costUSD": 0.116348,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 678,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 22893,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 8,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Picture a very smart friend locked in a room with no phone and no window. The room has a slot in the door.\n\nYour friend knows a lot, but only what's already in their head. They can't see today's booking calendar or open a machine manual.\n\nOn the door you tape a **menu of services**, for example \"check the calendar for a date\" and \"look up a page in the manual\". Each item has a short description of what it does and what details you need to give. This menu is the tool list.\n\nA student asks, \"Is the laser cutter free Thursday?\" You slide the question through the slot. Your friend can't check, but they can read the menu. They write a note back: *\"Please run 'check the calendar' for Thursday, laser cutter.\"* That note is the **tool call**.\n\nYour friend did not look anything up. You are standing outside the door. You read the note, walk to the calendar, read it, and slide the result back: *\"Booked 2–4pm, free otherwise.\"* Your friend then writes the answer for the student.\n\nSo the model never runs anything. It only writes a request in a set format, and your program does the real work and passes the result back. This is the loop you already know.\n\n**Where the analogy breaks:** your friend remembers the whole conversation. A model doesn't, so your program re-sends the full history with every note. That is why many back-and-forths cost more, which matters for your budget.\n\nQuick check: in your makerspace assistant, who actually books the machine, the model or your program? What does the model contribute?\n\nIf you'd like, I can turn this into a short lesson on writing good menu descriptions for your tools.",
+  "ttft_ms": 1797,
+  "type": "result",
+  "duration_ms": 18038,
+  "uuid": "8636e16f-45f4-48d6-863d-f18556c3272b",
+  "ttft_stream_ms": 1415,
+  "time_to_request_ms": 149,
+  "first_content_frame_ms": 1415,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 1828,
+      "cacheReadInputTokens": 64840,
+      "cacheCreationInputTokens": 22893,
+      "webSearchRequests": 0,
+      "costUSD": 0.116348,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 678,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 22893,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "credential_expires_at": "2026-11-19T11:33:50.141Z"
+}

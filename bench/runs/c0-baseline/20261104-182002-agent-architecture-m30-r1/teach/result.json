@@ -1,0 +1,154 @@
+{
+  "duration_api_ms": 196472,
+  "stop_reason": "end_turn",
+  "session_id": "7264ceab-8d79-4b9c-bf89-10eaa09918ae",
+  "total_cost_usd": 0.5681157250000001,
+  "usage": {
+    "input_tokens": 22,
+    "cache_creation_input_tokens": 64347,
+    "cache_read_input_tokens": 460113,
+    "output_tokens": 22227,
+    "output_tokens_details": {
+      "thinking_tokens": 906
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 64347,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 578,
+        "cache_read_input_tokens": 72206,
+        "cache_creation_input_tokens": 2777,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 2777
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 22,
+      "outputTokens": 22227,
+      "cacheReadInputTokens": 460113,
+      "cacheCreationInputTokens": 64347,
+      "webSearchRequests": 0,
+      "costUSD": 0.5257133,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 906,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 64347,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    },
+    "claude-haiku-5-5": {
+      "inputTokens": 39487,
+      "outputTokens": 8380,
+      "cacheReadInputTokens": 2710,
+      "cacheCreationInputTokens": 33893,
+      "webSearchRequests": 3,
+      "costUSD": 0.042402425,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2831,
+      "cacheCreationEphemeral5mInputTokens": 33893,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-haiku-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 1,
+    "requested": {
+      "background": 0,
+      "foreground": 1,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 1,
+    "spawned_by_subagents": 0,
+    "completed": 1,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {
+      "web-fetch": 1
+    }
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 25,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "I wrote the 30-minute lesson on context and memory, plus a short quiz and a cheat sheet. I haven't opened the lesson in a browser or run any checks on the files.\n\n- **Lesson:** `lessons/0001-context-and-memory-in-an-agent.html` (objective O3). You finish able to sort each piece of information in the makerspace assistant into one of four places: the context window, a saved note, a live tool call, or a searched library. The sections are:\n  - the context window\n  - what carries over between steps, with a worked token count\n  - why more context isn't better (context rot)\n  - notes as memory between sessions\n  - retrieval of manual pages\n  - a worked example and a practice task using the assistant\n\n  Each section has a practice check with instant feedback. I estimate the length at roughly 3,500 words, which should land between 23 and 25 minutes of reading plus the exercises.\n- **Quiz:** `quizzes/0002.json`, five items on the lesson's ideas, with the key in `keys/0002.json`. It's ready when you want it.\n- **Cheat sheet:** `cheatsheets/context-and-memory.html`, a one-page \"where does it go?\" reference.\n- **Other files:** `RESOURCES.md` (new) and `NOTES.md` (updated).\n\nThe lesson draws on Anthropic's article on context engineering and its docs on context windows and the memory tool, which I read in full. I couldn't find a good beginner source on embeddings and chunking, so the lesson keeps that part light and `RESOURCES.md` lists it as a gap.\n\nAsk me anything about the lesson. One question for you: do you want a follow-up on compaction and sub-agents, which the lesson only mentions, or should the next lesson be tool descriptions?",
+  "ttft_ms": 3093,
+  "type": "result",
+  "duration_ms": 183523,
+  "uuid": "515cd727-d616-4d59-b0a1-81ac3a9f05b2",
+  "ttft_stream_ms": 2703,
+  "time_to_request_ms": 253,
+  "first_content_frame_ms": 2703,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 22,
+      "outputTokens": 22227,
+      "cacheReadInputTokens": 460113,
+      "cacheCreationInputTokens": 64347,
+      "webSearchRequests": 0,
+      "costUSD": 0.5257133,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 906,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 64347,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    },
+    "claude-haiku-5-5": {
+      "inputTokens": 39487,
+      "outputTokens": 8380,
+      "cacheReadInputTokens": 2710,
+      "cacheCreationInputTokens": 33893,
+      "webSearchRequests": 3,
+      "costUSD": 0.042402425,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2831,
+      "cacheCreationEphemeral5mInputTokens": 33893,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-haiku-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "credential_expires_at": "2026-11-19T11:33:50.141Z"
+}
