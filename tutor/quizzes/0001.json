@@ -1,0 +1,44 @@
+{
+  "id": "0001",
+  "objective": "O1",
+  "title": "How an agent decides it is done",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O1",
+      "stem": "A harness exits its loop as soon as the reply text contains the word \"done\". The model replies: \"Done reading the file, now fixing the typo\", and the reply includes an edit_file tool call. What happens?",
+      "options": [
+        {"id": "a", "text": "The loop raises an error for mixed text and tool call"},
+        {"id": "b", "text": "The loop ignores the word and runs until max_turns"},
+        {"id": "c", "text": "The loop exits early and the edit never gets run"},
+        {"id": "d", "text": "The loop runs the edit and then exits on the next"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "objective": "O1",
+      "stem": "In the Agent SDK, a task needs 6 turns that each contain tool calls, and then one final text-only reply. Each tool-call turn and the final text-only reply count toward max_turns. What is the smallest max_turns that lets the run finish with subtype success?",
+      "unit": "turns"
+    },
+    {
+      "id": "q3",
+      "type": "short",
+      "objective": "O1",
+      "stem": "A result message has subtype error_max_budget_usd. Which field, present on a success result, is missing from it?"
+    },
+    {
+      "id": "q4",
+      "type": "mcq",
+      "objective": "O1",
+      "stem": "A Messages API call returns stop_reason max_tokens, and the reply ends in the middle of a sentence. What should the loop conclude?",
+      "options": [
+        {"id": "a", "text": "Done: return the reply as the finished answer"},
+        {"id": "b", "text": "Cut off: raise max_tokens or ask it to continue"},
+        {"id": "c", "text": "Refused: retry the same request on another model"},
+        {"id": "d", "text": "Tool call: run the tool and send back the result"}
+      ]
+    }
+  ]
+}

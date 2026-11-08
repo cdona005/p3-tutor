@@ -1,0 +1,29 @@
+{
+  "id": "0001",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "c",
+      "rationale": "The loop checks wording, not tool calls, so it exits on 'Done' while the edit_file call is still pending and never runs it. Believing the model's words signal completion is M1.",
+      "distractors": {"d": "M1"}
+    },
+    {
+      "id": "q2",
+      "answer": 7,
+      "tolerance": 0,
+      "rationale": "Each of the 6 tool-call turns counts, plus one for the final text-only reply: 7. With 6, the run ends as error_max_turns with no final response."
+    },
+    {
+      "id": "q3",
+      "answer": "result",
+      "accepted": ["the result field", "result field", "the result", "result text", "the final result", "a final result", "the final response", "no final response"],
+      "rationale": "Only the success variant carries the result field, so check the subtype before reading it."
+    },
+    {
+      "id": "q4",
+      "answer": "b",
+      "rationale": "max_tokens means the reply hit the token limit, so it is truncated, not finished. Treating any non-tool_use stop as completion is M2.",
+      "distractors": {"a": "M2"}
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "duration_api_ms": 26524,
+  "stop_reason": "end_turn",
+  "session_id": "20d1d50a-dead-46bc-9e91-30bad93a9702",
+  "total_cost_usd": 0.15548160000000003,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 27471,
+    "cache_read_input_tokens": 94816,
+    "output_tokens": 3610,
+    "output_tokens_details": {
+      "thinking_tokens": 173
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 27471,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 574,
+        "cache_read_input_tokens": 35683,
+        "cache_creation_input_tokens": 2424,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 2424
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 3610,
+      "cacheReadInputTokens": 94816,
+      "cacheCreationInputTokens": 27471,
+      "webSearchRequests": 0,
+      "costUSD": 0.15548160000000003,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 173,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 27471,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 16,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "I graded submission s1 for quiz 0001 and wrote `grades/0001-s1.json`, `learning-records/0003-model-requests-program-runs-tools.md` and an update to `NOTES.md`.\n\n**Grades**\n- **q1, correct:** the agent loop is what makes a system an agent.\n- **q2, wrong (M4):** the model outputs a tool request as text, and the program runs the tool. The model doesn't open the booking system.\n- **q3, correct:** a step limit is the right safeguard against the repeated failing edit.\n- **q4, wrong (M4):** the answer is 4 model calls, not 1. That's 3 tool requests plus the final answer, with the program running each tool between calls.\n- **q5, partial:** the result goes back to the model, but you left out why. The model needs it in its next input to decide its next step or write the answer.\n- **q6, partial (M3):** tools are chosen from the descriptions the program supplies, which is right. The claim that the model remembers earlier sessions on its own is wrong. The model only sees its current input.\n\n**Summary:** You have the loop structure, stopping conditions and description-based tool choice down. What to fix is who does what. The model only emits a tool request, and the program runs the tool and makes a separate model call for each step. You also assumed the model remembers between sessions on its own.\n\n**Next step:** Trace the \"laser cutter at 3 pm, plus training\" request as a table with columns for model call number, what the model outputs, and what the program does. It should come to 4 model calls, with the program running every tool.\n\ns2 is still ungraded.\n\nDo you want a short practice quiz on who runs the tools and how many model calls a request takes, why the result goes back to the model, and what the model does and doesn't remember?",
+  "ttft_ms": 1620,
+  "type": "result",
+  "duration_ms": 26707,
+  "uuid": "34e29a9c-ccfd-400a-a53b-c158a02f3fb3",
+  "ttft_stream_ms": 1301,
+  "time_to_request_ms": 143,
+  "first_content_frame_ms": 1301,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 3610,
+      "cacheReadInputTokens": 94816,
+      "cacheCreationInputTokens": 27471,
+      "webSearchRequests": 0,
+      "costUSD": 0.15548160000000003,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 173,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 27471,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "credential_expires_at": "2026-11-19T11:33:49.605Z"
+}

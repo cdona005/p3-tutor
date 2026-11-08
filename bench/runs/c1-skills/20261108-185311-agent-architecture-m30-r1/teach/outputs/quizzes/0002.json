@@ -1,0 +1,56 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your assistant's program calls the model for step 2 of a request. What lets the model use the result of the tool it requested in step 1?",
+      "options": [
+        {"id": "a", "text": "The model stores that result internally after step 1 and recalls it"},
+        {"id": "b", "text": "The program includes that result in the text it sends at step 2"},
+        {"id": "c", "text": "The context window keeps results between calls without any sending"},
+        {"id": "d", "text": "The model fetches the result again by itself from the tool"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "A request takes two model calls. The system prompt, tool definitions and the student's question total 2,100 tokens. The first call outputs a 100-token tool request. The tool returns 900 tokens. The second call then writes the final answer. How many input tokens does the model read across both calls in total?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "A student passes the laser cutter training on Monday. On Thursday they start a new chat and the assistant must know they passed. Which design makes that work?",
+      "options": [
+        {"id": "a", "text": "Use a model with a context window big enough for a week"},
+        {"id": "b", "text": "Write a longer system prompt that tells the model to remember"},
+        {"id": "c", "text": "Have the program save the status and load it at session start"},
+        {"id": "d", "text": "Trust the model to keep every earlier chat on its own"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your 300-page band saw manual is needed for a few questions a day. Which setup keeps the cost per request lowest while still answering from the manual?",
+      "options": [
+        {"id": "a", "text": "Put the full manual in the context on every model call"},
+        {"id": "b", "text": "Keep the manual outside and search it for matching passages"},
+        {"id": "c", "text": "Summarize the manual once and never look at the pages again"},
+        {"id": "d", "text": "Ask the model to write the manual from its training data"}
+      ]
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O3",
+      "stem": "A long booking conversation is close to filling the context window. Name one thing the program can do to keep the agent going, and say what it does to the context."
+    }
+  ]
+}

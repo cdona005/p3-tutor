@@ -115,10 +115,24 @@ Read `references/LESSONS.md` and `references/lesson-template.html`, then the tit
    Add the sources to `RESOURCES.md` in the format in `references/RESOURCES-FORMAT.md`.
 3. **Plan to the minutes:** split the lesson into sections with a word budget for each, as `references/LESSONS.md` explains, so the whole lesson fits the requested length.
 4. **Write the lesson** to `lessons/NNNN-<slug>.html`, following `FORMATS.md` and the template: beautiful and self-contained, with figures, worked examples, practice with immediate feedback, and citations.
+   Write it in the voice below.
 5. **Write a short quiz and its key** on the lesson's objective, in the same pass: four or five items, as `references/QUIZZES.md` describes, none of them a repeat of the lesson's practice questions.
 6. **Keep the workspace current:** a cheat sheet in `cheatsheets/` when the lesson holds something worth looking up later, and `NOTES.md` for anything you learned about the learner.
 7. **Finish** with a short message: the lesson's path and what it covers, that a quiz is ready when they are, and a reminder that they can ask you anything about it.
    Never put a quiz answer in the message.
+
+### The voice of a lesson
+
+A lesson must be easy to read to the end; a correct lesson that reads like a reference manual loses the learner halfway.
+The voice changes how a lesson says things, never what is true: every fact stays exact and cited.
+
+- **Talk to one person.** Use "you", active verbs and short sentences, as a sharp friend who knows the field would explain it, not as a specification.
+- **Start each section with a problem, not a definition.** Open with a question, a scenario or a failure the learner could hit, then give the idea as the answer to it.
+- **Anchor each new idea in something the learner already knows.** Use the examples `PREFERENCES.md` and `NOTES.md` say they relate to, such as a programming idea, and say where the analogy stops holding.
+  Ration them: at most one analogy per idea, and only where it makes the idea clearer; when the idea is plain enough, explain it directly instead of reaching for a comparison.
+- **Plain words first, then the term.** Explain the idea in everyday words, then name it; introduce at most one new term per paragraph.
+- **Keep the stretches short.** Paragraphs of three or four sentences, bullets for lists, and a practice check after every section, so no screen is a wall of definitions.
+- **Stay direct.** No filler, no praise, no hype; interest comes from concrete examples and surprising consequences, not from enthusiasm.
 
 ## Quiz
 

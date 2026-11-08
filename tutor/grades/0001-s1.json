@@ -1,0 +1,31 @@
+{
+  "quiz": "0001",
+  "submission": "s1",
+  "items": [
+    {
+      "id": "q1",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Correct. The loop tests wording, so it exits on \"done\" while the edit_file call is still pending. Control flow should read structure (tool calls), not prose."
+    },
+    {
+      "id": "q2",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Correct: 6 tool-call turns plus 1 final text-only turn is 7. With 6, the run would end as error_max_turns with no final response, even though the work was done."
+    },
+    {
+      "id": "q3",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Correct. Only the success variant carries result, so check the subtype before reading it."
+    },
+    {
+      "id": "q4",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Correct. max_tokens means the reply was truncated, not finished, and a tool call inside it may be incomplete. Raise the limit or ask the model to continue."
+    }
+  ],
+  "summary": "4 of 4 correct. You have down what ends an agent loop (no tool call), why wording is not the signal, how max_turns counts the final reply, and that max_tokens means truncated. Next: other stop_reason values (refusal, pause_turn, model_context_window_exceeded) and how a harness should handle each. Ask for a lesson on that when ready."
+}

@@ -1,0 +1,120 @@
+{
+  "duration_api_ms": 19053,
+  "stop_reason": "end_turn",
+  "session_id": "48f246fe-1a74-4641-bebe-3252806ba22c",
+  "total_cost_usd": 0.0904519,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 15670,
+    "cache_read_input_tokens": 79759,
+    "output_tokens": 1978,
+    "output_tokens_details": {
+      "thinking_tokens": 672
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 15670,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 590,
+        "cache_read_input_tokens": 25491,
+        "cache_creation_input_tokens": 815,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 815
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 1978,
+      "cacheReadInputTokens": 79759,
+      "cacheCreationInputTokens": 15670,
+      "webSearchRequests": 0,
+      "costUSD": 0.0904519,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 672,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 15670,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 9,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "**Analogy: ordering at a restaurant**\n\n- **The model is the customer.** It can talk and decide what it wants, but it can't enter the kitchen.\n- **The tools are the kitchen.** Checking the calendar and booking a machine are dishes the kitchen can make.\n- **The menu is the tool descriptions.** The customer only knows what it can order because the menu lists each dish and what it does. A vague description means a wrong order.\n- **Your program is the waiter.** The model writes an order slip, for example \"check the laser cutter, Friday\". The waiter takes it to the kitchen, the kitchen does the work, and the waiter brings back the result.\n- **The result goes back to the customer as new text.** The model reads it and then either orders again (another tool call) or answers the student.\n\n**What people usually get wrong:** the model never runs anything. It only writes the request. Your code reads the request, runs the real function, and hands back the output. Tool calling is a text-in, text-out exchange with your program in the middle.\n\n**Where the analogy breaks:**\n- A real customer remembers the meal so far. The model doesn't. Each time the waiter returns, your program has to send the whole conversation again, including the earlier orders and results.\n- A customer can't order a dish that isn't on the menu. A model sometimes asks for one anyway, or fills in the wrong details. Your program has to check each request before running it.\n\n**CS version:** it's like an RPC. The model writes the function name and arguments as structured text, and your program is the runtime that calls the function.\n\nI haven't opened Quiz 0001 and don't discuss its items before grading. Run `/grade` if you want it marked.\n\n**Check:** a student asks \"Can I use the 3D printer tomorrow at 2?\" In your own words, say who does what, in order, until the student gets an answer.",
+  "ttft_ms": 2246,
+  "type": "result",
+  "duration_ms": 19200,
+  "uuid": "2d5c1c3d-583e-4e7f-88fa-22c87b78e1ff",
+  "ttft_stream_ms": 1961,
+  "time_to_request_ms": 117,
+  "first_content_frame_ms": 1961,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 1978,
+      "cacheReadInputTokens": 79759,
+      "cacheCreationInputTokens": 15670,
+      "webSearchRequests": 0,
+      "costUSD": 0.0904519,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 672,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 15670,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "credential_expires_at": "2026-11-19T11:33:49.605Z"
+}

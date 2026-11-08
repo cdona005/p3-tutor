@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="p3-minutes" content="8">
+  <meta name="p3-objective" content="O1">
+  <title>How an agent decides it is done</title>
+  <style>
+    :root {
+      --bg: #fffdf8;
+      --text: #1f1d1a;
+      --muted: #6b665e;
+      --rule: #e4dfd4;
+      --accent: #9a4517;
+      --accent-soft: #f7ede4;
+      --warn: #8c2f39;
+      --warn-soft: #f9eaec;
+      --ok: #2f6b3a;
+      --ok-soft: #e7f2e9;
+      --code-bg: #f3efe6;
+      --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Sitka Text", Cambria, Georgia, serif;
+      --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #171614;
+        --text: #e9e5dc;
+        --muted: #a49e93;
+        --rule: #36332e;
+        --accent: #eaa77a;
+        --accent-soft: #2c231d;
+        --warn: #f0a3ac;
+        --warn-soft: #2f1f22;
+        --ok: #9fd3a8;
+        --ok-soft: #1c2a1f;
+        --code-bg: #23211e;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { font-size: 19px; -webkit-text-size-adjust: 100%; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--serif); line-height: 1.6; }
+    main { max-width: 40rem; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+    p, li { hyphens: auto; }
+    a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    h1, h2, h3 { line-height: 1.25; font-weight: 600; }
+    h1 { font-size: 2.1rem; margin: 0.25rem 0 1rem; }
+    h2 { font-size: 1.45rem; margin: 3rem 0 0.75rem; }
+    h3 { font-size: 1.1rem; margin: 2rem 0 0.5rem; }
+    .kicker, .label, .meta, .section-time, figcaption, summary, th, nav.toc, footer.closing {
+      font-family: var(--sans);
+    }
+    .kicker { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .lead { font-size: 1.15rem; }
+    .meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; font-size: 0.85rem; color: var(--muted);
+            border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 0.5rem 0; margin: 1.5rem 0; }
+    nav.toc { font-size: 0.9rem; margin: 1.5rem 0 2rem; }
+    nav.toc ol { padding-left: 1.2rem; margin: 0.4rem 0 0; }
+    .section-time { font-size: 0.8rem; font-weight: 400; color: var(--muted); margin-left: 0.4rem; white-space: nowrap; }
+    dfn { font-style: normal; font-weight: 600; }
+    aside.note { font-size: 0.9rem; color: var(--muted); border-left: 2px solid var(--rule); padding-left: 1rem; margin: 1.25rem 0; }
+    .box { border-radius: 6px; padding: 1rem 1.25rem; margin: 1.75rem 0; }
+    .box > :first-child { margin-top: 0; }
+    .box > :last-child { margin-bottom: 0; }
+    .label { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.4rem; }
+    .mission { background: var(--accent-soft); }
+    .mission .label { color: var(--accent); }
+    .misconception { background: var(--warn-soft); border-left: 4px solid var(--warn); }
+    .misconception .label { color: var(--warn); }
+    .worked { border: 1px solid var(--rule); }
+    .worked ol { padding-left: 1.3rem; }
+    .summary { border: 1px solid var(--rule); }
+    figure { margin: 2rem 0; }
+    figure svg { display: block; width: 100%; height: auto; }
+    figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; margin: 1.5rem 0; }
+    th, td { text-align: left; vertical-align: top; padding: 0.45rem 0.6rem; border-bottom: 1px solid var(--rule); }
+    th { font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+    code, pre { font-family: var(--mono); font-size: 0.85em; background: var(--code-bg); border-radius: 4px; }
+    code { padding: 0.1em 0.3em; }
+    pre { padding: 1rem; overflow-x: auto; line-height: 1.45; }
+    pre code { padding: 0; background: none; font-size: 1em; }
+    .check { border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.25rem; margin: 1.75rem 0; }
+    .check .label { color: var(--accent); }
+    .check p { margin: 0.25rem 0; }
+    .choices { list-style: none; padding: 0; margin: 0.75rem 0 0; display: grid; gap: 0.5rem; }
+    .choices button { width: 100%; text-align: left; font: inherit; font-size: 0.95rem; color: inherit; background: transparent;
+                      border: 1px solid var(--rule); border-radius: 6px; padding: 0.55rem 0.8rem; cursor: pointer; }
+    .choices button:hover { border-color: var(--accent); }
+    .choices button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .choices button.right { border-color: var(--ok); background: var(--ok-soft); }
+    .choices button.wrong { border-color: var(--warn); background: var(--warn-soft); }
+    .feedback { font-size: 0.95rem; margin: 0.6rem 0 0; }
+    .feedback:empty { margin: 0; }
+    details { margin-top: 0.75rem; }
+    summary { font-size: 0.85rem; color: var(--accent); cursor: pointer; }
+    details > :not(summary) { margin: 0.5rem 0 0; }
+    .go-further li { margin-bottom: 0.6rem; }
+    footer.closing { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-size: 0.9rem; color: var(--muted); }
+    @media (max-width: 32rem) {
+      html { font-size: 17px; }
+      h1 { font-size: 1.75rem; }
+      main { padding-top: 2rem; }
+    }
+    @media print {
+      :root { --bg: #fff; --text: #000; --muted: #444; --rule: #ccc; --accent: #000; --accent-soft: #f2f2f2;
+              --warn: #000; --warn-soft: #f2f2f2; --ok: #000; --ok-soft: #fff; --code-bg: #f2f2f2; }
+      html { font-size: 11.5pt; }
+      main { max-width: none; padding: 0; }
+      nav.toc { display: none; }
+      a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; word-break: break-all; }
+      .box, .check, figure, table, pre { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<main>
+
+  <header>
+    <div class="kicker">Lesson 1 &middot; 8 minutes</div>
+    <h1>How an agent decides it is done</h1>
+    <p class="lead">By the end of this lesson you can look at an agent loop and say what ends it, and why a model's own words are not that signal.</p>
+    <div class="meta">
+      <span>Objective O1: how an agent loop decides to stop</span>
+      <span>About 8 minutes</span>
+    </div>
+    <div class="box mission">
+      <span class="label">Why this matters for you</span>
+      <p>You are building a tutor that runs as an agent. Every job it does (teach, quiz, grade) ends when its loop ends, so you need to know what ends the loop and what can end it badly.</p>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="In this lesson">
+    <strong>In this lesson</strong>
+    <ol>
+      <li><a href="#s1">The loop and its one exit</a></li>
+      <li><a href="#s2">Why not check for "done"?</a></li>
+      <li><a href="#s3">Other ways a run stops</a></li>
+      <li><a href="#practice">Worked example and practice</a></li>
+      <li><a href="#summary">Summary</a></li>
+      <li><a href="#further">Go further</a></li>
+    </ol>
+  </nav>
+
+  <section id="s1">
+    <h2>The loop and its one exit <span class="section-time">2 min</span></h2>
+    <p>Problem: a model only produces text, or a request to call a tool. Who decides whether to go around again?</p>
+    <p>The harness (the program around the model) does, by reading one field on each reply. Each reply carries a <dfn>stop_reason</dfn>, which says why the model stopped generating. Two values drive the loop (<a href="https://platform.claude.com/docs/en/api/handling-stop-reasons">Anthropic: handling stop reasons</a>):</p>
+    <ul>
+      <li><code>tool_use</code>: Claude is calling a tool. Run it, return the result, call the model again.</li>
+      <li><code>end_turn</code>: Claude completed its response naturally. Use the response.</li>
+    </ul>
+    <p>In CS terms it is a <code>while</code> loop whose condition is "the last reply asked for a tool". The Agent SDK states the same rule: turns continue until Claude produces output with no tool calls, and then the loop ends and the final result is delivered (<a href="https://code.claude.com/docs/en/agent-sdk/agent-loop">Agent SDK: how the agent loop works</a>).</p>
+
+<pre><code># Basic tool loop (shape taken from the Messages API docs)
+while True:
+    reply = call_model(messages, tools)           # one model call = one turn
+    if reply.stop_reason == "tool_use":           # model asked for a tool
+        results = run_tools(reply.content)        # harness executes it
+        messages.append(assistant(reply.content)) # keep the history
+        messages.append(user(results))            # feed results back
+    else:                                         # no tool call: exit
+        break</code></pre>
+
+    <figure>
+      <svg viewBox="0 0 640 260" role="img" aria-labelledby="fig1-title">
+        <title id="fig1-title">The agent loop: call the model, check stop_reason, either run a tool and loop or finish</title>
+        <defs>
+          <marker id="arrow1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+          </marker>
+        </defs>
+        <g fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="20" y="40" width="150" height="60" rx="8"/>
+          <rect x="245" y="40" width="160" height="60" rx="8" style="stroke: var(--accent)"/>
+          <rect x="475" y="40" width="145" height="60" rx="8"/>
+          <rect x="245" y="170" width="160" height="60" rx="8"/>
+          <line x1="170" y1="70" x2="241" y2="70" marker-end="url(#arrow1)"/>
+          <line x1="405" y1="70" x2="471" y2="70" marker-end="url(#arrow1)"/>
+          <line x1="325" y1="100" x2="325" y2="166" marker-end="url(#arrow1)"/>
+          <path d="M245,200 H95 V104" marker-end="url(#arrow1)"/>
+        </g>
+        <g fill="currentColor" font-family="system-ui, sans-serif" font-size="18" text-anchor="middle">
+          <text x="95" y="76">Call model</text>
+          <text x="325" y="64" style="fill: var(--accent)">Read</text>
+          <text x="325" y="86" style="fill: var(--accent)">stop_reason</text>
+          <text x="547" y="64">Finish:</text>
+          <text x="547" y="86">return reply</text>
+          <text x="325" y="196">Run tool,</text>
+          <text x="325" y="218">append result</text>
+          <text x="438" y="60" font-size="16" text-anchor="middle">end_turn</text>
+          <text x="372" y="140" font-size="16" text-anchor="start">tool_use</text>
+        </g>
+      </svg>
+      <figcaption>Figure 1. One exit: a reply with no tool call. Every other path goes back to the model.</figcaption>
+    </figure>
+
+    <div class="check" data-check>
+      <span class="label">Check yourself</span>
+      <p>In the basic loop, a reply arrives with stop_reason <code>tool_use</code> and a call to <code>read_file</code>. What happens next?</p>
+      <ul class="choices">
+        <li><button type="button" data-correct="false" data-why="That is the end_turn branch. A tool call means the model is mid-task and waiting for a result.">Return the reply to the user as the final answer</button></li>
+        <li><button type="button" data-correct="true" data-why="tool_use means run the tool, append the result to the history, and call the model again.">Run read_file, append the result, call the model again</button></li>
+        <li><button type="button" data-correct="false" data-why="The loop has no discard step. A tool request is honored, not retried away.">Discard the call and ask the model to answer again</button></li>
+      </ul>
+      <p class="feedback" aria-live="polite"></p>
+      <details>
+        <summary>Show the answer</summary>
+        <p>The second option. <code>tool_use</code> sends the loop around again; only a reply without a tool call exits.</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="s2">
+    <h2>Why not check for "done"? <span class="section-time">2 min</span></h2>
+    <p>Problem: a model often writes "Done." or "All finished." in plain text. Why not exit when you see that?</p>
+    <div class="box misconception">
+      <span class="label">A common mix-up</span>
+      <p>"The agent is done when it says it is done." It is tempting because it matches how people talk. But a reply can say "Done reading the file, now editing it" and still contain an edit tool call. A text-matching loop exits there, and the edit never runs. The reverse also happens: the model finishes without ever writing "done", and the loop spins on.</p>
+    </div>
+    <p>The reliable signal is structural, not linguistic: does the reply contain a tool call? That is what <code>stop_reason</code> encodes. Parsing prose is the same mistake as parsing a log message to decide control flow when a return code exists.</p>
+    <aside class="note">A turn is one model call plus the tool runs it triggers. The loop can run many turns before the final text-only one.</aside>
+
+    <div class="check" data-check>
+      <span class="label">Check yourself</span>
+      <p>Which exit test is reliable for deciding that an agent is done?</p>
+      <ul class="choices">
+        <li><button type="button" data-correct="false" data-why="Wording is not control flow. The model can say done and still request a tool.">The reply text contains the word done</button></li>
+        <li><button type="button" data-correct="false" data-why="A turn count is a safety cap, not a completion check. It stops runs, finished or not.">The loop has run at least ten turns</button></li>
+        <li><button type="button" data-correct="true" data-why="No tool call means the model has nothing left to request; the loop ends.">The latest reply contains no tool calls</button></li>
+      </ul>
+      <p class="feedback" aria-live="polite"></p>
+      <details>
+        <summary>Show the answer</summary>
+        <p>The third option. Completion is the absence of a tool call, read from <code>stop_reason</code>.</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="s3">
+    <h2>Other ways a run stops <span class="section-time">2 min</span></h2>
+    <p>Problem: what if the model never stops asking for tools, or its reply is cut off?</p>
+    <p>Then something other than the model's choice ends the run. Two kinds:</p>
+    <ul>
+      <li><strong>Reply-level stops</strong> from the API. <code>max_tokens</code> means the reply hit your limit, so it may be truncated mid-sentence or mid-tool-call. <code>model_context_window_exceeded</code> means the context filled. Treat both as truncated, not finished (<a href="https://platform.claude.com/docs/en/api/handling-stop-reasons">handling stop reasons</a>).</li>
+      <li><strong>Run-level caps</strong> set in the harness. The Agent SDK has <code>max_turns</code> and <code>max_budget_usd</code>, both unlimited by default. A turn counts for each tool-call turn, plus one for the final text-only response (<a href="https://code.claude.com/docs/en/agent-sdk/agent-loop">Agent SDK docs</a>).</li>
+    </ul>
+    <p>A capped run reports its outcome in a result subtype: <code>success</code>, <code>error_max_turns</code>, <code>error_max_budget_usd</code>, or <code>error_during_execution</code>. The <code>result</code> text exists only on <code>success</code>, so check the subtype before reading it.</p>
+    <aside class="note">A cap stops a run; it does not tell you the task succeeded. Use the result subtype for that.</aside>
+
+    <div class="check" data-check>
+      <span class="label">Check yourself</span>
+      <p>An SDK run ends with subtype <code>error_max_turns</code>. What does the run hold?</p>
+      <ul class="choices">
+        <li><button type="button" data-correct="true" data-why="The result field exists only on success. A turn-cap stop has no final response.">No result field, since the cap was hit first</button></li>
+        <li><button type="button" data-correct="false" data-why="There is no partial-result field. Only the success variant carries result.">A partial result field, flagged by the turn cap</button></li>
+        <li><button type="button" data-correct="false" data-why="A successful last tool call does not make the run a success; the cap ended it before a final answer.">A final result, since the last tool call succeeded</button></li>
+      </ul>
+      <p class="feedback" aria-live="polite"></p>
+      <details>
+        <summary>Show the answer</summary>
+        <p>The first option. Only <code>success</code> carries a <code>result</code>.</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="practice">
+    <h2>Worked example and practice <span class="section-time">2 min</span></h2>
+    <div class="box worked">
+      <span class="label">Worked example</span>
+      <p>Task: "fix the failing test." Trace the loop, with <code>max_turns</code> set to 4.</p>
+      <ol>
+        <li>Turn 1: <code>tool_use</code> (run_tests). One test fails. Loop continues: a tool call is present.</li>
+        <li>Turn 2: <code>tool_use</code> (read_file). Loop continues.</li>
+        <li>Turn 3: <code>tool_use</code> (edit_file). Loop continues.</li>
+        <li>Turn 4: <code>tool_use</code> (run_tests). Tests pass, but the model still needs a turn to say so.</li>
+        <li>The cap is 4 and no text-only turn has happened: the run ends as <code>error_max_turns</code> with no result, though the work was done. Setting 5 leaves room for the final <code>end_turn</code> reply.</li>
+      </ol>
+    </div>
+    <div class="check">
+      <span class="label">Your turn</span>
+      <p>A loop sees these stop reasons in order: <code>tool_use</code>, <code>tool_use</code>, <code>max_tokens</code>. First step given: the third reply is not an <code>end_turn</code>. Decide what the loop should do with it, and whether to run any tool call inside it.</p>
+      <details>
+        <summary>Show a solution</summary>
+        <p>The third reply was cut off at your token limit, so it is truncated, not finished. Do not return it as the answer. Do not run a tool call in it either, because that call may be incomplete. Raise <code>max_tokens</code> and retry, or ask the model to continue.</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="summary">
+    <h2>Summary <span class="section-time">1 min</span></h2>
+    <div class="box summary">
+      <ul>
+        <li>The loop exits on a reply with no tool call (<code>end_turn</code>); <code>tool_use</code> means run the tool and go again.</li>
+        <li>Completion is read from structure (<code>stop_reason</code>), never from words like "done".</li>
+        <li><code>max_tokens</code> and context overflow mean truncated, not finished.</li>
+        <li>Caps (<code>max_turns</code>, budget) end runs early; check the result subtype before using <code>result</code>.</li>
+      </ul>
+      <p><strong>Say it in your own words:</strong> without looking, explain what ends an agent loop and why searching for "done" in the reply fails.</p>
+    </div>
+  </section>
+
+  <section id="further" class="go-further">
+    <h2>Go further</h2>
+    <p><strong>Read next:</strong> <a href="https://code.claude.com/docs/en/agent-sdk/agent-loop">Agent SDK: how the agent loop works</a>, the official account of turns, result subtypes and limits.</p>
+    <ul>
+      <li><a href="https://platform.claude.com/docs/en/api/handling-stop-reasons">Handling stop reasons</a>: every <code>stop_reason</code> value and what to do for each.</li>
+      <li><a href="https://ai-sdk.dev/docs/agents/loop-control">AI SDK: loop control</a>: step caps and combined stop conditions in another SDK.</li>
+    </ul>
+  </section>
+
+  <footer class="closing">
+    <p>Anything unclear? Ask me in the chat; I can explain any part again, another way, or go deeper.</p>
+    <p>A short quiz on this lesson is ready (quiz 0001): ask me for it when you want to check what stuck.</p>
+  </footer>
+
+</main>
+<script>
+  // Practice checks: mark the chosen option and explain it at once.
+  document.querySelectorAll("[data-check]").forEach(function (box) {
+    var buttons = box.querySelectorAll("button[data-correct]");
+    var out = box.querySelector(".feedback");
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        buttons.forEach(function (b) { b.classList.remove("right", "wrong"); });
+        var right = button.getAttribute("data-correct") === "true";
+        button.classList.add(right ? "right" : "wrong");
+        if (out) { out.textContent = (right ? "Yes. " : "Not quite. ") + (button.getAttribute("data-why") || ""); }
+      });
+    });
+  });
+</script>
+</body>
+</html>

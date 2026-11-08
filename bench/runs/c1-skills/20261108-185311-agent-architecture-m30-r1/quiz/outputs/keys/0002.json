@@ -1,0 +1,49 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "c",
+      "rationale": "Per Anthropic's 'Building effective agents', workflows orchestrate models and tools through predefined code paths, while in an agent the model directs its own process and tool use. The difference is who owns the control flow, not whether a model is called (a), how many tools there are (b) or model size (d).",
+      "distractors": {"a": "M8", "b": "M9", "d": "M10"}
+    },
+    {
+      "id": "q2",
+      "answer": "a",
+      "rationale": "The steps and their order never vary, so code should own the control flow: it is predictable, cheaper and easier to test, and the model is used only where language is needed. An agent (b, d) pays for model decisions that have only one sensible outcome, and using tools does not by itself make a system an agent (c).",
+      "distractors": {"b": "M7", "c": "M11", "d": "M7"}
+    },
+    {
+      "id": "q3",
+      "answer": "d",
+      "rationale": "Only in d does the model choose the steps, their number and when to stop; code merely runs the tools. In a, b and c the model's output is used, but code fixed the paths in advance, so they are workflows (routing, prompt chaining, parallelization with voting).",
+      "distractors": {"a": "M12", "b": "M12", "c": "M12"}
+    },
+    {
+      "id": "q4",
+      "answer": "The workflow makes only the model calls it needs, while an agent spends extra model calls deciding each next step and rereads a growing context every time.",
+      "accepted": [
+        "An agent uses extra model calls to decide what to do next; the workflow already knows the steps.",
+        "The agent spends tokens on deciding the steps and may loop or take extra steps; the workflow does not.",
+        "Fewer model calls and fewer tokens, because code decides the steps."
+      ],
+      "rationale": "Any one valid cost reason is enough: the agent pays for model calls (and tokens of growing context) to decide steps that are already known, and may wander or take extra steps. Answers that say only 'workflows are simpler' or 'more predictable' without a cost reason are partial; saying workflows use a cheaper model is not the reason asked for."
+    },
+    {
+      "id": "q5",
+      "answer": "b",
+      "rationale": "This is a routing workflow: the model makes a decision, but the code fixed the possible branches and the steps in each, so the code owns the control flow. A model making a choice (a) does not make a system an agent; an agent chooses its own steps, not just a label.",
+      "distractors": {"a": "M12"}
+    },
+    {
+      "id": "q6",
+      "answer": "The steps cannot be known in advance: what to check or ask next depends on what each search or answer turns up, so the model must choose its own steps.",
+      "accepted": [
+        "The path depends on what is found along the way, so it cannot be hardcoded.",
+        "It is open-ended, with an unpredictable number of steps, so the model has to decide what to do next from the results.",
+        "No fixed sequence fits every cause of warping, so the model must pick its steps dynamically."
+      ],
+      "rationale": "An agent suits tasks where the needed steps are unknown up front and depend on intermediate results. Answers saying only that the question is hard or that an agent is smarter miss the point (the reason is that the path is unpredictable) and are partial or wrong."
+    }
+  ]
+}

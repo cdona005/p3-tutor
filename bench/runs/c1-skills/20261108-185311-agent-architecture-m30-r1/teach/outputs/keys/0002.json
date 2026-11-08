@@ -1,0 +1,40 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "b",
+      "rationale": "The model keeps nothing between calls; the program appends the tool result to the message list and sends the whole list at step 2. The window (c) is only the limit on what is sent in one call, and the model neither stores (a) nor fetches (d) results itself.",
+      "distractors": {"a": "M3", "c": "M3", "d": "M4"}
+    },
+    {
+      "id": "q2",
+      "answer": 5200,
+      "tolerance": 0,
+      "rationale": "Call 1 reads 2,100. Call 2 reads 2,100 + 100 + 900 = 3,100. The total is 2,100 + 3,100 = 5,200. Answering 3,100 counts only the final context and forgets that call 1 was also read; 4,100 counts only the new text at call 2."
+    },
+    {
+      "id": "q3",
+      "answer": "c",
+      "rationale": "A new session starts with an empty context, so the fact must be stored outside it and loaded back by the program. A bigger window (a), a longer prompt (b) or trusting the model (d) all assume memory that does not exist across sessions.",
+      "distractors": {"a": "M3", "b": "M3", "d": "M3"}
+    },
+    {
+      "id": "q4",
+      "answer": "b",
+      "rationale": "Retrieval keeps the manual in storage and brings only the matching passage into the context, so each call reads a small slice. Pasting it every call (a) is the most expensive; a one-time summary (c) loses detail the question may need; training data (d) does not contain the makerspace's manual."
+    },
+    {
+      "id": "q5",
+      "answer": "Compact it: summarize the conversation and continue in a fresh context that holds the summary (or clear old tool results), so the context gets smaller.",
+      "accepted": [
+        "Summarize the conversation and start a new window with the summary",
+        "Clear old tool results from the context",
+        "Compaction: replace the long history with a summary",
+        "Remove tool results that are no longer needed so the context shrinks",
+        "Save notes to external memory and drop the old messages from the context"
+      ],
+      "rationale": "Full credit needs an action (compaction by summary, clearing old tool results, or moving details into notes and dropping them) and its effect of shrinking the context. An action alone is partial. Switching to a bigger window or stopping the agent does not keep the same session going within its context."
+    }
+  ]
+}

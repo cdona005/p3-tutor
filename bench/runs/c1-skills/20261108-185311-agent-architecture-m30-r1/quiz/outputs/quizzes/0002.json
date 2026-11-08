@@ -1,0 +1,67 @@
+{
+  "id": "0002",
+  "objective": "O4",
+  "title": "Workflows, agents and who owns the control flow",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "What is the core difference between a workflow and an agent?",
+      "options": [
+        {"id": "a", "text": "A workflow never calls a language model, while an agent always does"},
+        {"id": "b", "text": "A workflow may use only one tool, while an agent may use several"},
+        {"id": "c", "text": "Code fixes the order of steps in a workflow; the model picks them in an agent"},
+        {"id": "d", "text": "A workflow runs on a smaller model, while an agent runs on a larger one"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "In your makerspace assistant, every booking request needs the same four steps in the same order: check the calendar slot, check the student's training record, create the booking, send a confirmation. Which design fits this part best?",
+      "options": [
+        {"id": "a", "text": "Python code runs the four steps in order, calling the model only to read the request and write the reply"},
+        {"id": "b", "text": "An agent given four tools, which decides at every request which tool to call next"},
+        {"id": "c", "text": "An agent, because any system that calls tools needs the model to be in charge"},
+        {"id": "d", "text": "An agent, because a model can notice when a step is not needed and skip it"}
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Which of these four designs for the makerspace assistant is an agent rather than a workflow?",
+      "options": [
+        {"id": "a", "text": "Code asks the model to label each question as manual, booking or other, then code calls the handler for that label"},
+        {"id": "b", "text": "Code searches the manuals, asks the model to summarize the pages, then code checks that the summary is short enough"},
+        {"id": "c", "text": "Code asks the model the same question three times in parallel, then code returns the answer most runs agree on"},
+        {"id": "d", "text": "The model is given a manual-search tool and a calendar tool, and chooses which to call, how often and when to stop"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O4",
+      "stem": "A request type always needs the same three steps. Give one reason a fixed workflow costs less per request than an agent doing the same job."
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Your code sends the student's question to the model, which must reply with one of three labels. Code then runs the fixed sequence of steps written for that label. Who owns the control flow of this system?",
+      "options": [
+        {"id": "a", "text": "The model, because it decided which branch the request takes"},
+        {"id": "b", "text": "The code, because it set the branches and the steps in each"},
+        {"id": "c", "text": "The student, because the question decides which branch runs"},
+        {"id": "d", "text": "Both equally, so the system counts as half an agent"}
+      ]
+    },
+    {
+      "id": "q6",
+      "type": "short",
+      "objective": "O4",
+      "stem": "A student asks, \"My 3D print keeps warping and I don't know why.\" In one or two sentences, why does this request suit an agent better than a fixed workflow?"
+    }
+  ]
+}

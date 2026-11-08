@@ -1,0 +1,120 @@
+{
+  "duration_api_ms": 11368,
+  "stop_reason": "end_turn",
+  "session_id": "f44a9b37-1300-4665-b17f-6ff0c31ad357",
+  "total_cost_usd": 0.07486280000000001,
+  "usage": {
+    "input_tokens": 6,
+    "cache_creation_input_tokens": 14381,
+    "cache_read_input_tokens": 54368,
+    "output_tokens": 1189,
+    "output_tokens_details": {
+      "thinking_tokens": 129
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 14381,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 501,
+        "cache_read_input_tokens": 24609,
+        "cache_creation_input_tokens": 408,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 408
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 1189,
+      "cacheReadInputTokens": 54368,
+      "cacheCreationInputTokens": 14381,
+      "webSearchRequests": 0,
+      "costUSD": 0.07486280000000001,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 129,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 14381,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 7,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "That's not right. A language model does not remember earlier conversations on its own, so your assistant won't remember what students told it last week unless you build that.\n\n- **Why it's tempting:** a chat app feels like it remembers. That memory is the app's doing, not the model's.\n- **What's true:** the model is stateless. Its weights don't change when you talk to it. Each call sees only the text you send in that call, which is the context window.\n- **How chat \"memory\" works:** the app keeps the message history and re-sends it with every new request. It's like a pure function with no global state: `reply = model(messages)`. If you don't pass last week's messages in, the model never sees them.\n- **For your assistant:**\n  - Within a session, your code appends each turn to a `messages` list and sends the whole list every time.\n  - Between sessions, your code has to save something, such as a short per-student record in a JSON file or database, and load it into the context at the start of the next visit.\n  - Sending everything costs tokens on every request, so saving a compact summary or key facts (for example, \"completed laser cutter training on 10/28\") is usually better than saving full transcripts. That matters with your small budget.\n- **Chat products that do remember:** some add a memory feature on top, where the app stores notes and inserts them into the prompt. That's still the application layer, not the model.\n\nThis is the \"what it saves between sessions\" decision from your mission, and the next topic on your path.\n\nQuick check: a student says \"book me the 3D printer again like last time.\" What would your code have to have saved, and where would it put it, for the assistant to handle that?",
+  "ttft_ms": 1637,
+  "type": "result",
+  "duration_ms": 11519,
+  "uuid": "d26c2bd8-2af7-4912-a24b-edc2fe7f9287",
+  "ttft_stream_ms": 1298,
+  "time_to_request_ms": 128,
+  "first_content_frame_ms": 1298,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 1189,
+      "cacheReadInputTokens": 54368,
+      "cacheCreationInputTokens": 14381,
+      "webSearchRequests": 0,
+      "costUSD": 0.07486280000000001,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 129,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 14381,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "credential_expires_at": "2026-11-19T11:33:49.605Z"
+}

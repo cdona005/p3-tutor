@@ -1,0 +1,43 @@
+{
+  "quiz": "0001",
+  "submission": "s1",
+  "items": [
+    {
+      "id": "q1",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Correct. The loop (model picks action, program runs it, result returns) is the structure; prompt length and model size only change what one call can do."
+    },
+    {
+      "id": "q2",
+      "verdict": "wrong",
+      "misconception": "M4",
+      "feedback": "Wrong: the model does not open the booking system. It only outputs text: a structured request naming check_calendar with arguments (laser cutter, tomorrow's date), which is option c. The program around the model parses that request, runs the function, and returns the result. Think of the model as the caller that emits a function name plus args, and the program as the interpreter that executes it."
+    },
+    {
+      "id": "q3",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Correct. Repeated identical failures mean more steps add nothing; a step limit is the stopping condition. A bigger window does not help since all 40 steps already fit."
+    },
+    {
+      "id": "q4",
+      "verdict": "wrong",
+      "misconception": "M4",
+      "feedback": "Wrong: the answer is 4, not 1. Each model call ends in one tool request or the final answer, so 3 tool requests + 1 final answer = 4 calls. You wrote that the model 'runs the 3 tools itself' inside one call; it cannot. The program runs each tool between calls, and each result is fed into a new call. Count one call per input the model receives: the question plus 3 tool results."
+    },
+    {
+      "id": "q5",
+      "verdict": "partial",
+      "misconception": null,
+      "feedback": "Right on what: the result goes back to the model. Missing why: the model needs it in its next input to decide its next step or write the final answer. It has no other way to see the result. A full answer states both parts."
+    },
+    {
+      "id": "q6",
+      "verdict": "partial",
+      "misconception": "M3",
+      "feedback": "Right: the program sends tool descriptions (name, what it does) and the model picks the one that fits. Wrong: the claim that it remembers which tool it picked in earlier sessions. The model keeps nothing between calls or sessions; it only sees the text in its current input. Any cross-session memory has to be saved by the program and put back into the input. Drop that sentence."
+    }
+  ],
+  "summary": "You have down the shape of the loop (q1), stopping conditions (q3), and that tools are chosen from descriptions the program supplies (q6). The one thing to fix is who does what: the model only outputs text (a tool request); the program runs the tool and makes a separate model call per step. You missed q2 and q4 for this reason. You also assumed the model remembers across sessions, which it does not by itself. Next step: re-trace the 'laser cutter at 3 pm, plus training' request as a table with columns 'model call #', 'model outputs', 'program does', and check that it has 4 model calls with the program running every tool."
+}

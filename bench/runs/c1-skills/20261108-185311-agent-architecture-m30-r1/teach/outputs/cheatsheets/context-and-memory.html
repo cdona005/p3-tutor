@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat sheet: context and memory in an agent</title>
+  <style>
+    body { max-width: 42rem; margin: 0 auto; padding: 2rem 1rem; font-family: Charter, Georgia, serif; line-height: 1.5; background: #fffdf8; color: #1f1d1a; }
+    @media (prefers-color-scheme: dark) { body { background: #171614; color: #e9e5dc; } a { color: #eaa77a; } }
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    th, td { text-align: left; vertical-align: top; padding: 0.4rem 0.5rem; border-bottom: 1px solid #8884; }
+    code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+<h1>Context and memory in an agent</h1>
+<p>From <a href="../lessons/0001-context-and-memory-in-an-agent.html">lesson 1</a>.</p>
+<table>
+  <thead><tr><th>Place</th><th>Lifetime</th><th>Use for</th></tr></thead>
+  <tbody>
+    <tr><td>Context window</td><td>One session; resent on every call</td><td>The current chat, recent tool results</td></tr>
+    <tr><td>Notes / memory files</td><td>Across sessions; the program saves and reloads</td><td>Per-student facts such as training status</td></tr>
+    <tr><td>Searchable store</td><td>Permanent; fetched by a tool</td><td>Long manuals</td></tr>
+  </tbody>
+</table>
+<ul>
+  <li>The model keeps nothing between calls; the program resends the message list.</li>
+  <li>Input read across a request = sum of every call's context, so it grows faster than the final context.</li>
+  <li>Shrink the context: clear old tool results, or compact into a summary.</li>
+  <li>Bigger window = more fits in one call, not more remembered next time.</li>
+  <li>Retrieval: pre-loaded (search first) or just-in-time (agent calls a search tool).</li>
+</ul>
+</body>
+</html>

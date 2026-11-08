@@ -1,0 +1,43 @@
+{
+  "quiz": "0001",
+  "submission": "s2",
+  "items": [
+    {
+      "id": "q1",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Correct. The loop (model picks an action, program runs it, result comes back) is the structure that separates an agent from one call. Prompt length and window size change what one call can do, not that structure."
+    },
+    {
+      "id": "q2",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Correct. The model only emits a structured request (tool name plus arguments); the program runs the tool. Keep this split in mind for q4."
+    },
+    {
+      "id": "q3",
+      "verdict": "wrong",
+      "misconception": "M6",
+      "feedback": "Wrong. The agent is repeating the same failing edit, so more steps add nothing: 'it will eventually fix it' assumes an agent needs no stopping condition. The fix is a stopping condition such as a step limit that ends the loop and reports back. In CS terms: a while loop with no iteration cap and no progress check is an infinite-loop risk, and it also burns your model budget."
+    },
+    {
+      "id": "q4",
+      "verdict": "partial",
+      "misconception": "M4",
+      "feedback": "The count of 4 is right, but the reasoning is wrong: 'the model ... runs check_calendar' is false. The model only requests each tool; the program runs it. The 4 calls are 3 tool requests plus 1 final answer, i.e. one call per input received (the question and 3 results). Tool runs are not model calls. Fix: describe each step as 'model requests X, program runs X'."
+    },
+    {
+      "id": "q5",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Correct. You gave both parts: the result goes back as the next input, and the model uses it to decide its next step. Precise version: the program appends the result to the model's context and calls the model again."
+    },
+    {
+      "id": "q6",
+      "verdict": "partial",
+      "misconception": null,
+      "feedback": "Incomplete. The name is part of what the model sees, but not all of it. The model chooses from the full tool description the program supplies: name, what the tool does, and its parameters. A name alone can mislead (e.g. a tool called check_calendar that really checks machine maintenance). This is why writing clear tool descriptions is on your mission list."
+    }
+  ],
+  "summary": "You have the agent loop structure and the model's tool request down (q1, q2, q5). Work on next: who does what in the loop. In q4 you said the model runs the tools, but the program runs them and the model only requests them. Also fix the stopping-condition gap (q3) and the idea that tool choice depends on the full description, not just the name (q6). Next step: redo q3, q4 and q6 on paper as 'model requests / program runs / result goes back' traces, with a step limit stated in each."
+}
