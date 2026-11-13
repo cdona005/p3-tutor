@@ -21,7 +21,7 @@ The design is fixed: two configs, three lengths, three teach-only runs in each c
 
 | | 10 minutes | 30 minutes | 60 minutes |
 |---|---|---|---|
-| `c1-skills` | 3 runs | 3 runs | 3 runs |
+| `c1-skills` | 3 runs | 3 runs | 3 runs | 
 | `final` | 3 runs | 3 runs | 3 runs |
 
 ```
@@ -57,7 +57,7 @@ One or two sentences: as the requested length grows from 10 to 60 minutes, which
 For example: "The single-agent `c1-skills` loses more than `final` as lessons get longer, because one context writing a 60-minute lesson drifts from the plan, so its `teach_facts_correct` falls further from 10 to 60 minutes, and `final` wins more of the blind pairs at 60 minutes than at 10."
 It should be something you could be wrong about.
 
-TODO: your hypothesis.
+As the length increases from 10 to 60 minutes for the lesson, c1-skills will lose more on the teach-facts-correct statistic than final will due to final having multiple agents, so each agent's context will be smaller and drift less from the goal than the single agent c1 teach skill.
 
 ---
 
@@ -72,7 +72,7 @@ Across all three lengths there are nine pairs: 8 of 9 gives a p-value of about 0
 An objective measure, such as `teach_facts_correct` or the judge's level fit, gives three numbers per cell, and you can see a difference only when it is larger than the spread between the three runs.
 So choose a Δ that is large enough to matter and large enough for three runs to see.
 
-TODO: your primary measure and your Δ, with the reason.
+My primary measure is teach_facts_correct, and a delta of 0.17 across the three runs between final and c1. If final stays at 1.00 and c1 drops to 0.83, then one fact is wrong in every lesson that c1 made. Any amount of incorrect facts in the lesson could confuse the learner, and if the delta is at least 0.17 then I think the lesson should be rewritten to ensure the students learn the correct information.
 
 ---
 
@@ -88,7 +88,13 @@ At least these:
 - **Cost against length:** tokens per minute of lesson for each config, and whether `final`'s overhead grows in step with length or faster.
   Say whether you divide by the minutes requested or by the estimated minutes.
 
-TODO: your measures, and how you compute each one.
+Primary measure: teach_facts_correct is computed by a judge model by checking if each fact is present and correct. I will read the mean and range of the 3 runs in each cell, then compare across the 10, 30, and 60 minute lesson runs. The judge is also an agent, so it could be incorrect or too strict about how it judges the lesson.
+
+Blind Comparison: For each of the three session (1 per length), I will report how well the lesson teaches the topic, how easy it is to understand and read, and how well the agent followed my preferences. I will not give either point for a tie, and either scoring 2/3 will be considered the better agent. If there are any ties, I will still leave the wins/3 rule because either should not get 100% win if there are ties. So if there is one tie and one agent gets 2 wins, I will still count the score as 2/3 for the winning agent. If there are 2 ties, the agent with the 1 win will be considered the winner of the round.
+
+Length Accuracy: If the length accuracy for a 60 minute lesson comes out less than 0.60 for the long runs, I will keep the cell in the comparisons and read the rest of the metrics with that as a possible reason other metrics changed.
+
+Cost against length: To compare, I will divide by the estimated minutes, as I think that will be a more accurate comparison. I belive final's token per minute will be higher than c1 due to the use of multiple agents to plan, write, and review the lesson. Final will also grow quicker as length increases.
 
 ---
 
@@ -108,7 +114,9 @@ This is the default rule, and you can tighten it, but do not loosen it after you
 Then name the threats to validity you will report (lecture 22): blinding failures (your could-tell share at each length), judge bias toward longer outputs (lecture 24), the rough length estimate, and three runs per cell.
 Say which one worries you most for your hypothesis.
 
-TODO: confirm or tighten this rule, and name your threats to validity.
+I will keep the rule as written. 
+The biggest threats to the validity of the results is being able to tell which agent wrote the lesson, which could cause the blind test results to be skewed, the judge agent favoring longer lessons, and only comparing 3 runs, which is not enough to make an accurate comparison. 
+The threat that I am the most worried about is that there is only 3 runs per cell. Any one lesson being bad from either side could change the results drastically, and the judge model being an agent that can be wrong or too strict can make this happen easily.
 
 ---
 
