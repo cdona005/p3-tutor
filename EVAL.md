@@ -161,20 +161,115 @@ Name the rounds that built this step and the inventory entries of the reviewers 
 Then the loops' design, for each of teach, quiz and grade: who reviews, what is on each reviewer's checklist and which items came from your `c1-skills` major review, how each reviewer gets a fresh context, how many passes a loop may run and what ends it early, and what each loop records.
 Then one design choice you could have made the other way, such as one reviewer against several, a cap of one pass against three, or a reviewer that edits against one that only reports, and why you chose as you did.
 
-TODO: the rounds and entries, and the design of your review loops.
+Round 1 added the grade reviewer, round 2 added quiz reviewer, and round 3 added lesson reviewer.
+One subagent reviews for each that is started by it's skill. All use the sonnet model, and grade-reviewer and quiz-reviewer have acces to Read, Glob, and Grep. Lesson reviewer has the same with WebSearch and WebFetch added.
+Grade reviewer has 12 checks, quiz has 12, and lesson has 17.
+My c1-review asked for more detail, to point to lessons, and review every missed answer. I also asked for more detailed feedback, and all of these are rules for the reviewer. 
+The quiz skill checks to ensure the question is in the lecture clearly, which I also asked for.
+
+Each reviewer is a subagent and can only see the draft and files passed to it, never the writing agent's reasoning.
+
+I chose to cap the passes at 2 and stops early if no issues are found. After the second pass it stops and reports what it finds. I could have allowed more passes, but I feel like what is caught in 2 passes is enough to improve the skill significantly and the cost of more reviews would not be justified. The second reviewers did find a lot of errors in the second pass and more loops could find more errors, but the first 2 passes find the big issues and after that I could not find anything obviously wrong, so I do not think that more reviewers would change the user's experience.
 
 ### The loops as they ran
 
 For teach, quiz and grade: how many review passes ran in your bench run, what the reviewers flagged, and whether the revisions moved anything you can point at, a fact corrected, an ambiguous item rewritten, feedback that changed.
 The loop records in the run's outputs are the evidence; name the files.
 
-TODO: what the review loops did in the run.
+Lesson had 7 findings in pass 1, 16 in pass 2, then stopped. It did not reach 0.
+Quiz had 15 findings in pass1, 15 in pass 2, then stopped and never reached 0.
+Grade had 8 findings in pass1, then 1 in pass 2.
+
+file: bench/runs/c2-review/20261113-232251-agent-architecture-m30-r1/teach/outputs/review-records/0001-lesson.md
+
+The lesson reviewer found mostly wording issues, and used my feedback of the thin context section to ask to add more information about context and compaction. Most of the issues found were small details and not something I would say is necessary to correct.
+
+file: bench/runs/c2-review/20261113-232251-agent-architecture-m30-r1/quiz/outputs/review-records/0002-quiz.md
+
+The quiz reviewer tried to make the quiz cover more of the lesson's topics and remove overlap between questions. It did fix one question where the question obviously gave away the answer.
+
+file: bench/runs/c2-review/20261113-232251-agent-architecture-m30-r1/grade-s1/outputs/review-records/0001-s1-grade.md 
+bench/runs/c2-review/20261113-232251-agent-architecture-m30-r1/grade-s2/outputs/review-records/0001-s2-grade.md
+
+The grade reviewer made the feedback more detailed and ensured the reviewer followed my personalization notes, liek removing praise and trying to point to lessons that teach why the answer was wrong. 
 
 ### Your review, the objective checks and the cost
 
 Paste `uv run p3 report --configs c1-skills,c2-review`.
 
-TODO: paste the report tables.
+## Results on agent-architecture
+
+Scored full runs (quick runs and --only runs left out); each cell is the mean over the runs, with the range in brackets.
+
+### Quality
+
+| config | runs | teach facts | teach misconc. | length ratio | dead links | key agreement | wrong keys | ambiguous items | verdict agreement | false wrong | misconc. hit | leaks | behavior met |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `c1-skills` | 1 | 1.00 | 0 | 0.59 | 0 | 1.00 | 0 | 0 | 1.00 | 0.00 | 1.00 | 0 | 0.33 |
+| `c2-review` | 1 | 1.00 | 0 | 0.86 | 0 | 1.00 | 0 | 0 | 1.00 | 0.00 | 1.00 | 0 | 0.33 |
+
+Teach facts, key agreement, verdict agreement, false wrong, misconception hit and behavior met are shares (0 to 1); misconceptions, dead links, wrong keys, ambiguous items and leaks are counts per run.
+A dash means no run could be scored on that check, and n= says how many of the runs could.
+A job that failed counts against the config: no lesson scores 0 teach facts, no quiz and key 0 key agreement, a missing grades file disagrees on every item, and a tutor scenario with no reply is not met; leaks need a reply to check, so such a scenario is left out of them.
+The length ratio is a rough reading-time estimate (visible words / 150) over the minutes requested; 0.6 to 1.5 counts as on length.
+
+### Cost: teach
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c1-skills` | 1 | 675.7k | 30.5k | 3.1 | 1 | 0.59 |
+| `c2-review` | 1 | 1.90M | 66.4k | 6.5 | 4 | 1.27 |
+
+### Cost: quiz
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c1-skills` | 1 | 189.3k | 6.5k | 0.9 | 0 | 0.20 |
+| `c2-review` | 1 | 846.4k | 27.1k | 3.2 | 3 | 0.59 |
+
+### Cost: grade
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c1-skills` | 1 | 289.2k | 7.2k | 0.9 | 0 | 0.32 |
+| `c2-review` | 1 | 824.7k | 28.5k | 3.2 | 4 | 0.79 |
+
+### Cost: tutor
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c1-skills` | 1 | 626.8k | 9.9k | 1.7 | 0 | 0.53 |
+| `c2-review` | 1 | 639.3k | 11.4k | 1.8 | 0 | 0.58 |
+
+### Cost: all jobs
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c1-skills` | 1 | 1.78M | 54.2k | 6.6 | 1 | 1.64 |
+| `c2-review` | 1 | 4.21M | 133.4k | 14.7 | 11 | 3.22 |
+
+Costs are per run, summed over the job's scenarios; list-price $ is the list-price equivalent, not what you pay on a subscription.
+
+## Your ratings
+
+Your ratings from 1 to 5 in the major reviews (reviews/<step>.md), which review full runs on the shared topic; a dash means no rating there yet, one that p3 check does not accept, or a job that step does not review (Tutor in c2-review; Quiz, Feedback and Tutor in c3-split).
+
+| job | criterion | c1-skills | c2-review | c3-split | final |
+|---|---|---:|---:|---:|---:|
+| Lesson | Technical correctness and facts | 5 | 5 | - | - |
+| Lesson | Pedagogy | 4 | 5 | - | - |
+| Lesson | Alignment with the learning goal | 5 | 5 | - | - |
+| Lesson | Overall quality | 4 | 5 | - | - |
+| Quiz | Difficulty | 4 | 4 | - | - |
+| Quiz | Coverage of the lesson's core | 3 | 4 | - | - |
+| Quiz | Wording and possible misreadings | 4 | 4 | - | - |
+| Quiz | Writing quality | 5 | 5 | - | - |
+| Quiz | Alignment with the learning goal | 4 | 4 | - | - |
+| Feedback | Useful | 3 | 5 | - | - |
+| Feedback | Explains enough | 3 | 5 | - | - |
+| Feedback | Personalized to how I like things explained | 1 | 5 | - | - |
+| Tutor | Guardrails | 3 | - | - | - |
+| Tutor | Personalization | 3 | - | - | - |
 
 ### What the step bought and what it cost
 
@@ -182,7 +277,10 @@ Did the problems your `c1-skills` review found go away, and which ratings moved?
 Which loop earned its cost and which did not?
 If a loop ran several passes and the final output was no better than the first draft, say so, because that is the finding.
 
-TODO: your judgment of step 2.
+All of the problems in c1 went away besides the tutor guardrails, which was worse this pass than the last. 
+I think the grade cost is worth it, the feedback was much more useful and detailed enough to explain why the answer was wrong.
+
+I do not think the lesson reviewer is worth the cost. I liked the lessons from c1, and while c2 is a little better, the cost is too high to justify the reviewer. The teach skill over doubled in cost, from $0.59 to $1.27. For this small of a difference in quality I would leave the lesson reviewer out.
 
 ---
 

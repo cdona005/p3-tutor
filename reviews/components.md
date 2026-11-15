@@ -58,25 +58,25 @@ An example of a finished entry:
 
 - Kind: subagent
 - Step added: c2-review
-- Purpose: TODO
+- Purpose: Ensure the grade agent follows my personilaztion and gives accurate and detailed feedback.
 - With and without: reviews/c2-review.md, Round 1 (without) and Round 2 (with)
-- Review: TODO
+- Review: The grade reviewer did well and followed my feedback about wanting more detailed feedback and tried to point to lessons.
 - Kept in final: TODO
 
 ### quiz-reviewer
 
 - Kind: subagent
 - Step added: c2-review
-- Purpose: TODO
+- Purpose: Ensure the quiz tests about all important topics and has no errors
 - With and without: reviews/c2-review.md, Round 2 (without) and Round 3 (with)
-- Review: TODO
+- Review: The quiz reviewer tried to make the questions test about more of the topics in the lesson, but I do not feel like it changed enough to make more than one pass with the reviewer worth the cost.
 - Kept in final: TODO
 
 ### lesson-reviewer
 
 - Kind: subagent
 - Step added: c2-review
-- Purpose: TODO
+- Purpose: Ensure the lesson covers all topics in the learning objective and is all accurate.
 - With and without: reviews/c2-review.md, Round 3 (without) and Round 4 (with)
-- Review: TODO
+- Review: It found some small errors, but nothing about correctness or covering the learning objective. It did add more information about context and compacting, which I asked for in c1.
 - Kept in final: TODO
