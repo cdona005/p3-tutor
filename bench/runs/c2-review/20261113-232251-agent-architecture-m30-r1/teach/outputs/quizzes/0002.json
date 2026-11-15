@@ -1,0 +1,56 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "On Monday a student tells the makerspace assistant, \"I like evening slots.\" Nothing is saved anywhere. On Thursday the same student opens a new chat. The model has a very large context window. What does the assistant know about the preference?",
+      "options": [
+        {"id": "a", "text": "It knows the preference, because a large window carries over to later chats"},
+        {"id": "b", "text": "It knows the preference, because the model remembers every student it met"},
+        {"id": "c", "text": "It knows nothing of Monday, because each new session starts with an empty context"},
+        {"id": "d", "text": "It knows a short note, because the model keeps small facts and drops long ones"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "An agent run has a base input of 1,000 tokens (system prompt, tool definitions and question). It makes two tool calls and then writes its final answer, so the model is called three times. Each tool step adds 500 tokens to the message list (the request plus the result), and the whole list is sent on every call. How many input tokens are sent across all three calls in total?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your manual search returns the chunk \"Set the speed to 40% and the power to 60%.\" It is found for questions about the wrong machine, because the chunk does not say which machine or material it is for. Which change most directly fixes the cause?",
+      "options": [
+        {"id": "a", "text": "Return many more chunks for each question so the right one is included"},
+        {"id": "b", "text": "Store the machine name and section title with each chunk before indexing it"},
+        {"id": "c", "text": "Switch to a model with a larger window so it can read more chunks"},
+        {"id": "d", "text": "Tell the model in the system prompt to double-check which machine applies"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O3",
+      "stem": "A teammate proposes giving the assistant memory by saving each session's full transcript and loading all past transcripts at the start of every visit. In one or two sentences, give the main problem with this design."
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "In a long run, your program deletes the first tool result from the message list before the third model call, and no later message mentions what that result said. What does the model know about that result at the third call?",
+      "options": [
+        {"id": "a", "text": "Everything in it, because a model keeps what it read in earlier calls"},
+        {"id": "b", "text": "A summary of it, because the model compacts old results on its own"},
+        {"id": "c", "text": "Everything in it, because the API stores earlier results on the server"},
+        {"id": "d", "text": "Nothing, because it only sees what the program sends on that call"}
+      ]
+    }
+  ]
+}

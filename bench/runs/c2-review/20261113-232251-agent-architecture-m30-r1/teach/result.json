@@ -1,0 +1,136 @@
+{
+  "duration_api_ms": 419147,
+  "stop_reason": "end_turn",
+  "session_id": "6516a2eb-d2e6-4abc-992a-dce34acafe59",
+  "total_cost_usd": 1.2682202,
+  "usage": {
+    "input_tokens": 12,
+    "cache_creation_input_tokens": 14789,
+    "cache_read_input_tokens": 471852,
+    "output_tokens": 10605,
+    "output_tokens_details": {
+      "thinking_tokens": 1466
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 14789,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 782,
+        "cache_read_input_tokens": 97868,
+        "cache_creation_input_tokens": 4984,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 4984
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 64,
+      "outputTokens": 48521,
+      "cacheReadInputTokens": 1528359,
+      "cacheCreationInputTokens": 171654,
+      "webSearchRequests": 0,
+      "costUSD": 1.2056479000000002,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 9695,
+      "cacheCreationEphemeral5mInputTokens": 79428,
+      "cacheCreationEphemeral1hInputTokens": 92226,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    },
+    "claude-haiku-5-5": {
+      "inputTokens": 103110,
+      "outputTokens": 17858,
+      "cacheReadInputTokens": 8855,
+      "cacheCreationInputTokens": 25950,
+      "webSearchRequests": 4,
+      "costUSD": 0.06257230000000001,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 8652,
+      "cacheCreationEphemeral5mInputTokens": 25950,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-haiku-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [
+    {
+      "tool_name": "Bash",
+      "tool_use_id": "toolu_011HjF9ogA124Ff4FNpJWeju",
+      "tool_input": {
+        "command": "mkdir -p lessons review-records quizzes keys cheatsheets && cp drafts/lessons/0001-context-and-memory-in-an-agent.html lessons/0001-context-and-memory-in-an-agent.html && python3 -I -c \"\nimport re,sys\nt=open('lessons/0001-context-and-memory-in-an-agent.html').read()\nt=re.sub(r'<(script|style).*?</\\1>','',t,flags=re.S)\nt=re.sub(r'<[^>]+>',' ',t)\nprint(len(t.split()))\"",
+        "description": "Copy final lesson and count words"
+      }
+    }
+  ],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "origin": {
+    "kind": "task-notification",
+    "producer": "session-task",
+    "runId": "0mwflwicj-41e36be2"
+  },
+  "subagent_stats": {
+    "spawned": 4,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 4
+    },
+    "started_in_background": 2,
+    "max_depth": 1,
+    "spawned_by_subagents": 0,
+    "completed": 4,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {
+      "web-fetch": 2,
+      "lesson-reviewer": 2
+    }
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 22,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "I wrote lesson 0001, \"Context and memory in an agent\" (30 minutes, objective O3), at `lessons/0001-context-and-memory-in-an-agent.html`. I didn't open it in a browser, and I didn't count its words myself. The first reviewer estimated about 4,800 words (roughly 32 minutes). The lesson grew a little after that, but should still be well inside the 2,700–6,750 range.\n\n**What it covers:**\n- **Context window:** what counts toward it (system prompt, tool definitions, messages, tool results and the reply), what context rot is, and why tokens set the cost.\n- **Between steps:** the model remembers only the message list your program resends, so every call pays for the whole list again. It covers clearing old results and compaction, with a worked cost example (17,500 input tokens for a four-call run) and a faded \"your turn\" task.\n- **Between sessions:** nothing carries over unless you save it. It covers short, trusted notes, who decides what to load, and stale records.\n- **Retrieval:** whether you need it at all (the under-200,000-token rule), embeddings versus BM25 keyword search, chunks that lose their context, and what each retrieval stage does to the failure rate.\n- **Sort-it task:** you decide whether four makerspace facts go in the context, a saved note or a searchable manual store.\n\n**Sources:** the facts come from Anthropic's context-engineering post, the Claude context-windows docs, and the Contextual Retrieval article. I added them to `RESOURCES.md`.\n\nThe lesson went through two review passes. They found 7 issues, then 16, and I fixed most of them. I left three suggestions unapplied: an \"In short\" line per section, an output-versus-input pricing claim I had no source for, and more bulleting. The details are in `review-records/0001-lesson.md`.\n\nI also wrote quiz 0002 (five items) with its key (`keys/0002.json`), and updated `NOTES.md`. Say when you want to take the quiz, and ask me anything about the lesson in the meantime.\n\nI skipped the optional cheat sheet. Do you want a one-page one on the context, notes and retrieval decisions for your design review?",
+  "ttft_ms": 3077,
+  "type": "result",
+  "duration_ms": 71607,
+  "uuid": "e3585ea0-f7f6-43b5-a9a8-6e57671bd6f3",
+  "ttft_stream_ms": 1123,
+  "time_to_request_ms": 11,
+  "first_content_frame_ms": 1123,
+  "queued_turn_count": 0,
+  "result_index": 2,
+  "model_usage_since_last_result": {},
+  "credential_expires_at": "2026-11-19T11:33:49.605Z"
+}

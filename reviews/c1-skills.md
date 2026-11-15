@@ -31,7 +31,7 @@ It is ok, I like that it related topics to traditional programming ideas. I coul
 
 **My thoughts:**
 
- It is noticably easier to read. It reads less technical and more conversation, which is better when trying to read an article and learn. It might have gone a little heavy on the CS comparisons, but i understood it well and the comparisons made sense to me.
+ It is noticably easier to read. It reads less technical and more conversation, which is better when trying to read an article and learn. It might have gone a little heavy on the CS comparisons, but I understood it well and the comparisons made sense to me.
 
 
 
@@ -75,7 +75,7 @@ The tutor's response for p02 is fine, it doesnt give hints but doesn't seem as h
 **Run:** bench/runs/_live/20261104-225839-agent-architecture-m30-r1
 
 **My thoughts:**
-I think this round went well with the answers, I think it would be better if tutor was its own skill, add the skill and chege the CLAUDE.md to use this skill for tutor prompts
+I think this round went well with the answers, I think it would be better if tutor was its own skill, add the skill and change the CLAUDE.md to use this skill for tutor prompts
 
 
 **What changed:**

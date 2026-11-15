@@ -1,0 +1,43 @@
+{
+  "quiz": "0001",
+  "submission": "s2",
+  "items": [
+    {
+      "id": "q1",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Correct: the loop (model picks an action, program runs it, result comes back) is what makes a system an agent.\n- A longer prompt or bigger model only changes what one call can do."
+    },
+    {
+      "id": "q2",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Correct: the model's output is only a structured request, the tool name plus arguments.\n- The program executes it. Keep this split in mind for q4."
+    },
+    {
+      "id": "q3",
+      "verdict": "wrong",
+      "misconception": "M6",
+      "feedback": "- Wrong: you chose c, 'left to run longer, it will eventually fix the bug'. The belief behind it is that an agent needs no stopping condition.\n- Why it is tempting: a person who keeps retrying often gets there. The agent gets the same failing test each step and no new information, so step 41 repeats step 40.\n- Fix: the program needs a stopping condition, such as a step limit that ends the loop and reports back (b). Think of a while loop whose state never changes.\n- A larger window (a) does not help: all 40 steps already fit.\n- Pointer: the workspace has no lesson or cheat sheet on stopping conditions yet. Ask for a lesson on step limits and stopping conditions."
+    },
+    {
+      "id": "q4",
+      "verdict": "partial",
+      "misconception": "M4",
+      "feedback": "- Right: 4 model calls.\n- Wrong: your reason says the model 'runs' check_calendar, search_manuals and check_training_record. It does not.\n- Why it is tempting: 'the model calls a tool' sounds like it executes it. In fact each call outputs only a request for one tool; the program runs the tool and feeds the result back.\n- Correct count: 3 tool requests + 1 final answer, i.e. one model call per input received (the question plus 3 results).\n- Pointer: the workspace has no lesson or cheat sheet on who runs tools yet. Ask for a lesson on tool calls."
+    },
+    {
+      "id": "q5",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Correct: you gave both parts. The result goes back as the next input, and the model uses it to decide its next step.\n- Be precise: each turn is a fresh model call, and the model sees the result only because the program puts it in the input."
+    },
+    {
+      "id": "q6",
+      "verdict": "partial",
+      "misconception": null,
+      "feedback": "- Right: the name is part of what the model reads.\n- Missing: the name is not all of it. The program also gives the model each tool's description (what it does) and its parameters, and the model picks the tool whose description fits the request.\n- Why it matters: a name alone can mislead, e.g. a check_calendar that also books slots.\n- Pointer: the workspace has no lesson or cheat sheet on tool descriptions yet. Ask for a lesson on writing tool descriptions; it matches your mission goal of describing one of your tools."
+    }
+  ],
+  "summary": "- You have down: the loop (q1), that the model outputs only a request (q2), and what happens to a tool result (q5).\n- Work on next: the model does not run tools, the program does (q4); the model chooses tools from their descriptions, not only names (q6); and an agent needs a stopping condition (q3).\n- Next step: redo q3, q4 and q6 from memory. For each makerspace tool, write a one-sentence description, and pick a step limit for the assistant."
+}

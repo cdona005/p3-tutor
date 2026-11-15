@@ -1,0 +1,27 @@
+{
+  "name": "c2-review",
+  "hash": "sha256:adbc7248217395ee19c616eec4222a28dc4b98cb16c2072cd8b12186311488b6",
+  "created_at": "2026-11-13T23:21:19Z",
+  "files": [
+    ".claude/agents/README.md",
+    ".claude/agents/grade-reviewer.md",
+    ".claude/agents/lesson-reviewer.md",
+    ".claude/agents/quiz-reviewer.md",
+    ".claude/settings.json",
+    ".claude/skills/grade/SKILL.md",
+    ".claude/skills/quiz/SKILL.md",
+    ".claude/skills/teach/SKILL.md",
+    ".claude/skills/teach/references/GLOSSARY-FORMAT.md",
+    ".claude/skills/teach/references/GRADING.md",
+    ".claude/skills/teach/references/LEARNING-RECORD-FORMAT.md",
+    ".claude/skills/teach/references/LESSONS.md",
+    ".claude/skills/teach/references/MISSION-FORMAT.md",
+    ".claude/skills/teach/references/QUIZZES.md",
+    ".claude/skills/teach/references/RESOURCES-FORMAT.md",
+    ".claude/skills/teach/references/TUTORING.md",
+    ".claude/skills/teach/references/lesson-template.html",
+    ".claude/skills/tutor/SKILL.md",
+    "CLAUDE.md",
+    "PREFERENCES.md"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "quiz": "0001",
+  "submission": "s1",
+  "items": [
+    {
+      "id": "q1",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Correct: the loop (model picks action, program runs it, result comes back) is what defines an agent.\n- A longer prompt or bigger model only changes what a single call can do."
+    },
+    {
+      "id": "q2",
+      "verdict": "wrong",
+      "misconception": "M4",
+      "feedback": "- Wrong: you chose (a), that the model reads the calendar by opening the booking system itself. The model cannot do that; it only outputs text.\n- Correct is (c): a structured request naming check_calendar with the laser cutter and tomorrow's date as arguments. The program receives it, runs the tool, and sends the result back.\n- Belief behind (a): the model runs tools itself (M4). It is tempting because the final answer reads as if the model looked it up.\n- CS analogy: the model writes out a function call; the program is the interpreter that executes it.\n- No lesson, cheat sheet or resource covers this yet; ask for a lesson on tool calls and the loop."
+    },
+    {
+      "id": "q3",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Correct: repeating the same failing step is a loop problem, and a step limit is the stopping condition that ends it.\n- A larger window would not help; all 40 steps already fit.\n- A step limit also caps token spend, which matters for your budget."
+    },
+    {
+      "id": "q4",
+      "verdict": "wrong",
+      "misconception": "M4",
+      "feedback": "- Wrong: the answer is 4. You answered 1, saying the model runs the 3 tools itself inside one call. It does not (M4); it is tempting because the whole exchange looks like one smooth answer from the outside.\n- Each model call ends with one tool request or the final answer, and the program runs the tool between calls.\n- Calls: 1 requests check_calendar, 2 requests search_manuals, 3 requests check_training_record, 4 writes the final answer. One call per input received: the question plus three results.\n- No lesson, cheat sheet or resource covers this yet; ask for a lesson on tool calls and the loop."
+    },
+    {
+      "id": "q5",
+      "verdict": "partial",
+      "misconception": null,
+      "feedback": "- Right: the result is sent back to the model (into its next input, and the model is called again).\n- Missing: the why. The model has not seen the result, so it needs it to decide its next step or write the final answer.\n- Fix: when a question asks 'what and why', give both parts.\n- No lesson, cheat sheet or resource covers this yet; ask for a lesson on tool calls and the loop."
+    },
+    {
+      "id": "q6",
+      "verdict": "partial",
+      "misconception": "M3",
+      "feedback": "- Right: the model is sent tool descriptions (name and what it does) and picks the one that fits.\n- Wrong: 'it remembers which tool it picked in earlier sessions'. That is not how it chooses, and the model keeps nothing between calls: it only sees the text it is given. Believing memory is automatic (M3) is tempting because chatbots seem to remember you, but that comes from the program re-supplying saved text.\n- Fix: say the choice comes from the descriptions alone.\n- No lesson, cheat sheet or resource covers this yet; ask for a lesson on memory across sessions."
+    }
+  ],
+  "summary": "- Down: the shape of the loop (q1), the stopping condition (q3), and that the model chooses tools from the descriptions it is given (q6).\n- Work on next: the model never runs a tool; it outputs a request and the program runs it (q2, q4). Also give the 'why' in q5, and drop the idea of automatic memory across sessions (q6).\n- Next step: trace the 'laser cutter at 3 pm and training' request on paper, listing for each of the 4 model calls what goes in and what comes out, and mark what the program does between calls. No lesson or cheat sheet exists yet for these topics; ask for a lesson on tool calls and the loop, and one on memory."
+}

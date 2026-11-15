@@ -47,11 +47,27 @@ Use Read, Glob and Grep to look around, Write to create files and web search to 
 1. Pin down the objective, its id and the number of items asked for; use the id the workspace already has for it.
 2. Find the objective's core: in its lessons or, when there are none, in a high-trust source you search for and read, never in your own memory.
 3. Choose the item types and write the items as `references/QUIZZES.md` describes: one tested idea per item, mostly application in a new case, difficulty spread through the quiz, and every distractor a misconception that someone would really hold.
-4. Write the quiz to `quizzes/NNNN.json` and its key to `keys/NNNN.json` with the next number, exactly as `FORMATS.md` shows.
+4. Write the draft quiz to `drafts/quizzes/NNNN.json` and its draft key to `drafts/keys/NNNN.json`, not to `quizzes/` and `keys/`, with the next number in `quizzes/`, exactly as `FORMATS.md` shows.
 5. Answer every item yourself from its stem alone, without looking at your key, and rewrite any item that lacks a single defensible answer, that can be read two ways, or whose correct option repeats words from its stem.
-6. Note in `NOTES.md` anything new you learned about the learner.
-7. Finish with a short message: the quiz's path, its objective, and how many items; say if it is ahead of the lessons.
+6. Review the drafts in a loop of at most two passes, as below.
+7. Write the final `quizzes/NNNN.json` and `keys/NNNN.json` once, as copies of the last drafts, and the loop's record, as below.
+8. Note in `NOTES.md` anything new you learned about the learner.
+9. Finish with a short message: the quiz's path, its objective, and how many items; say if it is ahead of the lessons.
    Never put an answer in the message.
+
+## The review loop
+
+A fresh reviewer reads the drafts the way the learner will, which you cannot do with your own reasoning still in view.
+
+1. Start the `quiz-reviewer` subagent with the Agent tool.
+   Its task message names these paths and the objective's id and text, and nothing else: the draft quiz, the draft key, `FORMATS.md`, `MISSION.md`, `PREFERENCES.md`, `NOTES.md`, `lessons/`, `cheatsheets/`, `learning-records/` and `keys/`.
+   Do not describe your reasoning or what you think of the drafts.
+2. Wait for its report before you do anything else: do not revise, write the final files or finish until it has come back.
+3. Fix every finding in the drafts, or say in the record why you did not.
+   An item that tests an idea no lesson teaches is rewritten to test one a lesson does teach, or replaced; the number of items stays what was asked for.
+4. When the report said `FINDINGS: 0`, stop.
+   Otherwise, if this was the first pass, review the revised drafts once more; after the second pass, stop whatever it found.
+5. Write `review-records/NNNN-quiz.md`: for each pass, the number of findings and one line for each, what you changed for it, and what you left and why.
 
 ## Giving a quiz in the chat
 

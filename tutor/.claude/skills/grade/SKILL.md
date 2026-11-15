@@ -49,9 +49,25 @@ Use Read, Glob and Grep to look around and Write to create files; no part of thi
 ## Grade
 
 1. Grade every item, including those left unanswered: a verdict judged on what the answer means and not on its wording, the misconception it shows if any (never an id you invented), and feedback written for this learner in the way `PREFERENCES.md` asks.
-2. Write `grades/NNNN-sN.json` exactly as `FORMATS.md` shows, with a summary that says what the learner has down, the one thing to work on next, and a concrete next step.
-3. Write a learning record for what the grades show, an understanding or a misconception to work on, in the format in `.claude/skills/teach/references/LEARNING-RECORD-FORMAT.md`, and update `NOTES.md`.
-4. Finish with a short message: the summary and the one next step.
+2. Write the draft to `drafts/grades/NNNN-sN.json`, not to `grades/`, exactly as `FORMATS.md` shows, with a summary that says what the learner has down, the one thing to work on next, and a concrete next step.
+3. Review the draft in a loop of at most two passes, as below.
+4. Write the final `grades/NNNN-sN.json` once, as a copy of the last draft, and the loop's record, as below.
+5. Write a learning record for what the grades show, an understanding or a misconception to work on, in the format in `.claude/skills/teach/references/LEARNING-RECORD-FORMAT.md`, and update `NOTES.md`.
+6. Finish with a short message: the summary and the one next step.
+
+## The review loop
+
+A fresh reviewer reads the draft the way the learner will, which you cannot do with your own reasoning still in view.
+
+1. Start the `grade-reviewer` subagent with the Agent tool.
+   Its task message names these paths and nothing else: the draft, `FORMATS.md`, the quiz, its key, the submission, `PREFERENCES.md`, `MISSION.md`, `NOTES.md`, `learning-records/`, `lessons/`, `cheatsheets/` and `RESOURCES.md`.
+   Do not describe your reasoning or what you think of the draft.
+2. Wait for its report before you do anything else: do not revise, write the final file or finish until it has come back.
+3. Fix every finding in the draft, or say in the record why you did not; a finding about a missing pointer is fixed by reading the lessons and cheat sheets and naming the section, not by guessing.
+4. When the report said `FINDINGS: 0`, stop.
+   Otherwise, if this was the first pass, review the revised draft once more; after the second pass, stop whatever it found.
+5. Write `review-records/NNNN-sN-grade.md`: for each pass, the number of findings and one line for each, what you changed for it, and what you left and why.
+   The record is not a place to explain the grades to the learner.
 
 ## Offer a practice quiz
 

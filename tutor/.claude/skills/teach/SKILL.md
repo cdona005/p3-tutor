@@ -114,12 +114,29 @@ Read `references/LESSONS.md` and `references/lesson-template.html`, then the tit
 2. **Find the knowledge:** search the web for high-trust sources on exactly this objective, read the best two or three, and choose the single best one as the lesson's primary source.
    Add the sources to `RESOURCES.md` in the format in `references/RESOURCES-FORMAT.md`.
 3. **Plan to the minutes:** split the lesson into sections with a word budget for each, as `references/LESSONS.md` explains, so the whole lesson fits the requested length.
-4. **Write the lesson** to `lessons/NNNN-<slug>.html`, following `FORMATS.md` and the template: beautiful and self-contained, with figures, worked examples, practice with immediate feedback, and citations.
+4. **Write the draft lesson** to `drafts/lessons/NNNN-<slug>.html`, not to `lessons/`, with the next number in `lessons/`, following `FORMATS.md` and the template: beautiful and self-contained, with figures, worked examples, practice with immediate feedback, and citations.
    Write it in the voice below.
-5. **Write a short quiz and its key** on the lesson's objective, in the same pass: four or five items, as `references/QUIZZES.md` describes, none of them a repeat of the lesson's practice questions.
-6. **Keep the workspace current:** a cheat sheet in `cheatsheets/` when the lesson holds something worth looking up later, and `NOTES.md` for anything you learned about the learner.
-7. **Finish** with a short message: the lesson's path and what it covers, that a quiz is ready when they are, and a reminder that they can ask you anything about it.
+   Draft it in a folder at the same depth as `lessons/`, so its relative links to `../assets/` and `../cheatsheets/` work unchanged.
+5. **Review the draft** in a loop of at most two passes, as below.
+6. **Write the final lesson** to `lessons/NNNN-<slug>.html` once, as a copy of the last draft, and the loop's record, as below.
+7. **Write a short quiz and its key** on the lesson's objective, in the same pass: four or five items, as `references/QUIZZES.md` describes, none of them a repeat of the lesson's practice questions.
+8. **Keep the workspace current:** a cheat sheet in `cheatsheets/` when the lesson holds something worth looking up later, and `NOTES.md` for anything you learned about the learner.
+9. **Finish** with a short message: the lesson's path and what it covers, that a quiz is ready when they are, and a reminder that they can ask you anything about it.
    Never put a quiz answer in the message.
+
+### The review loop
+
+A fresh reviewer reads the draft the way the learner will, which you cannot do with your own reasoning still in view.
+
+1. Start the `lesson-reviewer` subagent with the Agent tool.
+   Its task message names these and nothing else: the draft's path, the objective's id and text, the requested length in minutes, and the paths of `FORMATS.md`, `MISSION.md`, `PREFERENCES.md`, `NOTES.md`, `learning-records/` and `lessons/`.
+   Do not describe your reasoning, your sources or what you think of the draft.
+2. Wait for its report before you do anything else: do not revise, write the final file or finish until it has come back.
+3. Fix every finding in the draft, or say in the record why you did not.
+   A correction is checked against the source the reviewer named; a lesson that is too short is lengthened with the objective's important ideas, taught in the main text, and never with padding.
+4. When the report said `FINDINGS: 0`, stop.
+   Otherwise, if this was the first pass, review the revised draft once more; after the second pass, stop whatever it found.
+5. Write `review-records/NNNN-lesson.md`: for each pass, the number of findings and one line for each, what you changed for it, and what you left and why.
 
 ### The voice of a lesson
 

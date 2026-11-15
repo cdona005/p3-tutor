@@ -1,0 +1,73 @@
+{
+  "id": "0002",
+  "objective": "O4",
+  "title": "Workflows, agents and who owns the control flow",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Workflows and agents differ in who owns the control flow, meaning who decides what step comes next. Which statement matches that difference?",
+      "options": [
+        {"id": "a", "text": "Developer code decides the next step in an agent; the model decides in a workflow"},
+        {"id": "b", "text": "The model decides the next step in an agent; developer code decides in a workflow"},
+        {"id": "c", "text": "The user decides the next step in an agent; developer code decides in a workflow"},
+        {"id": "d", "text": "The model decides the next step in both; only the number of tools differs"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Your script sends each student message to the model with one instruction: reply with exactly one label, MANUAL, BOOKING or OTHER. The script then runs a fixed Python handler for that label and returns its output. Which description fits this design?",
+      "options": [
+        {"id": "a", "text": "A workflow, because the code defines every path and the model only picks a label"},
+        {"id": "b", "text": "An agent, because the model writes the code of the handler that then runs"},
+        {"id": "c", "text": "An agent, because a model call is made before any other work happens"},
+        {"id": "d", "text": "A workflow, because the model only ever produces one word of output"}
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Booking a machine always needs the same three actions in the same order: check the calendar, check the training record, write the booking. You want predictable behavior and the lowest model cost per request. Which design should this part of the assistant use?",
+      "options": [
+        {"id": "a", "text": "An agent, because it can handle any unusual booking request it meets"},
+        {"id": "b", "text": "An agent, because a loop will stop on its own once the booking exists"},
+        {"id": "c", "text": "An agent, because it makes fewer model calls than fixed code would"},
+        {"id": "d", "text": "A workflow, because a path set in code costs less and behaves the same"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O4",
+      "stem": "A student asks, \"My 3D print keeps warping, why?\" The model would choose each next lookup (a manual page, a calendar entry, a maintenance log) from what the previous one returned, and no one can say in advance how many lookups it takes. For this part of the assistant, would you build a fixed workflow or an agent? Answer in one sentence, with your reason."
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Your assistant must handle a request like \"book the laser cutter for my project and tell me what settings to use\". Booking always follows the same three steps. Finding the settings means searching several manuals, and how many searches it takes varies. Which design uses an agent only where it is needed?",
+      "options": [
+        {"id": "a", "text": "One agent for the whole request, so every step stays flexible"},
+        {"id": "b", "text": "One fixed workflow for the whole request, with a set number of searches"},
+        {"id": "c", "text": "A fixed workflow for the booking, and an agent for the settings search"},
+        {"id": "d", "text": "An agent for the booking, and a fixed workflow for the settings search"}
+      ]
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "A teammate says, \"Our assistant calls tools, so it is an agent.\" In your design, a Python function calls search_manuals, then check_calendar, then book_machine for every request, and the model writes the reply from the results. Which reply is correct?",
+      "options": [
+        {"id": "a", "text": "Right; any system that calls tools is an agent by definition"},
+        {"id": "b", "text": "No; calling tools does not make it one, since the model sets none of the steps"},
+        {"id": "c", "text": "Right; it is an agent as long as it saves memory between sessions"},
+        {"id": "d", "text": "No; it would be an agent only if it used a larger, newer model"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "duration_api_ms": 21516,
+  "stop_reason": "end_turn",
+  "session_id": "a9dd76a1-2c19-49c2-b205-011af9cbe0ff",
+  "total_cost_usd": 0.1184591,
+  "usage": {
+    "input_tokens": 12,
+    "cache_creation_input_tokens": 17670,
+    "cache_read_input_tokens": 109074,
+    "output_tokens": 1408,
+    "output_tokens_details": {
+      "thinking_tokens": 155
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 17670,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 553,
+        "cache_read_input_tokens": 28012,
+        "cache_creation_input_tokens": 284,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 284
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 12,
+      "outputTokens": 1408,
+      "cacheReadInputTokens": 109074,
+      "cacheCreationInputTokens": 17670,
+      "webSearchRequests": 0,
+      "costUSD": 0.0956914,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 155,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 17670,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    },
+    "claude-haiku-5-5": {
+      "inputTokens": 22057,
+      "outputTokens": 1124,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 2,
+      "costUSD": 0.022767700000000002,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 384,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-haiku-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 9,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "No, that isn't right. The assistant will not remember last week's conversations on its own.\n\n- **The model is stateless.** Each call is independent. It sees only the text you send in that request, and nothing carries over between calls.\n- **Chat apps fake memory.** The app stores the history and resends the whole thing with every new message. Anthropic's docs say it directly: the Messages API is stateless, so you always send the full conversation history.\n- **Why it's tempting.** Chatbots feel like they remember because the app does the resending for you. In your own code, nobody does it unless you write it.\n- **A CS analogy.** The model is a pure function of its input, `reply = f(messages)`. It has no instance variables. Memory is state your program keeps and passes in as an argument.\n- **What it means for the makerspace assistant:**\n  - Within one session, you append each turn to a `messages` list and resend it. Every resend costs input tokens, so long sessions get more expensive.\n  - Across sessions, you have to save what matters, such as a student's training status and booking preferences. A database or JSON file keyed by student ID works. At the start of the next session, you load it and put it in the prompt.\n  - Deciding what to save and what to drop is a design choice you can defend at your review. The next topic in your mission covers it.\n\nQuick check: a student returns next week, and your code starts a new `messages` list with only their new question. What does the model know about last week, and what would you add to the request to change that?\n\nSources:\n- [Anthropic Messages API docs](https://platform.claude.com/docs/en/api/messages.md)\n- [Anthropic: working with messages](https://docs.claude.com/en/docs/build-with-claude/working-with-messages)",
+  "ttft_ms": 1628,
+  "type": "result",
+  "duration_ms": 21736,
+  "uuid": "ae167b7a-412d-4838-94ff-8f6a199dd52e",
+  "ttft_stream_ms": 1289,
+  "time_to_request_ms": 187,
+  "first_content_frame_ms": 1289,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 12,
+      "outputTokens": 1408,
+      "cacheReadInputTokens": 109074,
+      "cacheCreationInputTokens": 17670,
+      "webSearchRequests": 0,
+      "costUSD": 0.0956914,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 155,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 17670,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    },
+    "claude-haiku-5-5": {
+      "inputTokens": 22057,
+      "outputTokens": 1124,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 2,
+      "costUSD": 0.022767700000000002,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 384,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-haiku-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "credential_expires_at": "2026-11-19T11:33:49.605Z"
+}

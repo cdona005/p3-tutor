@@ -1,0 +1,44 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "b",
+      "rationale": "In an agent the model dynamically directs its own steps and tool use; in a workflow, predefined code paths decide. Option a swaps the two, c wrongly puts the user in charge, and d denies the difference."
+    },
+    {
+      "id": "q2",
+      "answer": "a",
+      "rationale": "This is the routing pattern, a workflow: code defines every possible path and the model only classifies the input. The model does not choose its own next step or tools, so b is wrong (the handlers are fixed code the model never writes); the position of the model call (c) and the length of its output (d) do not decide who owns the control flow."
+    },
+    {
+      "id": "q3",
+      "answer": "d",
+      "rationale": "The steps are known and fixed, so a path set in code is predictable and avoids the extra model calls an agent spends deciding what to do. Flexibility (a) is not needed here, any design can stop (b), and an agent typically makes more model calls, not fewer (c)."
+    },
+    {
+      "id": "q4",
+      "answer": "An agent, because the steps can't be predicted in advance.",
+      "accepted": [
+        "agent",
+        "an agent",
+        "agent, because the steps are unpredictable",
+        "an agent, because the path depends on what each lookup returns",
+        "agent, since the number of steps is not known ahead of time",
+        "an agent, because you can't hardcode a fixed path",
+        "an agent, because the number of lookups is not known in advance"
+      ],
+      "rationale": "When the number and order of steps depend on what each result shows, no fixed path can be hardcoded, so the model must choose the next step: an agent. Answering workflow is wrong; an agent with a reason that is only 'it is smarter' misses the unpredictable path and is partial."
+    },
+    {
+      "id": "q5",
+      "answer": "c",
+      "rationale": "Use fixed code where the path is known (booking) and give the model control only where the number of steps varies (settings search), which keeps cost and unpredictability low. An agent everywhere (a) pays for flexibility the booking does not need, a fixed search count (b) cannot handle varying searches, and d reverses the right split."
+    },
+    {
+      "id": "q6",
+      "answer": "b",
+      "rationale": "Calling tools does not make a system an agent; a workflow can call tools in a code-defined order. What makes an agent is the model directing the steps. Memory (c) and model size (d) have nothing to do with who owns the control flow."
+    }
+  ]
+}

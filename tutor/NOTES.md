@@ -15,3 +15,4 @@
 - 2026-11-08: lesson 0001 written (8 min, requested "short"). Quiz 0001 taken in chat (submission s1): 4/4 correct, no misconception shown.
 - Knows: loop exit on no tool call, max_turns counting, max_tokens = truncated, result only on success.
 - Not yet covered: refusal, pause_turn, model_context_window_exceeded handling; empty end_turn; subagent/budget caps in depth.
+- 2026-11-15: learner pasted quiz 0001's "done" item (q1) with no question. grades/ is empty (0001-s1 grade removed), so treated quiz 0001 as possibly being retaken: no answer given, item-specific hints only.

@@ -46,13 +46,91 @@ TODO: your reading of the baseline.
 Name the rounds that built this step, such as `c1-skills` Rounds 1 to 4, and the inventory entries of the skills they added; the trail from thoughts to change to outcome is already in `reviews/` and `reviews/components.md`, so do not retell it here.
 Then what you put in `PREFERENCES.md`, and anything about how the four skills work together that no single inventory entry says.
 
-TODO: the rounds and entries, your preferences, and how the skills fit together.
+I did 7 quick rounds to get the tutor to respond the way I want.
+Rounds 1-4 modified the teach skill. I mainly wanted the lessons to be easier to read and the tutor was too close to giving quiz answers, so I fixed that.
+Round 5 added the tutor skill.
+Round 6 added the quiz skill.
+Round 7 created the grade skill.
+
+I put in my PREFERENCES.md that I wanted the agent to explain with concise explanations and bullet points unless I ask for more detail, use CS comparisons to make topics more clear, and to not give me praise and direectly give me the answer and what is wrong.
 
 ### Your review, the objective checks and the cost
 
 Paste `uv run p3 report --configs c0-baseline,c1-skills`: the objective checks, the cost per job, and your ratings.
 
-TODO: paste the report tables.
+## Results on agent-architecture
+
+Scored full runs (quick runs and --only runs left out); each cell is the mean over the runs, with the range in brackets.
+
+### Quality
+
+| config | runs | teach facts | teach misconc. | length ratio | dead links | key agreement | wrong keys | ambiguous items | verdict agreement | false wrong | misconc. hit | leaks | behavior met |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `c0-baseline` | 3 | 1.00 | 0 | 0.69 (0.66-0.73) | 0 | 1.00 | 0 | 0.3 (0-1) | 1.00 | 0.00 | 1.00 | 0 | 0.61 (0.50-0.67) |
+| `c1-skills` | 1 | 1.00 | 0 | 0.59 | 0 | 1.00 | 0 | 0 | 1.00 | 0.00 | 1.00 | 0 | 0.33 |
+
+Teach facts, key agreement, verdict agreement, false wrong, misconception hit and behavior met are shares (0 to 1); misconceptions, dead links, wrong keys, ambiguous items and leaks are counts per run.
+A dash means no run could be scored on that check, and n= says how many of the runs could.
+A job that failed counts against the config: no lesson scores 0 teach facts, no quiz and key 0 key agreement, a missing grades file disagrees on every item, and a tutor scenario with no reply is not met; leaks need a reply to check, so such a scenario is left out of them.
+The length ratio is a rough reading-time estimate (visible words / 150) over the minutes requested; 0.6 to 1.5 counts as on length.
+
+### Cost: teach
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c0-baseline` | 3 | 519.2k (448.0k-652.0k) | 26.1k (22.9k-30.6k) | 2.9 (2.5-3.5) | 0.3 (0-1) | 0.54 (0.51-0.57) |
+| `c1-skills` | 1 | 675.7k | 30.5k | 3.1 | 1 | 0.59 |
+
+### Cost: quiz
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c0-baseline` | 3 | 137.1k (135.9k-138.6k) | 6.1k (5.1k-7.0k) | 1.0 (0.9-1.2) | 0 | 0.19 (0.18-0.20) |
+| `c1-skills` | 1 | 189.3k | 6.5k | 0.9 | 0 | 0.20 |
+
+### Cost: grade
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c0-baseline` | 3 | 255.2k (231.6k-270.6k) | 6.5k (6.3k-6.9k) | 1.0 (0.9-1.2) | 0 | 0.31 (0.30-0.32) |
+| `c1-skills` | 1 | 289.2k | 7.2k | 0.9 | 0 | 0.32 |
+
+### Cost: tutor
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c0-baseline` | 3 | 555.6k (530.9k-580.8k) | 9.8k (9.4k-10.2k) | 2.1 (1.8-2.4) | 0 | 0.68 (0.67-0.70) |
+| `c1-skills` | 1 | 626.8k | 9.9k | 1.7 | 0 | 0.53 |
+
+### Cost: all jobs
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c0-baseline` | 3 | 1.47M (1.38M-1.60M) | 48.5k (45.7k-53.1k) | 7.0 (6.6-7.7) | 0.3 (0-1) | 1.72 (1.69-1.73) |
+| `c1-skills` | 1 | 1.78M | 54.2k | 6.6 | 1 | 1.64 |
+
+Costs are per run, summed over the job's scenarios; list-price $ is the list-price equivalent, not what you pay on a subscription.
+
+## Your ratings
+
+Your ratings from 1 to 5 in the major reviews (reviews/<step>.md), which review full runs on the shared topic; a dash means no rating there yet, one that p3 check does not accept, or a job that step does not review (Tutor in c2-review; Quiz, Feedback and Tutor in c3-split).
+
+| job | criterion | c1-skills | c2-review | c3-split | final |
+|---|---|---:|---:|---:|---:|
+| Lesson | Technical correctness and facts | 5 | - | - | - |
+| Lesson | Pedagogy | 4 | - | - | - |
+| Lesson | Alignment with the learning goal | 5 | - | - | - |
+| Lesson | Overall quality | 4 | - | - | - |
+| Quiz | Difficulty | 4 | - | - | - |
+| Quiz | Coverage of the lesson's core | 3 | - | - | - |
+| Quiz | Wording and possible misreadings | 4 | - | - | - |
+| Quiz | Writing quality | 5 | - | - | - |
+| Quiz | Alignment with the learning goal | 4 | - | - | - |
+| Feedback | Useful | 3 | - | - | - |
+| Feedback | Explains enough | 3 | - | - | - |
+| Feedback | Personalized to how I like things explained | 1 | - | - | - |
+| Tutor | Guardrails | 3 | - | - | - |
+| Tutor | Personalization | 3 | - | - | - |
 
 ### What the step bought and what it cost
 
@@ -62,7 +140,16 @@ Where they disagree, which do you believe, and why?
 What did the step cost per scenario, and was the gain worth it?
 Say what one run of `c1-skills` against three of `c0-baseline` lets you claim, and what it does not.
 
-TODO: your judgment of step 1.
+The biggest change I noticed is that the model followed my preferences for using CS comparisons really well, even too well at first and I had it use less because it became too much. 
+The c1 tutor was faster than any of the runs in c0 (c1 was 1.7, c0 was 1.8-2.4), I believe that is from me asking for concise answers.
+All of the c1 skills were faster or the same besides teach, which was 3.1 for c1 and 2.5-3.5 for c0. I am not sure why this is, but it may have to do with asking for CS comparisons which makes the model think more about how to write the lessons. 
+
+The one c1 run lets me claim that all of the skills were faster than c0 besides teach and the list price for the overall cost is cheaper for c1 than c0. The overall cost for c1 also had more output tokens and tokens for all runs of c0.
+I cannot claim that the subagents differ for any of the skills, they are either the same between c0 and c1 or c1 is in the range of c0 subagents.
+The c1 had a lower score on behavior met than all runs of c0.
+
+I rated tutor's guardrails as a 3/5, which I think accurately shows that the c1 behavior met is accurate. I thought the agent outputted more information then it should have, and if the student just tells the tutor that the quiz question is not for a quiz it would answer immediately. 
+I thought the agent was better than the objective checks show. I liked how the model made lessons and spoke, my main issue was with the grade skill. It did not give any useful feedback and left out feedback for partial credit problems. If I was actually taking this quiz, I would have to either look at the lessons or ask the tutor agent for enough information to understand what I did wrong.
 
 ---
 

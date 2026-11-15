@@ -1,0 +1,37 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "c",
+      "rationale": "A context window is per conversation and is empty when a new session starts; memory across sessions exists only if the program saves something and loads it back. A bigger window (a), a model that remembers users (b) or a model that keeps small facts by itself (d) all assume memory is automatic.",
+      "distractors": {"a": "M3", "b": "M3", "d": "M3"}
+    },
+    {
+      "id": "q2",
+      "answer": 4500,
+      "tolerance": 0,
+      "rationale": "Call 1 sees 1,000; call 2 sees 1,000 + 500 = 1,500; call 3 sees 1,000 + 1,000 = 2,000. Total 4,500. An answer of 2,000 counts only the last call, and 2,000 as the new content (1,000 + 500 + 500) ignores that the list is resent every call."
+    },
+    {
+      "id": "q3",
+      "answer": "b",
+      "rationale": "The chunk lost the page around it, so the fix is to give it its own context (machine, section) before indexing, as in contextual retrieval. More chunks (a) and a larger window (c) add cost without making the chunk say what it is for, and an instruction in the prompt (d) cannot recover information the chunk never contained."
+    },
+    {
+      "id": "q4",
+      "answer": "Full transcripts are large and mostly irrelevant to the next visit, so loading them fills the context window and costs tokens on every call; save a short, trusted note instead.",
+      "accepted": [
+        "It is too large: the transcripts would fill the context window and cost tokens on every call, and most of it is irrelevant.",
+        "Loading every past transcript wastes tokens and context, and the model may miss what matters; store short notes instead."
+      ],
+      "rationale": "Full credit names the size or cost problem (context fills, tokens are paid on every call, context rot) and may add the fix of short notes. Saying only that it is a privacy issue, without the context and cost problem, is partial. Saying it cannot work because the model cannot read old text is wrong."
+    },
+    {
+      "id": "q5",
+      "answer": "d",
+      "rationale": "The model has no memory between calls beyond the text the program sends; a result removed from the list is gone unless something later in the list restates it. Believing the model keeps it (a), that the API stores it (c) or that the model compacts by itself (b) assumes memory that nobody built.",
+      "distractors": {"a": "M3", "b": "M3", "c": "M3"}
+    }
+  ]
+}
