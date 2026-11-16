@@ -1,0 +1,38 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "b",
+      "rationale": "The model keeps nothing between calls; its only input is the context the program sends, so without the history it works as if the earlier steps never happened. Choosing a or c shows the misconception that the model remembers earlier steps itself (M8).",
+      "distractors": {"a": "M8", "c": "M8"}
+    },
+    {
+      "id": "q2",
+      "answer": 6000,
+      "tolerance": 0,
+      "rationale": "Call 1 sends 1,000, call 2 sends 2,000 and call 3 sends 3,000, because each call re-sends the whole history: 1,000 + 2,000 + 3,000 = 6,000. An answer of 3,000 counts only the final context and misses that earlier text is paid for again at each call (M8)."
+    },
+    {
+      "id": "q3",
+      "answer": "d",
+      "rationale": "Facts that must outlive a session, and that matter for safety, belong in a stored record the program controls and loads into the next session. The context window is emptied between sessions (b), a model-written prompt can drift or be wrong (a), and manuals hold machine instructions, not per-student status (c). Choosing b shows the misconception that memory is automatic (M3).",
+      "distractors": {"b": "M3", "a": "M3"}
+    },
+    {
+      "id": "q4",
+      "answer": "Each session starts with an empty context and the model keeps nothing between sessions, so the program must save the information outside the model and load it into the next session.",
+      "accepted": [
+        "The model has no memory between sessions; the program must store notes or records and load them back into the new context.",
+        "A new session has a fresh context, so the program has to save the visit to a database or file and put it back in the context next time."
+      ],
+      "rationale": "Full credit needs both parts: why (the context is empty at the start of a session and the model stores nothing) and the fix (the program saves to storage and loads it back into the context). Giving only one is partial. Saying the model should just remember, or that a bigger window fixes it, shows M3."
+    },
+    {
+      "id": "q5",
+      "answer": "c",
+      "rationale": "Every call would pay for all 600,000 tokens, and a model uses long inputs less reliably when the relevant text is buried in them, so retrieving a few chunks is cheaper and better. A window that can hold the text does not reject it (a), the program, not the model, re-sends text each call (b), and there is no rule against sending text together (d). Treating a big window as the answer shows M7.",
+      "distractors": {"a": "M7", "b": "M8"}
+    }
+  ]
+}

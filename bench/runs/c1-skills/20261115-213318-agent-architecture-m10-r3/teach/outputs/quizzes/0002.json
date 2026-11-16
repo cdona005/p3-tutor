@@ -1,0 +1,50 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your assistant calls the model three times to answer one student's question. How does the model know, on the third call, what the first tool returned?",
+      "options": [
+        {"id": "a", "text": "The program sends the earlier messages and tool results again in the third call"},
+        {"id": "b", "text": "The model keeps a private store of past calls and looks the result up there"},
+        {"id": "c", "text": "The model stores the result in its weights, so it is learned for later calls"},
+        {"id": "d", "text": "The tool sends the result straight to the model, which holds it until needed"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "A student chats with your assistant on Monday and opens a new chat on Wednesday. Your program stores nothing between chats. What does the model have about Monday's chat?",
+      "options": [
+        {"id": "a", "text": "A short summary it wrote itself at the end of Monday's chat"},
+        {"id": "b", "text": "The whole of Monday's chat, because the window is large enough"},
+        {"id": "c", "text": "Nothing, because each new chat starts with only what the program sends"},
+        {"id": "d", "text": "Only the facts the student stated, since those are saved automatically"}
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "Your agent's context holds 1,000 tokens of system prompt and tools, and each of 4 model calls adds exactly 500 new tokens to it after it runs (the first call sends only the 1,000). Assuming every call receives the whole context so far, how many input tokens are sent in total across the 4 calls?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O3",
+      "stem": "Your team proposes pasting the entire 300-page laser cutter manual into every request. In one or two sentences, give two reasons retrieval is better for your project."
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O3",
+      "stem": "In one sentence, what is a note in an agent's memory, and what problem does it solve that the context window alone cannot?"
+    }
+  ]
+}

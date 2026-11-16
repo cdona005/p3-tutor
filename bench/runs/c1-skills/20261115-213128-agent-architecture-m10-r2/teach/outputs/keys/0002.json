@@ -1,0 +1,44 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "b",
+      "rationale": "The model keeps nothing between calls; the program re-sends the earlier messages as part of each new input. Option a and d treat the model or window as storage (M7); c confuses training data with the conversation.",
+      "distractors": {"a": "M7", "c": "M7", "d": "M7"}
+    },
+    {
+      "id": "q2",
+      "answer": "It saved the training status to storage outside the context, such as a notes file or database, so it could load it into the new session's context.",
+      "accepted": [
+        "It wrote the training completion to a note or database that it can read back later.",
+        "It saved it to persistent storage and loads it next session.",
+        "It stored a note about the training outside the conversation."
+      ],
+      "rationale": "A new session starts with an empty context, so the fact must have been saved outside it and loaded back. Answers that say the assistant will just remember, or that the chat history persists by itself, show M3 and M7."
+    },
+    {
+      "id": "q3",
+      "answer": "a",
+      "rationale": "Retrieval loads only the relevant passages, so each call stays small and cheap. Pasting everything (b, d) pays for every token on every call and worsens recall as the context grows (M8); copying manuals into notes (c) duplicates what retrieval already does.",
+      "distractors": {"b": "M8", "d": "M8"}
+    },
+    {
+      "id": "q4",
+      "answer": "Compaction (or clearing old tool results): summarize or drop old content so a smaller context keeps what matters.",
+      "accepted": [
+        "Summarize the conversation and continue with the summary.",
+        "Clear old tool results from the context.",
+        "Context editing: remove stale tool results.",
+        "Compaction"
+      ],
+      "rationale": "Full credit names a technique (compaction, summarizing, or clearing old tool results) and says it shrinks the context while keeping what matters. Naming only a bigger window is wrong (M8)."
+    },
+    {
+      "id": "q5",
+      "answer": "d",
+      "rationale": "The memory tool is client-side: Claude requests file operations and your application runs them against storage you control. It is not hosted storage (c), not training (b), and not the context persisting (a).",
+      "distractors": {"a": "M7", "b": "M3", "c": "M3"}
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "a",
+      "rationale": "The model keeps no state between calls; the program's message list holds the results and is sent again on each call. Picking b, c or d shows the belief that the model or provider remembers on its own.",
+      "distractors": {"b": "M3", "c": "M3"}
+    },
+    {
+      "id": "q2",
+      "answer": 4550,
+      "tolerance": 1,
+      "rationale": "Call 1 sends 1,000 + 50 = 1,050. Call 2 sends 1,050 + 400 = 1,450. Call 3 sends 1,450 + 600 = 2,050. Total 1,050 + 1,450 + 2,050 = 4,550. Answering 2,050 counts only the last call; answering 2,050 + the new tokens only (1,650) forgets that earlier content is re-sent."
+    },
+    {
+      "id": "q3",
+      "answer": "b",
+      "rationale": "Between sessions the model keeps nothing, so a stored record from a source of truth must be loaded into the new context. A larger window does not carry a chat over to a new session (a), the model does not remember users on its own (c), and loading every student's log wastes tokens and exposes private data (d).",
+      "distractors": {"a": "M3", "c": "M3"}
+    },
+    {
+      "id": "q4",
+      "answer": "Every token is sent and paid for on every call, and long contexts reduce the model's recall of relevant details (context rot), so only the relevant part should be loaded.",
+      "accepted": ["it costs tokens on every call and degrades recall", "cost and context rot", "it raises cost and dilutes attention"],
+      "rationale": "Fitting is not the same as being used well: cost scales with the tokens sent on each call, and recall drops as the context grows. An answer with only one of the two reasons is partly right."
+    },
+    {
+      "id": "q5",
+      "answer": "Attach the machine name and page to each chunk and filter or check by machine, or have the assistant cite its source and say it could not find the answer when the match is weak.",
+      "accepted": ["filter by machine", "add metadata to chunks", "cite the source page", "check the machine name matches", "tell the assistant to say not found when the match is weak", "retrieve more chunks and compare"],
+      "rationale": "The failure is in retrieval, not the model: chunks need metadata (machine, page) so results can be filtered and cited, and the assistant needs a rule for weak matches. Suggesting a bigger model misses where the error arose."
+    }
+  ]
+}

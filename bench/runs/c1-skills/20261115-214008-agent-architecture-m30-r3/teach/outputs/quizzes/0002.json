@@ -1,0 +1,56 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your assistant is on its third model call within one request. The program sends the model only the latest tool result and nothing else. What will the model do?",
+      "options": [
+        {"id": "a", "text": "Recall the earlier steps itself, since it handled them moments ago"},
+        {"id": "b", "text": "Work without the earlier steps, as it keeps nothing between calls"},
+        {"id": "c", "text": "Rebuild the earlier steps from its stored record of this session"},
+        {"id": "d", "text": "Refuse to answer until the program supplies the full question again"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "In one request, the instructions, tool descriptions and question total 1,000 tokens. The agent makes three model calls: the first sends just those 1,000 tokens, and after each of the first two calls the program adds 1,000 tokens (tool request plus result) to the history, which every later call re-sends. How many input tokens are sent across the three calls in total?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "The assistant must know, in a visit next week, which machines a student has passed safety training for. Where should that information live?",
+      "options": [
+        {"id": "a", "text": "In the system prompt, rewritten by the model after each chat"},
+        {"id": "b", "text": "In the model's context window, which keeps it between sessions"},
+        {"id": "c", "text": "In the 15 machine manuals, searched by the retrieval tool"},
+        {"id": "d", "text": "In a stored record that the program loads at session start"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O3",
+      "stem": "A student returns the next day and the assistant, using the same model, has no memory of their earlier visit. In one or two sentences, why, and what must your program do to change that?"
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "A teammate proposes putting all 15 manuals, about 600,000 tokens, into every call, because the chosen model's window is big enough to hold them. What is the strongest objection?",
+      "options": [
+        {"id": "a", "text": "A window that large cannot be filled, so the model rejects the call"},
+        {"id": "b", "text": "The model forgets the manuals after the first call and needs them again"},
+        {"id": "c", "text": "Every call pays for those tokens, and the needed page can be lost"},
+        {"id": "d", "text": "Manuals must be fed to the model one page at a time, never together"}
+      ]
+    }
+  ]
+}

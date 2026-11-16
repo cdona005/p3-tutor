@@ -1,0 +1,45 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "b",
+      "rationale": "Each model call is independent; the program re-sends the history. A larger window only raises how much can be sent, and the model has no memory of its own between calls.",
+      "distractors": {"a": "M3", "c": "M3"}
+    },
+    {
+      "id": "q2",
+      "answer": 4500,
+      "tolerance": 0,
+      "rationale": "Call 1 sends 1,000; call 2 sends 1,500; call 3 sends 2,000. Total 4,500. An answer of 2,000 gives only the final context size and misses that history is re-sent each call."
+    },
+    {
+      "id": "q3",
+      "answer": "c",
+      "rationale": "Persistence across sessions is the program's job: write the fact to storage and load it back. A bigger window or an open conversation does not survive a new session, and telling the model once keeps nothing.",
+      "distractors": {"a": "M3", "b": "M3", "d": "M3"}
+    },
+    {
+      "id": "q4",
+      "answer": "It costs fewer tokens on every call and avoids context rot, so the model finds the answer more accurately.",
+      "accepted": [
+        "cheaper and more accurate",
+        "fewer tokens means lower cost and better accuracy",
+        "the whole manual costs tokens every call and degrades the model's recall",
+        "less cost and less context rot"
+      ],
+      "rationale": "Every token in context is paid for on each call, and a long context reduces recall accuracy. Either reason, cost or accuracy, is a valid core; the best answers give both."
+    },
+    {
+      "id": "q5",
+      "answer": "Details left out of the summary are lost and cannot be recovered.",
+      "accepted": [
+        "the summary loses detail",
+        "important details may be dropped",
+        "information is lost",
+        "it is lossy"
+      ],
+      "rationale": "Compaction is lossy: exact values, such as a booking time, may not survive the summary. Keep exact values in notes or storage."
+    }
+  ]
+}

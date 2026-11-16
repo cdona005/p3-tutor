@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat sheet: context and memory in an agent</title>
+  <style>
+    body { max-width: 44rem; margin: 0 auto; padding: 1.5rem 1rem; font-family: Charter, Georgia, serif; line-height: 1.5; background: #fffdf8; color: #1f1d1a; }
+    h1 { font-size: 1.5rem; } h2 { font-size: 1.1rem; margin-top: 1.5rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th, td { text-align: left; padding: 0.3rem 0.5rem; border-bottom: 1px solid #e4dfd4; vertical-align: top; }
+    code { background: #f3efe6; padding: 0.1em 0.3em; border-radius: 4px; }
+    @media (prefers-color-scheme: dark) { body { background: #171614; color: #e9e5dc; } th, td { border-color: #36332e; } code { background: #23211e; } }
+  </style>
+</head>
+<body>
+  <h1>Context and memory in an agent</h1>
+  <h2>Rules</h2>
+  <ul>
+    <li>The model keeps no state between calls. Your program re-sends the whole message list every call.</li>
+    <li>Window = system prompt + tool definitions + messages + tool results + the reply.</li>
+    <li>Input cost of a run = sum over calls of the whole context at that call. Early results are paid for again on every later call.</li>
+    <li>Bigger context is not better: recall degrades as it grows (context rot).</li>
+    <li>Nothing crosses a session boundary unless your program saves it and loads it back.</li>
+  </ul>
+  <h2>Cost pattern</h2>
+  <p>Call k input = call k-1 input + reply k-1 + result k-1. Total = base &times; calls + the carried-forward replies and results.</p>
+  <h2>Where does it live?</h2>
+  <table>
+    <tr><th>Place</th><th>Use for</th><th>Cost</th></tr>
+    <tr><td>Prompt</td><td>Short facts needed on most requests</td><td>Tokens on every call</td></tr>
+    <tr><td>Retrieval</td><td>Bulky material needed on some requests (manuals)</td><td>A few chunks when searched</td></tr>
+    <tr><td>Record (via tool)</td><td>Facts with an authority: training status, calendar</td><td>One tool call</td></tr>
+    <tr><td>Note</td><td>Soft, dated preferences and status</td><td>Small load per session</td></tr>
+  </table>
+  <h2>Shrinking the context</h2>
+  <ul>
+    <li>Clear used tool results (lightest touch).</li>
+    <li>Compact: summarize decisions, open items, facts not to re-guess, pointers.</li>
+    <li>Sub-agent: explore in a separate context, return a short summary.</li>
+  </ul>
+  <h2>Retrieval</h2>
+  <ul>
+    <li>Prepare: split by section, prefix each chunk with machine and section, index.</li>
+    <li>Keyword search for exact terms (codes, part numbers); embeddings for meaning; combine them.</li>
+    <li>Wrong answer? Look at what the search returned before editing the prompt.</li>
+    <li>Measure: 20 real questions, count how often the right section is returned.</li>
+  </ul>
+  <p>Source: <a href="https://anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic, Effective context engineering for AI agents</a>.</p>
+</body>
+</html>

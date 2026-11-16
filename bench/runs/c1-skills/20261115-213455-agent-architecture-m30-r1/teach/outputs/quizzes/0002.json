@@ -1,0 +1,50 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your assistant calls the model for step 4 of a request. Which statement about what the model knows from steps 1 to 3 is correct?",
+      "options": [
+        {"id": "a", "text": "It recalls them itself, because it processed them moments ago"},
+        {"id": "b", "text": "It knows them only if the program sent them again in this call"},
+        {"id": "c", "text": "It recalls them if the context window is large enough"},
+        {"id": "d", "text": "It knows only the tool results, never the earlier requests"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "An assistant starts a request with 1,000 tokens of context. It makes three model calls: two tool steps, then the final answer. Each tool step adds 500 tokens to the history. Counting every token sent as input across all three calls, what is the total number of input tokens?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "The assistant must know, in a new session next month, that a student is certified on the laser cutter. Which design makes that possible?",
+      "options": [
+        {"id": "a", "text": "Keep the old conversation open so the context is never cleared"},
+        {"id": "b", "text": "Use a model with a much bigger context window for sessions"},
+        {"id": "c", "text": "Have the program store the status and load it in new sessions"},
+        {"id": "d", "text": "Ask the model to remember it by stating it clearly once"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O3",
+      "stem": "In one sentence: why is retrieving a few relevant chunks of a 200-page manual usually better than putting the whole manual into the context for every question?"
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O3",
+      "stem": "An agent compacts its history by replacing it with a summary. In one sentence, what is the main risk of doing this?"
+    }
+  ]
+}

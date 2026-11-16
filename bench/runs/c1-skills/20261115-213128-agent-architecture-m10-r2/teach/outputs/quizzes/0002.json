@@ -1,0 +1,55 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your assistant answers a student's question, and in the next turn the student asks a follow-up. Why can the model use what was said in the first turn?",
+      "options": [
+        {"id": "a", "text": "The model stores each conversation inside itself as it runs"},
+        {"id": "b", "text": "The program sends the earlier messages again in the new input"},
+        {"id": "c", "text": "The model looks the conversation up in its training data"},
+        {"id": "d", "text": "The context window saves the chat after the session ends"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "short",
+      "objective": "O3",
+      "stem": "A student chats with your assistant on Monday and completes laser-cutter safety training in that chat. On Thursday they open a new session. In one sentence, what must your program have done on Monday for the assistant to know this on Thursday?"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your team wants the assistant to answer from twelve 150-page machine manuals. Which design is the best fit for a small model budget?",
+      "options": [
+        {"id": "a", "text": "A search tool that returns only the few passages that match"},
+        {"id": "b", "text": "All twelve manuals pasted into the system prompt every call"},
+        {"id": "c", "text": "A note file in which the model copies out every manual"},
+        {"id": "d", "text": "A bigger window so that all manuals fit without any search"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O3",
+      "stem": "A booking conversation has run for 60 steps and the context is full of old calendar results that no longer matter. Name one technique that keeps the session usable, and say what it does."
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "A teammate says the memory tool means Claude stores student notes on Anthropic's servers for you. What is the correct description of the memory tool?",
+      "options": [
+        {"id": "a", "text": "It makes the model keep its context after the session closes"},
+        {"id": "b", "text": "It trains the model on notes so that it knows each student"},
+        {"id": "c", "text": "It stores each student's notes in a hosted database for you"},
+        {"id": "d", "text": "It lets the model request file operations that your code runs"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat sheet: context and memory in an agent</title>
+  <style>
+    body { max-width: 44rem; margin: 0 auto; padding: 2rem 1.25rem; font-family: Charter, Georgia, serif; line-height: 1.5; color: #1f1d1a; background: #fffdf8; }
+    h1 { font-size: 1.6rem; } h2 { font-size: 1.1rem; margin-top: 1.75rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    th, td { text-align: left; vertical-align: top; padding: 0.4rem 0.5rem; border-bottom: 1px solid #e4dfd4; }
+    code { background: #f3efe6; padding: 0.1em 0.3em; border-radius: 4px; }
+    @media (prefers-color-scheme: dark) { body { background: #171614; color: #e9e5dc; } th, td { border-color: #36332e; } code { background: #23211e; } }
+  </style>
+</head>
+<body>
+  <h1>Context and memory in an agent</h1>
+  <p>From <a href="../lessons/0001-context-and-memory-in-an-agent.html">lesson 1</a>.</p>
+  <h2>Where information lives</h2>
+  <table>
+    <tr><th>Place</th><th>What goes there</th><th>Survives the session?</th><th>Cost</th></tr>
+    <tr><td>Context (history)</td><td>Instructions, tool descriptions, question, tool results</td><td>No</td><td>Paid again at every later call</td></tr>
+    <tr><td>Saved notes or records</td><td>Facts that stay true and are needed later, such as training status</td><td>Yes, if the program saves and loads them</td><td>Small, loaded when needed</td></tr>
+    <tr><td>Retrieved documents</td><td>Long material, such as manuals</td><td>Stored outside; only matches enter the context</td><td>A few chunks per call</td></tr>
+  </table>
+  <h2>Rules</h2>
+  <ul>
+    <li>The model keeps nothing between calls; the program re-sends the history.</li>
+    <li>Input tokens over a request = sum of each call's whole context, so long loops cost more than linearly.</li>
+    <li>Fitting in the window is not the same as being used well: keep the smallest set of high-signal tokens.</li>
+    <li>Make tools return less; compact long histories; use sub-agents for messy searches.</li>
+    <li>Memory is not automatic: decide what to save, write it, and load it.</li>
+  </ul>
+  <h2>Sort test</h2>
+  <p>For any fact ask: how long does it stay true, how big is it, does the model need it on every call?</p>
+</body>
+</html>

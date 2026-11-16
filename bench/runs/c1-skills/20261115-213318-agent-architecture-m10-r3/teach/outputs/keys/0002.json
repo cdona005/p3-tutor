@@ -1,0 +1,35 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "a",
+      "rationale": "Each model call is separate; the program resends the earlier messages and tool results as part of the new input. The model keeps no private store (b), does not learn in its weights during a run (c), and tools return results to the program, not the model (d).",
+      "distractors": {"b": "M7", "c": "M7", "d": "M4"}
+    },
+    {
+      "id": "q2",
+      "answer": "c",
+      "rationale": "Nothing carries between sessions unless the program saves it and loads it into the new context. Automatic memory of earlier chats is the misconception M3.",
+      "distractors": {"a": "M3", "b": "M3", "d": "M3"}
+    },
+    {
+      "id": "q3",
+      "answer": 8000,
+      "tolerance": 0,
+      "rationale": "Context sizes are 1,000, 1,500, 2,000 and 2,500 tokens, which sum to 8,000. Answering 6,000 (1,000 + 4 x 500 + ...) or 4,000 counts the context once rather than resending it each call."
+    },
+    {
+      "id": "q4",
+      "answer": "It would cost far more, since the whole manual is billed on every call, and a long context can reduce the model's recall of the relevant part.",
+      "accepted": ["cost and accuracy", "cheaper and more accurate", "too many tokens and the model may miss the relevant part", "cost and context rot"],
+      "rationale": "Full credit names two reasons from: cost (tokens resent every call), context rot or reduced accuracy with long context, or hitting the window limit. One reason only is partial."
+    },
+    {
+      "id": "q5",
+      "answer": "A note is a fact the agent saves outside the context, so it can be read back later, including in a new session or after the context is trimmed.",
+      "accepted": ["a saved fact in storage that persists beyond the context window", "information written to external storage and reloaded later"],
+      "rationale": "Full credit: information written to storage outside the context, which persists beyond one call or session. Describing it as something that stays in the context is wrong; the context is rebuilt and limited."
+    }
+  ]
+}

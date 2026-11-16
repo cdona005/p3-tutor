@@ -1,0 +1,37 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "b",
+      "rationale": "Memory between sessions is storage outside the model: the program saved the fact and put it into the new session's context. No weights change and the model keeps no per-user state. Choosing a or d shows the belief that the model itself learned or stored the fact."
+    },
+    {
+      "id": "q2",
+      "answer": 5100,
+      "tolerance": 0,
+      "rationale": "Call 1 input is 1,050. Call 2 is 1,050 + 50 + 400 = 1,500. Call 3 is 1,500 + 50 + 1,000 = 2,550. The total is 5,100, because each call re-sends the whole transcript. An answer of 2,550 counts only the last call; 1,550 or 2,500 counts each item once."
+    },
+    {
+      "id": "q3",
+      "answer": "c",
+      "rationale": "Context rot: recall and accuracy can degrade as the token count grows, even when everything fits in the window. The other options invent behaviours: nothing is ignored after the third chunk and the window is not reset."
+    },
+    {
+      "id": "q4",
+      "answer": "The application (the program around the model) writes it to storage it controls, and the model gets the result back as a tool result.",
+      "accepted": [
+        "The program writes it and returns the result to the model",
+        "Your application runs the request and sends back a tool result",
+        "The client code does the write and the model receives a tool_result",
+        "The app writes the note and the model gets the outcome as a tool result"
+      ],
+      "rationale": "Client-side means the model only requests the operation; the application executes it against its own storage and returns the outcome in a tool result, as with any other tool. An answer that says the model writes to disk itself has the same mistake as the model running its own tools."
+    },
+    {
+      "id": "q5",
+      "answer": "d",
+      "rationale": "Just-in-time search lets the model look again with a better query, at the cost of extra model calls, tokens and time. Search never changes training data, and chunking is still needed so each result is small."
+    }
+  ]
+}

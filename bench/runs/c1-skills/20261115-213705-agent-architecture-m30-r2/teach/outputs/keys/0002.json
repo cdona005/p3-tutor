@@ -1,0 +1,37 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "c",
+      "rationale": "A model keeps nothing between calls; anything it should know about Monday has to be saved by the program and put back into the context. Options a, b and d all assume the model or the API remembers by itself, which is the misconception that memory is automatic (M3).",
+      "distractors": {"a": "M3", "b": "M3", "d": "M3"}
+    },
+    {
+      "id": "q2",
+      "answer": 9300,
+      "tolerance": 0,
+      "rationale": "Call 1 sends 1,500 + 100 = 1,600. Call 2 sends 1,600 + 2,000 = 3,600. Call 3 sends 3,600 + 500 = 4,100. The total is 1,600 + 3,600 + 4,100 = 9,300. An answer of 4,100 counts only the final context and forgets that each call resends everything before it."
+    },
+    {
+      "id": "q3",
+      "answer": "a",
+      "rationale": "Removing old raw tool outputs while keeping the messages is tool result clearing. Compaction would summarize the history (b), note-taking saves facts outside the context (c), and retrieval fetches chunks from a store (d)."
+    },
+    {
+      "id": "q4",
+      "answer": "b",
+      "rationale": "In retrieval the program does the search and pastes the best chunks into the input; the model sees them like any other text. The model does not search, hold the manuals or recall them (M8).",
+      "distractors": {"a": "M8", "c": "M8", "d": "M8"}
+    },
+    {
+      "id": "q5",
+      "answer": "A short record is small and cheap to load into the context each session and easy to keep correct, while full transcripts would cost many tokens on every call and add noise that can hurt accuracy.",
+      "accepted": [
+        "The record is small, so it costs few tokens and keeps the context focused; transcripts are large and costly.",
+        "Transcripts take too many tokens and clutter the context, while a short record holds just the facts needed."
+      ],
+      "rationale": "Full credit needs the reason: size and cost (tokens billed on every call) and/or noise and context rot. Saying only that a record is better, without a reason, is partial. Saying the model cannot read transcripts is wrong; a student who says the model remembers them by itself shows M3."
+    }
+  ]
+}

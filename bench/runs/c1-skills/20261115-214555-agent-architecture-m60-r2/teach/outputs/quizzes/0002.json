@@ -1,0 +1,56 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Last week a student told your assistant their major, and today, in a new session, the assistant mentions it. Which explanation of how this works is correct?",
+      "options": [
+        {"id": "a", "text": "The model's weights were updated by last week's chat"},
+        {"id": "b", "text": "The program saved a note and loaded it into context"},
+        {"id": "c", "text": "The model keeps a private memory for each user"},
+        {"id": "d", "text": "The model recalled it from its original training data"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "One request runs three model calls. The system prompt and tool definitions are 1,000 tokens and the student's question is 50 tokens. After call 1 the model requests a tool (50 tokens) and the result is 400 tokens. After call 2 it requests another tool (50 tokens) and the result is 1,000 tokens. Call 3 writes the final answer. Each call is sent the full transcript so far. How many input tokens in total are sent across the three calls?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your assistant answers well with 3 manual chunks in context but gets worse when a teammate raises the search result to 60 chunks, although all of them fit in the window. Which statement best explains this?",
+      "options": [
+        {"id": "a", "text": "Chunks beyond the third are ignored by the model entirely"},
+        {"id": "b", "text": "Sixty chunks cause the window to be reset for the next call"},
+        {"id": "c", "text": "More tokens in context can lower recall, even when they fit"},
+        {"id": "d", "text": "Search results lose their meaning when there are many of them"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O3",
+      "stem": "With a client-side memory tool, the model decides to save a note. In one sentence, what actually writes the note to storage, and what does the model receive back?"
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "You are choosing between searching the manuals once before the first model call, and giving the model a search tool it can call repeatedly. What is the main trade-off of the repeated-search tool?",
+      "options": [
+        {"id": "a", "text": "It makes the manuals part of the model's training data"},
+        {"id": "b", "text": "It is faster, because the model reads the whole manual at once"},
+        {"id": "c", "text": "It removes the need to split manuals into smaller chunks"},
+        {"id": "d", "text": "It can refine a poor query, but takes more calls and tokens"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "b",
+      "rationale": "A model keeps no state between calls or sessions; a new session starts with an empty context, so Tuesday is available only if the program saved it and loads it back in. A bigger window (c) only holds what is loaded in one session, and neither the model (a) nor a tool (d) keeps conversations on its own. Options a and c show the misconception that memory between sessions is automatic (M3).",
+      "distractors": {"a": "M3", "c": "M3"}
+    },
+    {
+      "id": "q2",
+      "answer": 15450,
+      "tolerance": 0,
+      "rationale": "Call 1: 3,000 + 100 = 3,100. Call 2: 3,100 + 50 + 2,000 = 5,150. Call 3: 5,150 + 50 + 2,000 = 7,200. Total 3,100 + 5,150 + 7,200 = 15,450. An answer near 9,300 (3 x 3,100) ignores that earlier replies and results are re-sent on each call; 7,200 counts only the last call."
+    },
+    {
+      "id": "q3",
+      "answer": "c",
+      "rationale": "Retrieval through a search tool puts only a few relevant chunks in the context, so the recurring cost is small and the right passage is present. The full manuals in the prompt (a) are re-sent on every call and invite context rot, training knowledge (b) can be wrong or outdated for these machines, and one-line summaries (d) lack the procedure steps."
+    },
+    {
+      "id": "q4",
+      "answer": "The context window is finite and its contents can be cleared or compacted, so notes saved outside it persist and can be read back in later.",
+      "accepted": [
+        "Notes persist outside the context window, so the agent can read them back after the context is reset or compacted.",
+        "The context window is limited and gets reset, but a file survives, so the agent can reload its notes."
+      ],
+      "rationale": "Full credit needs the idea that the notes live outside the context window and so survive limits, resets or compaction, and are loaded back when needed. Saying only that notes are useful or organized, without the persistence outside the window, is partial. Saying the model remembers the notes by itself is wrong (M3)."
+    },
+    {
+      "id": "q5",
+      "answer": "d",
+      "rationale": "Context rot: as the token count grows, the model's accuracy and recall of information in the context degrade, even before the limit is reached. No error occurs below the limit (a), and the program, not the model or API, decides what is kept, so tools are not locked (b) and nothing is dropped silently in your own agent loop (c)."
+    }
+  ]
+}

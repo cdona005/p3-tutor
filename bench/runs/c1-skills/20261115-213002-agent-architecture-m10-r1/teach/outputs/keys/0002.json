@@ -1,0 +1,35 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "b",
+      "rationale": "Nothing persists between sessions unless the program saves and reloads it. A larger window only changes how much fits in one call (M7). Automatic memory or compaction of past sessions is not something the model does (M3).",
+      "distractors": {"a": "M7", "c": "M3", "d": "M3"}
+    },
+    {
+      "id": "q2",
+      "answer": "a",
+      "rationale": "Retrieval puts only the relevant chunks in context, so each call stays short. Pasting everything in (b) makes every call pay for all the manuals; the model has no memory between calls to rely on (d); skipping the manuals (c) loses grounding.",
+      "distractors": {"b": "M7", "d": "M7"}
+    },
+    {
+      "id": "q3",
+      "answer": "The context has grown, so each call sends and processes a longer input.",
+      "accepted": ["the context grows", "more tokens are sent each call", "every call resends all earlier steps", "the window gets longer each step"],
+      "rationale": "Each call carries the setup plus all earlier messages and tool results, so input tokens rise with every step. Saying the model gets slower or tools cost more misses this."
+    },
+    {
+      "id": "q4",
+      "answer": "d",
+      "rationale": "A small per-student fact must be saved outside the window and loaded in the next session. The window is gone after the session (b, c); the manuals do not contain student status (a).",
+      "distractors": {"b": "M3", "c": "M7", "a": "M8"}
+    },
+    {
+      "id": "q5",
+      "answer": "The chunk lost the machine it belongs to; add context to the chunk, such as the machine name, before indexing.",
+      "accepted": ["the chunk has no machine name so add context to chunks", "chunk lacks context; contextual retrieval", "add the machine name to each chunk"],
+      "rationale": "Chunks cut from a document lose context such as which machine they describe; adding a short explanation or the machine name to each chunk (contextual retrieval) fixes it. Partial: filtering by machine metadata is also reasonable."
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your assistant's loop runs five model calls for one request. Between call 2 and call 3, what carries the earlier tool results to the model?",
+      "options": [
+        {"id": "a", "text": "The program re-sends the stored message list, results included, in the call"},
+        {"id": "b", "text": "The model keeps them internally until the whole request has finished"},
+        {"id": "c", "text": "The provider saves them on its servers and attaches them to later calls"},
+        {"id": "d", "text": "The model re-derives them from the original question, with no results kept"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "A request makes 3 model calls. Every call re-sends a fixed 1,000 tokens (system prompt and tool descriptions). Call 1 adds a 50-token question. Call 2 adds a 400-token tool result. Call 3 adds a 600-token tool result. Each call sends everything so far, and you ignore the model's own output tokens. How many input tokens are sent in total across the 3 calls?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your team wants the assistant to know that a student passed laser cutter training last week, in a new session. Which design gives the most reliable result?",
+      "options": [
+        {"id": "a", "text": "Choose a model with a larger window, so last week's chat still fits"},
+        {"id": "b", "text": "Store the record in a database and load it into each new session"},
+        {"id": "c", "text": "Rely on the model to remember students it has helped before"},
+        {"id": "d", "text": "Put the entire training log for all students in the system prompt"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O3",
+      "stem": "In one or two sentences: why does a context window large enough to hold a whole 300-page manual still not mean you should load the whole manual on every question?"
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O3",
+      "stem": "Your assistant answers a question about acrylic settings using the wrong machine's manual page, confidently. The search tool returned that page as its top result. Name one change to the retrieval design that would help the assistant avoid or catch this error."
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "A student chats with your assistant on Monday and returns on Thursday in a new session. On Thursday the program sends the model only the system prompt and the new question. What does the model know about Monday?",
+      "options": [
+        {"id": "a", "text": "Everything said on Monday, because it learned from that chat"},
+        {"id": "b", "text": "A short summary of Monday, which it keeps by itself"},
+        {"id": "c", "text": "Nothing, unless the program saved Monday and sent it again"},
+        {"id": "d", "text": "Monday's tool results only, which the API stores for it"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "An agent request has a system prompt plus tool definitions of 1,500 tokens and a question of 100 tokens. The model is called three times. After call 1 a 2,000-token tool result is added; after call 2 a 500-token tool result is added. Ignoring the model's own output and caching, how many input tokens are sent to the model in total across the three calls?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "After a long session, your program deletes the raw output of old tool calls from the message list but keeps every message the student and the model wrote. Which technique is this?",
+      "options": [
+        {"id": "a", "text": "Tool result clearing, which drops old raw outputs from the history"},
+        {"id": "b", "text": "Compaction, which summarizes the history and restarts with the summary"},
+        {"id": "c", "text": "Structured note-taking, which saves facts outside the context window"},
+        {"id": "d", "text": "Retrieval, which searches a store and adds the best chunks to the input"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your assistant answers from 3,000 pages of machine manuals using retrieval. Which description of what happens at question time is correct?",
+      "options": [
+        {"id": "a", "text": "The model searches the manual store itself and keeps the pages it finds"},
+        {"id": "b", "text": "The program searches the store and adds the best chunks to the model's input"},
+        {"id": "c", "text": "The model was retrained on the manuals, so it holds them inside itself"},
+        {"id": "d", "text": "The program sends an index and the model recalls the matching pages"}
+      ]
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O3",
+      "stem": "In one or two sentences: why save a short record of a student's training status between sessions, rather than saving and reloading the full transcripts of all their past chats?"
+    }
+  ]
+}

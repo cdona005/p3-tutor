@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat sheet: context and memory</title>
+  <style>
+    body { max-width: 40rem; margin: 0 auto; padding: 2rem 1rem; font-family: Georgia, serif; line-height: 1.5; }
+    th, td { text-align: left; padding: 0.3rem 0.6rem; border-bottom: 1px solid #ccc; vertical-align: top; }
+    table { border-collapse: collapse; width: 100%; }
+  </style>
+</head>
+<body>
+  <h1>Context and memory</h1>
+  <ul>
+    <li><strong>Context:</strong> all tokens the model gets in one call (system prompt, tools, messages, tool results) plus its response.</li>
+    <li><strong>Context window:</strong> the limit on that total. The model keeps nothing between calls; the program re-sends history.</li>
+    <li><strong>Between steps:</strong> the program appends to the context. <strong>Between sessions:</strong> only saved data survives.</li>
+    <li><strong>Context rot:</strong> recall declines gradually as the context grows.</li>
+  </ul>
+  <table>
+    <thead><tr><th>Need</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td>Find a fact in a long manual</td><td>Retrieval: a search tool returns a few passages</td></tr>
+      <tr><td>Remember a student across visits</td><td>Notes in storage your program owns</td></tr>
+      <tr><td>Long session too full</td><td>Compaction or clearing old tool results</td></tr>
+    </tbody>
+  </table>
+  <p>Source: <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Effective context engineering for AI agents</a>.</p>
+</body>
+</html>

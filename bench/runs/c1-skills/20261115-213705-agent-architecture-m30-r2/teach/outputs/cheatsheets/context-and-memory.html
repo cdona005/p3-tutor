@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat sheet: context and memory in an agent</title>
+  <style>
+    body { max-width: 42rem; margin: 0 auto; padding: 2rem 1rem; font-family: Charter, Georgia, serif; line-height: 1.5; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    th, td { text-align: left; vertical-align: top; padding: 0.4rem 0.5rem; border-bottom: 1px solid #ccc; }
+    h1 { font-size: 1.6rem; }
+  </style>
+</head>
+<body>
+  <h1>Context and memory in an agent</h1>
+  <ul>
+    <li>The model keeps nothing between calls. Its context window (system prompt, tool definitions, messages, tool results, its own output) is everything it sees, and it is limited and billed.</li>
+    <li>Each call resends the whole message list, so input tokens billed = the sum of each call's full input, not the final size.</li>
+    <li>More context is not better: accuracy can fall as it grows (context rot).</li>
+  </ul>
+  <table>
+    <thead><tr><th>Symptom</th><th>Move</th><th>Risk</th></tr></thead>
+    <tbody>
+      <tr><td>Old tool outputs pile up</td><td>Tool result clearing</td><td>Deleting what a later step needs</td></tr>
+      <tr><td>Conversation nears the limit</td><td>Compaction (summary, restart)</td><td>Summary loses a detail</td></tr>
+      <tr><td>Facts needed next session</td><td>Notes saved outside the context, loaded at start</td><td>Stale or wrong notes</td></tr>
+      <tr><td>Source far bigger than the window</td><td>Retrieval: chunk, embed, store, search, add top chunks</td><td>Wrong chunk retrieved</td></tr>
+      <tr><td>Exact codes and part numbers</td><td>Keyword (BM25) plus embeddings</td><td>Embeddings alone miss exact strings</td></tr>
+      <tr><td>Side task floods the context</td><td>Sub-agent returning a short summary</td><td>Extra calls, lost detail</td></tr>
+    </tbody>
+  </table>
+  <p>Cost check: list each call's input size (everything so far), then add them up.</p>
+  <p>Sources: <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic, Effective context engineering</a>; <a href="https://platform.claude.com/docs/en/build-with-claude/context-windows">Claude docs, Context windows</a>; <a href="https://www.anthropic.com/news/contextual-retrieval">Anthropic, Contextual Retrieval</a>.</p>
+</body>
+</html>

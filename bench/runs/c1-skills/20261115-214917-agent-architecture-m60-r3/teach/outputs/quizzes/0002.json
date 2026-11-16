@@ -1,0 +1,56 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Dana trained on the laser cutter last Tuesday. Today she opens a new session of an assistant built as a plain agent loop with a model, tools and no code that saves anything. She asks, \"Am I cleared for the laser cutter?\" Which statement is true?",
+      "options": [
+        {"id": "a", "text": "The model recalls Tuesday's session, because it keeps every session it has had"},
+        {"id": "b", "text": "The model cannot see Tuesday's session unless your program saves it and supplies it"},
+        {"id": "c", "text": "The model recalls Tuesday's session if the context window is large enough"},
+        {"id": "d", "text": "The model recalls Tuesday's session because tools keep a log of conversations"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "An agent's system prompt and tool definitions total 3,000 tokens and the student's question is 100 tokens. The model is called three times: the first two calls each end with a 50-token tool request, and each tool returns a 2,000-token result that your program appends to the context; the third call writes the final answer. Ignoring caching, how many input tokens are sent in total across the three calls?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your makerspace has a 300-page manual set, and a student asks how to change a band saw blade. Which design gives the model what it needs at the lowest recurring cost?",
+      "options": [
+        {"id": "a", "text": "Put the full manuals in the system prompt so every call can see them"},
+        {"id": "b", "text": "Rely on what the model learned in training about band saws in general"},
+        {"id": "c", "text": "Give the model a search tool that returns the few best-matching chunks"},
+        {"id": "d", "text": "Replace each manual with a one-line summary kept in the system prompt"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O3",
+      "stem": "In one or two sentences: why would a long-running agent write notes to a file rather than rely only on its context window?"
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "An agent's context holds 60 earlier tool results and is still well under the window's limit. The relevant fact is in result 7. What problem can still occur?",
+      "options": [
+        {"id": "a", "text": "The API returns an error because the context is already too long"},
+        {"id": "b", "text": "The model stops calling tools because older results are locked"},
+        {"id": "c", "text": "The oldest results are dropped silently before the model sees them"},
+        {"id": "d", "text": "The model may recall the fact less accurately as the context grows"}
+      ]
+    }
+  ]
+}

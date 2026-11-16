@@ -1,0 +1,55 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your assistant's context window is large enough to hold every student record. A student chats on Monday, and the session ends. On Thursday a new session starts with no extra code. What does the model know about Monday?",
+      "options": [
+        {"id": "a", "text": "Everything, because the large window keeps all earlier chats stored"},
+        {"id": "b", "text": "Nothing, because a new session begins with an empty context window"},
+        {"id": "c", "text": "A summary, because the model compacts old sessions on its own"},
+        {"id": "d", "text": "Only tool results, because tool outputs are kept by the model"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "A 400-page manual set is searched before each answer. Which design keeps cost per request lowest while still answering from the manuals?",
+      "options": [
+        {"id": "a", "text": "Search a chunk index and put only the best few chunks in context"},
+        {"id": "b", "text": "Paste all manuals into the instructions so every call can see them"},
+        {"id": "c", "text": "Let the model answer from training and skip the manuals entirely"},
+        {"id": "d", "text": "Paste the manuals in once and rely on the model to remember them"}
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "short",
+      "objective": "O3",
+      "stem": "In one sentence: why does each later step of an agent loop usually cost more than the earlier steps?"
+    },
+    {
+      "id": "q4",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "The assistant must know on Thursday that a student passed 3D printer training on Monday. Which is the right mechanism?",
+      "options": [
+        {"id": "a", "text": "Retrieve it from the machine manuals, since it is a written fact"},
+        {"id": "b", "text": "Rely on the context window, since the student already said it"},
+        {"id": "c", "text": "Raise the model's token limit so Monday's messages still fit"},
+        {"id": "d", "text": "Save it to a note outside the window and load it next session"}
+      ]
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O3",
+      "stem": "A page of the laser cutter manual says only \"Set the speed to 40%.\" Retrieval returns it for a question about the 3D printer. In one sentence, what is the likely cause, and what could fix it?"
+    }
+  ]
+}
