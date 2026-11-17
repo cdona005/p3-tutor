@@ -1,0 +1,46 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "b",
+      "rationale": "The difference is who owns the control flow: in a workflow, predefined code decides the path; in an agent, the model decides what to do next and which tools to use. Several model calls (a) and tool use (c) occur in both, which is M7: that an agent is any system that uses tools or several model calls. Memory (d) is a separate topic.",
+      "distractors": {"a": "M7", "c": "M7"}
+    },
+    {
+      "id": "q2",
+      "answer": "d",
+      "rationale": "The model's label only chooses among paths the code already defines, and the steps in each path are fixed by code, so the code still owns the control flow: this is a workflow (the routing pattern). M8 is the belief that a system with a model call or a model decision in it is an agent (a), or that workflows cannot contain model calls (c); M7 is counting model calls (b).",
+      "distractors": {"a": "M8", "b": "M7", "c": "M8"}
+    },
+    {
+      "id": "q3",
+      "answer": 800,
+      "tolerance": 0,
+      "rationale": "The agent uses 5 + 1 = 6 model calls per request against the workflow's 2, so 4 more per request; 4 x 200 = 800. An answer of 1000 counts only the 5 tool requests and forgets the final-answer call; 400 treats the 2 workflow calls as the only difference. Agents trade cost and latency for flexibility, which matters on a small budget."
+    },
+    {
+      "id": "q4",
+      "answer": "a",
+      "rationale": "Booking has known steps in a fixed order, so code can run them predictably and cheaply. In b, c and d the next step depends on what turned up, which is where an agent earns its extra cost; picking one of them reflects M9: that open-ended work suits a fixed path.",
+      "distractors": {"b": "M9", "c": "M9", "d": "M9"}
+    },
+    {
+      "id": "q5",
+      "answer": "Known, unchanging steps need no model decisions, so a workflow uses fewer model calls (lower cost and latency) and behaves the same way every time.",
+      "accepted": [
+        "It is cheaper, because fewer model calls are needed when the steps are fixed.",
+        "A workflow is more predictable and consistent, because code runs the steps and the model cannot skip or reorder them.",
+        "The agent would spend extra model calls deciding steps that are already known, which wastes budget.",
+        "Fixed code is more reliable and cheaper for steps that never change."
+      ],
+      "rationale": "Full credit: cost or latency (fewer model calls) or predictability and consistency, tied to the steps being known in advance. Saying only that workflows are simpler or that agents are worse is partial. Saying that agents cannot do bookings, or that workflows cannot use a model, is wrong (M8)."
+    },
+    {
+      "id": "q6",
+      "answer": "c",
+      "rationale": "A prompt is a request the model may not follow; a step in code runs every time because the program, not the model, owns the control flow. Options a, b and d show M10, the belief that a stronger prompt, a bigger model or an example (a, b, d) guarantees a step happens; (a, b, d) only make skipping less likely.",
+      "distractors": {"a": "M10", "b": "M10", "d": "M10"}
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat sheet: how an agent loop stops</title>
+  <style>
+    :root {
+      --bg: #fffdf8;
+      --text: #1f1d1a;
+      --muted: #6b665e;
+      --rule: #e4dfd4;
+      --accent: #9a4517;
+      --accent-soft: #f7ede4;
+      --warn: #8c2f39;
+      --warn-soft: #f9eaec;
+      --ok: #2f6b3a;
+      --ok-soft: #e7f2e9;
+      --code-bg: #f3efe6;
+      --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Sitka Text", Cambria, Georgia, serif;
+      --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #171614;
+        --text: #e9e5dc;
+        --muted: #a49e93;
+        --rule: #36332e;
+        --accent: #eaa77a;
+        --accent-soft: #2c231d;
+        --warn: #f0a3ac;
+        --warn-soft: #2f1f22;
+        --ok: #9fd3a8;
+        --ok-soft: #1c2a1f;
+        --code-bg: #23211e;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { font-size: 17px; -webkit-text-size-adjust: 100%; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--serif); line-height: 1.5; }
+    main { max-width: 46rem; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+    a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    h1, h2 { line-height: 1.25; font-weight: 600; }
+    h1 { font-size: 1.7rem; margin: 0.25rem 0 0.5rem; }
+    h2 { font-size: 1.2rem; margin: 1.75rem 0 0.5rem; padding-bottom: 0.2rem; border-bottom: 1px solid var(--rule); }
+    .kicker, .label, .meta, summary, th, nav.toc, .tag { font-family: var(--sans); }
+    .kicker { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .meta { display: flex; flex-wrap: wrap; gap: 0.3rem 1.25rem; font-size: 0.8rem; color: var(--muted);
+            border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 0.4rem 0; margin: 0.75rem 0 1rem; }
+    nav.toc { font-size: 0.85rem; }
+    nav.toc a { margin-right: 0.9rem; white-space: nowrap; }
+    ul, ol { padding-left: 1.2rem; margin: 0.4rem 0; }
+    li { margin: 0.2rem 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 0.6rem 0; }
+    th, td { text-align: left; vertical-align: top; padding: 0.35rem 0.5rem; border-bottom: 1px solid var(--rule); }
+    th { font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+    td.wrong { color: var(--warn); }
+    td.right { color: var(--ok); }
+    .table-wrap { overflow-x: auto; }
+    code, pre { font-family: var(--mono); font-size: 0.85em; background: var(--code-bg); border-radius: 4px; }
+    code { padding: 0.1em 0.3em; }
+    pre { padding: 0.75rem; overflow-x: auto; line-height: 1.4; margin: 0.6rem 0; }
+    pre code { padding: 0; background: none; font-size: 1em; }
+    pre .bug { color: var(--warn); font-weight: 600; }
+    .model { background: var(--accent-soft); border-radius: 6px; padding: 0.6rem 0.9rem; margin: 0.6rem 0; }
+    .model p { margin: 0.2rem 0; }
+    ol.selftest > li { margin: 0.6rem 0; }
+    .tag { font-size: 0.68rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted);
+           border: 1px solid var(--rule); border-radius: 3px; padding: 0 0.3rem; margin-right: 0.3rem; }
+    details { margin-top: 0.25rem; }
+    summary { font-size: 0.8rem; color: var(--accent); cursor: pointer; }
+    details > :not(summary) { margin: 0.3rem 0 0; }
+    @media (max-width: 32rem) {
+      html { font-size: 16px; }
+      h1 { font-size: 1.45rem; }
+      table { font-size: 0.82rem; }
+    }
+    @media print {
+      :root { --bg: #fff; --text: #000; --muted: #444; --rule: #bbb; --accent: #000; --accent-soft: #f2f2f2;
+              --warn: #000; --warn-soft: #f2f2f2; --ok: #000; --ok-soft: #fff; --code-bg: #f2f2f2; }
+      html { font-size: 9.5pt; }
+      main { max-width: none; padding: 0; }
+      nav.toc { display: none; }
+      h2 { margin-top: 1rem; }
+      table, pre, ol.selftest > li { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<main>
+
+  <header>
+    <div class="kicker">Cheat sheet &middot; Objective O1</div>
+    <h1>How an agent loop stops</h1>
+    <div class="meta">
+      <span>Covers: <a href="../lessons/0001-how-an-agent-decides-it-is-done.html">Lesson 1, How an agent decides it is done</a></span>
+    </div>
+    <nav class="toc" aria-label="On this sheet">
+      <a href="#model">Model</a>
+      <a href="#cold">Know cold</a>
+      <a href="#signals">Signals</a>
+      <a href="#twists">Twists</a>
+      <a href="#counting">Counting</a>
+      <a href="#selftest">Self-test</a>
+      <a href="#reread">Reread</a>
+    </nav>
+  </header>
+
+  <section id="model">
+    <h2>The model</h2>
+    <div class="model">
+      <p>The harness runs a <code>while</code> loop: go again while the latest reply asks for a tool; the only finished state is a reply with no tool call, read from <code>stop_reason</code>, never from the words.</p>
+      <p>Every other ending (truncated reply, turn or budget cap) is a stop, not a success, so classify it by its signal before using the output.</p>
+    </div>
+<pre><code>while True:
+    reply = call_model(messages, tools)     # 1 turn
+    if reply.stop_reason == "tool_use":     # run tool, append result, loop
+        ...
+    elif reply.stop_reason == "end_turn":   # only natural finish
+        break
+    else:                                   # max_tokens / context full:
+        ...                                 # truncated, NOT an answer
+# caps (max_turns, max_budget_usd) sit in the harness, around the loop
+# <span class="bug">bug: the lesson's basic loop has a bare `else: break` here</span></code></pre>
+    <p><strong>Reading a run:</strong> check the subtype, then read <code>result</code> only on <code>success</code>.</p>
+  </section>
+
+  <section id="cold">
+    <h2>Know cold</h2>
+    <ol>
+      <li>The harness decides, from <code>stop_reason</code>: <code>tool_use</code> = run tool, append, call again; <code>end_turn</code> = exit. <a href="../lessons/0001-how-an-agent-decides-it-is-done.html#s1">&rarr; s1</a></li>
+      <li>Completion is structural (no tool call), never wording like "done". <a href="../lessons/0001-how-an-agent-decides-it-is-done.html#s2">&rarr; s2</a></li>
+      <li><code>max_tokens</code> / <code>model_context_window_exceeded</code> = truncated: don't return it, don't run a tool call in it. <a href="../lessons/0001-how-an-agent-decides-it-is-done.html#practice">&rarr; practice</a></li>
+      <li><code>max_turns</code> needed = tool-call turns + 1 for the final text-only reply. <a href="../lessons/0001-how-an-agent-decides-it-is-done.html#practice">&rarr; worked example</a></li>
+      <li>Subtype first: only <code>success</code> carries <code>result</code>; a cap says nothing about whether the task got done. <a href="../lessons/0001-how-an-agent-decides-it-is-done.html#s3">&rarr; s3</a></li>
+    </ol>
+  </section>
+
+  <section id="signals">
+    <h2>Signals</h2>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Signal</th><th>Level</th><th>Means</th><th>Loop does</th></tr></thead>
+      <tbody>
+        <tr><td><code>tool_use</code></td><td>reply</td><td>Calling a tool</td><td>Run it, append result, call again</td></tr>
+        <tr><td><code>end_turn</code></td><td>reply</td><td>Finished naturally</td><td>Exit; use the reply</td></tr>
+        <tr><td><code>max_tokens</code></td><td>reply</td><td>Hit your token limit; may be cut mid-sentence or mid-call</td><td>Raise limit and retry, or ask to continue</td></tr>
+        <tr><td><code>model_context_window_exceeded</code></td><td>reply</td><td>Context filled</td><td>Treat as truncated</td></tr>
+        <tr><td><code>max_turns</code> hit</td><td>run</td><td>Turn cap reached</td><td><code>error_max_turns</code>, no <code>result</code></td></tr>
+        <tr><td><code>max_budget_usd</code> hit</td><td>run</td><td>Spend cap reached</td><td><code>error_max_budget_usd</code>, no <code>result</code></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Subtypes: <code>success</code> (has <code>result</code>), <code>error_max_turns</code>, <code>error_max_budget_usd</code>, <code>error_during_execution</code> (no <code>result</code>).</p>
+  </section>
+
+  <section id="twists">
+    <h2>Twists</h2>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Situation</th><th>Tempting</th><th>Right</th></tr></thead>
+      <tbody>
+        <tr><td>Text says "done", reply has a tool call</td><td class="wrong">Exit</td><td class="right">Run the tool; the call is the signal</td></tr>
+        <tr><td>Task finished, text never says "done"</td><td class="wrong">Keep looping</td><td class="right">Exit: no tool call</td></tr>
+        <tr><td><code>end_turn</code> vs <code>max_tokens</code></td><td class="wrong">Both: model stopped, use reply</td><td class="right">Only <code>end_turn</code> is finished</td></tr>
+        <tr><td><code>max_tokens</code> reply ends in a tool call</td><td class="wrong">Run it</td><td class="right">Don't; it may be cut mid-call</td></tr>
+        <tr><td><code>max_turns</code> = N, N tool-call turns</td><td class="wrong">Enough</td><td class="right"><code>error_max_turns</code>, no <code>result</code>, even if work done</td></tr>
+        <tr><td><code>max_turns</code> = N + 1</td><td class="wrong">Too tight</td><td class="right"><code>success</code>: cap equal to turns used still passes</td></tr>
+        <tr><td>Run hit a cap</td><td class="wrong">Guess done or failed</td><td class="right">Cap says nothing about the task; read subtype</td></tr>
+        <tr><td>No cap set (default)</td><td class="wrong">Something will stop it</td><td class="right">Nothing in the harness does; the model's choice decides</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <section id="counting">
+    <h2>Counting and defaults</h2>
+    <ul>
+      <li>Turn = one model call plus the tool runs it triggers.</li>
+      <li><code>max_turns</code> needed = tool-call turns + 1.</li>
+      <li><code>max_turns</code> and <code>max_budget_usd</code>: both unlimited by default in the Agent SDK.</li>
+      <li>CS frame: <code>stop_reason</code> is a return code; the reply's words are a log line.</li>
+    </ul>
+  </section>
+
+  <section id="selftest">
+    <h2>Self-test</h2>
+    <p>Cover the sheet first. Hardest first: 3, 5, 4, 6, 2.</p>
+    <ol class="selftest">
+      <li><span class="tag">recall</span>Who decides whether to call the model again, and from which field?
+        <details><summary>Answer</summary><p>The harness, from <code>stop_reason</code> on the latest reply: <code>tool_use</code> = go again, <code>end_turn</code> = exit.</p></details></li>
+      <li><span class="tag">compare</span>Harness A exits when the text contains "finished". Harness B returns the reply whenever <code>stop_reason != "tool_use"</code>. Name one way each goes wrong.
+        <details><summary>Answer</summary><p>A: exits early on "finished reading, now editing" with a pending call, or spins on when the word never appears. B: returns a <code>max_tokens</code> or context-exceeded reply, which is truncated, as the answer.</p></details></li>
+      <li><span class="tag">apply</span>A reply stops with <code>max_tokens</code> and its last block is a <code>write_file</code> tool call. Run it? Why?
+        <details><summary>Answer</summary><p>No. The reply is truncated and the call may be incomplete. Raise <code>max_tokens</code> and retry, or ask the model to continue.</p></details></li>
+      <li><span class="tag">apply</span><code>max_turns</code> is 5. The model makes 4 tool-call turns, then a text-only reply. Subtype, and is there a <code>result</code>?
+        <details><summary>Answer</summary><p><code>success</code>, with a <code>result</code>: 4 + 1 = 5 fits exactly.</p></details></li>
+      <li><span class="tag">apply</span>Stop reasons would arrive <code>tool_use</code>, <code>tool_use</code>, <code>end_turn</code>, and <code>max_turns</code> is 2. How does the run end?
+        <details><summary>Answer</summary><p><code>error_max_turns</code>, no <code>result</code>: the cap is reached after the two tool-call turns, before the final reply.</p></details></li>
+      <li><span class="tag">spot the bug</span>A dashboard counts a run as succeeded whenever its subtype is not <code>error_during_execution</code>. What is wrong?
+        <details><summary>Answer</summary><p><code>error_max_turns</code> and <code>error_max_budget_usd</code> are not successes either. Only <code>success</code> is.</p></details></li>
+      <li><span class="tag">compare</span>Sort into reply-level or run-level: <code>max_tokens</code>, <code>max_budget_usd</code>, <code>model_context_window_exceeded</code>, <code>max_turns</code>.
+        <details><summary>Answer</summary><p>Reply-level (from the API): <code>max_tokens</code>, <code>model_context_window_exceeded</code>. Run-level (harness caps): <code>max_budget_usd</code>, <code>max_turns</code>.</p></details></li>
+      <li><span class="tag">why</span>A run ends <code>error_max_turns</code> right after its last tool call succeeded. Why can't you treat it as finished?
+        <details><summary>Answer</summary><p>A cap stops a run whether or not the task is done. No final response was produced and there is no <code>result</code>; only <code>success</code> means success.</p></details></li>
+      <li><span class="tag">apply</span>You set neither <code>max_turns</code> nor <code>max_budget_usd</code>, and the model keeps requesting tools. What ends the run?
+        <details><summary>Answer</summary><p>No cap does: both are unlimited by default. Only the model's own choice, a reply with no tool call, ends the loop.</p></details></li>
+      <li><span class="tag">why</span>In CS terms, why is <code>stop_reason</code> a better exit test than the reply's words?
+        <details><summary>Answer</summary><p>It is a structured value, like a return code; the words are like a log message. Branch control flow on structure.</p></details></li>
+    </ol>
+  </section>
+
+  <section id="reread">
+    <h2>Where to reread</h2>
+    <ul>
+      <li>Q1: <a href="../lessons/0001-how-an-agent-decides-it-is-done.html#s1">The loop and its one exit</a></li>
+      <li>Q2, Q10: <a href="../lessons/0001-how-an-agent-decides-it-is-done.html#s2">Why not check for "done"?</a></li>
+      <li>Q4, Q6, Q7, Q8, Q9: <a href="../lessons/0001-how-an-agent-decides-it-is-done.html#s3">Other ways a run stops</a></li>
+      <li>Q3, Q5: <a href="../lessons/0001-how-an-agent-decides-it-is-done.html#practice">Worked example and practice</a></li>
+    </ul>
+    <p>Then rewrite the loop sketch from memory, with the third branch for truncation. Redo missed questions the next day.</p>
+  </section>
+
+</main>
+</body>
+</html>

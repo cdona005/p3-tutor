@@ -1,0 +1,120 @@
+{
+  "duration_api_ms": 11125,
+  "stop_reason": "end_turn",
+  "session_id": "d155835a-e88c-43cf-8b0c-4b3c3cc0f643",
+  "total_cost_usd": 0.09255959999999999,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 17544,
+    "cache_read_input_tokens": 84976,
+    "output_tokens": 1387,
+    "output_tokens_details": {
+      "thinking_tokens": 307
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 17544,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 350,
+        "cache_read_input_tokens": 27643,
+        "cache_creation_input_tokens": 527,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 527
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 1387,
+      "cacheReadInputTokens": 84976,
+      "cacheCreationInputTokens": 17544,
+      "webSearchRequests": 0,
+      "costUSD": 0.09255959999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 307,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 17544,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 10,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "I can't give you the letter for q3. I don't hand out quiz answers before grading, and that holds for a practice retake. Neither attempt at quiz 0001 has been graded yet. Once it's graded, we can go through q3 together.\n\nHere is how to work it out yourself:\n\n- **Topic:** the agent loop, which is what your agent-loop session and learning record 0002 cover. The question is about what the loop itself does and doesn't do.\n- **Stem wording to look at:**\n  - \"Which change to the **agent program**\" asks who makes the change. The program around the model and the model itself have different jobs.\n  - \"all 40 steps are **still in its context**\" tells you what the model can already see.\n- **Test for each option:**\n  - Does it change the agent program, or only what the model sees or is told?\n  - What would happen at step 41 with that change in place?\n  - Does the change depend on the model choosing differently, when it has already repeated itself 40 times?\n\nTell me your pick and the reasoning you'd defend at a design review. Then I can show you where the reasoning holds up or breaks.",
+  "ttft_ms": 3620,
+  "type": "result",
+  "duration_ms": 13932,
+  "uuid": "3081ca4b-a6d0-40b8-8cb7-2a44f80db521",
+  "ttft_stream_ms": 3334,
+  "time_to_request_ms": 2774,
+  "first_content_frame_ms": 3334,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 1387,
+      "cacheReadInputTokens": 84976,
+      "cacheCreationInputTokens": 17544,
+      "webSearchRequests": 0,
+      "costUSD": 0.09255959999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 307,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 17544,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "credential_expires_at": "2026-11-19T11:33:49.534Z"
+}

@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="p3-minutes" content="15">
+  <meta name="p3-objective" content="O2">
+  <title>What an agent harness does</title>
+  <style>
+    :root {
+      --bg: #fffdf8;
+      --text: #1f1d1a;
+      --muted: #6b665e;
+      --rule: #e4dfd4;
+      --accent: #9a4517;
+      --accent-soft: #f7ede4;
+      --warn: #8c2f39;
+      --warn-soft: #f9eaec;
+      --ok: #2f6b3a;
+      --ok-soft: #e7f2e9;
+      --code-bg: #f3efe6;
+      --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Sitka Text", Cambria, Georgia, serif;
+      --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #171614;
+        --text: #e9e5dc;
+        --muted: #a49e93;
+        --rule: #36332e;
+        --accent: #eaa77a;
+        --accent-soft: #2c231d;
+        --warn: #f0a3ac;
+        --warn-soft: #2f1f22;
+        --ok: #9fd3a8;
+        --ok-soft: #1c2a1f;
+        --code-bg: #23211e;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { font-size: 19px; -webkit-text-size-adjust: 100%; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--serif); line-height: 1.6; }
+    main { max-width: 40rem; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+    p, li { hyphens: auto; }
+    a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    h1, h2, h3 { line-height: 1.25; font-weight: 600; }
+    h1 { font-size: 2.1rem; margin: 0.25rem 0 1rem; }
+    h2 { font-size: 1.45rem; margin: 3rem 0 0.75rem; }
+    h3 { font-size: 1.1rem; margin: 2rem 0 0.5rem; }
+    .kicker, .label, .meta, .section-time, figcaption, summary, th, nav.toc, footer.closing {
+      font-family: var(--sans);
+    }
+    .kicker { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .lead { font-size: 1.15rem; }
+    .meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; font-size: 0.85rem; color: var(--muted);
+            border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 0.5rem 0; margin: 1.5rem 0; }
+    nav.toc { font-size: 0.9rem; margin: 1.5rem 0 2rem; }
+    nav.toc ol { padding-left: 1.2rem; margin: 0.4rem 0 0; }
+    .section-time { font-size: 0.8rem; font-weight: 400; color: var(--muted); margin-left: 0.4rem; white-space: nowrap; }
+    dfn { font-style: normal; font-weight: 600; }
+    aside.note { font-size: 0.9rem; color: var(--muted); border-left: 2px solid var(--rule); padding-left: 1rem; margin: 1.25rem 0; }
+    .box { border-radius: 6px; padding: 1rem 1.25rem; margin: 1.75rem 0; }
+    .box > :first-child { margin-top: 0; }
+    .box > :last-child { margin-bottom: 0; }
+    .label { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.4rem; }
+    .mission { background: var(--accent-soft); }
+    .mission .label { color: var(--accent); }
+    .misconception { background: var(--warn-soft); border-left: 4px solid var(--warn); }
+    .misconception .label { color: var(--warn); }
+    .worked { border: 1px solid var(--rule); }
+    .worked ol { padding-left: 1.3rem; }
+    .summary { border: 1px solid var(--rule); }
+    figure { margin: 2rem 0; }
+    figure svg { display: block; width: 100%; height: auto; }
+    figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; margin: 1.5rem 0; }
+    th, td { text-align: left; vertical-align: top; padding: 0.45rem 0.6rem; border-bottom: 1px solid var(--rule); }
+    th { font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+    code, pre { font-family: var(--mono); font-size: 0.85em; background: var(--code-bg); border-radius: 4px; }
+    code { padding: 0.1em 0.3em; }
+    pre { padding: 1rem; overflow-x: auto; line-height: 1.45; }
+    pre code { padding: 0; background: none; font-size: 1em; }
+    .check { border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.25rem; margin: 1.75rem 0; }
+    .check .label { color: var(--accent); }
+    .check p { margin: 0.25rem 0; }
+    .choices { list-style: none; padding: 0; margin: 0.75rem 0 0; display: grid; gap: 0.5rem; }
+    .choices button { width: 100%; text-align: left; font: inherit; font-size: 0.95rem; color: inherit; background: transparent;
+                      border: 1px solid var(--rule); border-radius: 6px; padding: 0.55rem 0.8rem; cursor: pointer; }
+    .choices button:hover { border-color: var(--accent); }
+    .choices button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .choices button.right { border-color: var(--ok); background: var(--ok-soft); }
+    .choices button.wrong { border-color: var(--warn); background: var(--warn-soft); }
+    .feedback { font-size: 0.95rem; margin: 0.6rem 0 0; }
+    .feedback:empty { margin: 0; }
+    details { margin-top: 0.75rem; }
+    summary { font-size: 0.85rem; color: var(--accent); cursor: pointer; }
+    details > :not(summary) { margin: 0.5rem 0 0; }
+    .go-further li { margin-bottom: 0.6rem; }
+    footer.closing { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-size: 0.9rem; color: var(--muted); }
+    @media (max-width: 32rem) {
+      html { font-size: 17px; }
+      h1 { font-size: 1.75rem; }
+      main { padding-top: 2rem; }
+    }
+    @media print {
+      :root { --bg: #fff; --text: #000; --muted: #444; --rule: #ccc; --accent: #000; --accent-soft: #f2f2f2;
+              --warn: #000; --warn-soft: #f2f2f2; --ok: #000; --ok-soft: #fff; --code-bg: #f2f2f2; }
+      html { font-size: 11.5pt; }
+      main { max-width: none; padding: 0; }
+      nav.toc { display: none; }
+      a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; word-break: break-all; }
+      .box, .check, figure, table, pre { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<main>
+
+  <header>
+    <div class="kicker">Lesson 2 &middot; 15 minutes</div>
+    <h1>What an agent harness does</h1>
+    <p class="lead">By the end of this lesson you can look at a misbehaving agent run and say which of the harness's four duties (loop and tools, context, limits, permissions) is responsible, and explain why a bare model can do none of them.</p>
+    <div class="meta">
+      <span>Objective O2: the goal of an agent harness</span>
+      <span>About 15 minutes</span>
+      <span>Builds on <a href="0001-how-an-agent-decides-it-is-done.html">How an agent decides it is done</a></span>
+    </div>
+    <div class="box mission">
+      <span class="label">Why this matters for you</span>
+      <p>Your tutor is a harness configuration: skills, allowed tools, caps. Once you know what the harness owns, you can tell which knob changes which behavior, and predict a change before you spend bench usage on it.</p>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="In this lesson">
+    <strong>In this lesson</strong>
+    <ol>
+      <li><a href="#warm-up">Warm-up</a></li>
+      <li><a href="#s1">A model alone cannot act</a></li>
+      <li><a href="#s2">The loop and tool execution</a></li>
+      <li><a href="#s3">Context management</a></li>
+      <li><a href="#s4">Limits</a></li>
+      <li><a href="#s5">Permissions</a></li>
+      <li><a href="#practice">Worked example and practice</a></li>
+      <li><a href="#summary">Summary</a></li>
+      <li><a href="#further">Go further</a></li>
+    </ol>
+  </nav>
+
+  <section id="warm-up">
+    <h2>Warm-up <span class="section-time">1 min</span></h2>
+    <p>Two recalls from <a href="0001-how-an-agent-decides-it-is-done.html">lesson 1</a>. Answer in your head first.</p>
+    <div class="check">
+      <span class="label">Recall 1</span>
+      <p>A loop ends because a reply has text and no tool call. Does that prove the task is done?</p>
+      <details>
+        <summary>Check your answer</summary>
+        <p>No. It is only the loop's exit. A <code>result</code> text exists only when the run ended in <code>success</code>; a truncated reply (<code>max_tokens</code>) also has no tool call.</p>
+      </details>
+    </div>
+    <div class="check">
+      <span class="label">Recall 2</span>
+      <p>A run is cut off with <code>max_turns=3</code> after three tool-calling turns. What does the result show?</p>
+      <details>
+        <summary>Check your answer</summary>
+        <p>Subtype <code>error_max_turns</code> and no <code>result</code> text. The cap counts tool-calling turns plus one for the final reply, and that reply never happened. Section 4 returns to this (<a href="../cheatsheets/agent-loop-stopping.html">cheat sheet</a>).</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="s1">
+    <h2>A model alone cannot act <span class="section-time">3 min</span></h2>
+    <p>You send "fix the failing test" to the model API. It replies with a <code>tool_use</code> block asking to run <code>pytest</code>. Nothing runs it, and nothing carries it into your next call: the Messages API is stateless, so your code must resend the whole history every time (<a href="https://platform.claude.com/docs/en/build-with-claude/working-with-messages">Using the Messages API</a>). What now?</p>
+
+<pre><code># One bare call to the model API
+reply = client.messages.create(
+    model=MODEL, max_tokens=1024, tools=TOOL_SCHEMAS,
+    messages=[{"role": "user", "content": "Fix the failing test"}],
+)
+print(reply.stop_reason)   # "tool_use"
+print(reply.content[-1])   # tool_use block: name="Bash", input={"command": "pytest"}
+# Nobody runs pytest: the reply is only a request.
+# Nobody stores this exchange: the next create() starts blank
+# unless your code resends the history.</code></pre>
+
+    <p>The model only returns a structured request. For tools you define, it answers <code>stop_reason: "tool_use"</code>, and your code runs the operation and sends back a <code>tool_result</code> (<a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview">Tool use with Claude</a>).</p>
+    <p>The code you write to fill that gap is the <dfn>agent harness</dfn>. Anthropic's definition, written for Claude Code, names two of the duties:</p>
+    <ul>
+      <li>Claude Code "is the layer around the model that provides the tools and manages the context the model sees. This surrounding layer is what the term agentic harness refers to" (<a href="https://code.claude.com/docs/en/how-claude-code-works">How Claude Code works</a>).</li>
+    </ul>
+    <p>This lesson's own grouping adds the rest, for four duties, one per section after this: loop and tools (running the loop and executing tool calls), context, limits, and permissions.</p>
+
+    <figure>
+      <svg viewBox="0 0 640 450" role="img" aria-labelledby="fig1-title">
+        <title id="fig1-title">A box labelled Harness around a box labelled Model. A user prompt enters the model. The model emits tool_use, the harness runs the tool, and tool_result goes back to the model. The model finally emits text that leaves the harness. The harness has four duties: loop and tools, context, limits, permissions.</title>
+        <defs>
+          <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+          </marker>
+          <marker id="a1c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" style="fill: var(--accent)"/>
+          </marker>
+        </defs>
+        <rect x="20" y="64" width="600" height="330" rx="10" style="fill: var(--code-bg)" stroke="currentColor" stroke-width="1.5"/>
+        <g fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="60" y="4" width="200" height="36" rx="8" style="fill: var(--bg)"/>
+          <rect x="60" y="116" width="200" height="96" rx="8" style="fill: var(--bg); stroke: var(--accent)" stroke-width="2.5"/>
+          <rect x="400" y="116" width="180" height="96" rx="8" style="fill: var(--bg)"/>
+          <line x1="160" y1="40" x2="160" y2="112" marker-end="url(#a1)"/>
+          <line x1="400" y1="182" x2="266" y2="182" marker-end="url(#a1)"/>
+          <g style="stroke: var(--accent)" stroke-width="2.5">
+            <line x1="260" y1="146" x2="396" y2="146" marker-end="url(#a1c)"/>
+            <line x1="160" y1="212" x2="160" y2="414" marker-end="url(#a1c)"/>
+          </g>
+        </g>
+        <g fill="currentColor" font-family="system-ui, sans-serif" font-size="18" text-anchor="middle">
+          <text x="160" y="28">User prompt</text>
+          <text x="160" y="170" font-weight="700" style="fill: var(--accent)">Model</text>
+          <text x="490" y="170">Run the tool</text>
+          <text x="331" y="138" style="fill: var(--accent)">tool_use</text>
+          <text x="331" y="204">tool_result</text>
+          <text x="160" y="440" style="fill: var(--accent)">final text</text>
+          <g text-anchor="start">
+            <text x="36" y="92" font-weight="700">Harness</text>
+            <text x="300" y="256" font-weight="700">Four duties</text>
+            <text x="300" y="286">1. Loop and tools</text>
+            <text x="300" y="314">2. Context</text>
+            <text x="300" y="342">3. Limits</text>
+            <text x="300" y="370">4. Permissions</text>
+          </g>
+        </g>
+      </svg>
+      <figcaption>Figure 1. The model only produces the arrows that leave it (in the accent color). The harness does everything else.</figcaption>
+    </figure>
+
+    <div class="check" data-check>
+      <span class="label">Check yourself</span>
+      <p>The model returns a <code>tool_use</code> block for <code>pytest</code>. Which component runs the command?</p>
+      <ul class="choices">
+        <li><button type="button" data-correct="false" data-why="The model only generates text and tool requests. It has no process to run a command in, and generating the next reply does not execute anything.">The model itself, during its next turn of generation</button></li>
+        <li><button type="button" data-correct="true" data-why="The harness runs the tool and sends the output back as a tool_result, which is the next input the model sees.">The harness, which runs it and returns a tool_result</button></li>
+        <li><button type="button" data-correct="false" data-why="Anthropic's servers run only server tools such as web search. A shell command is a client tool that your own code must run.">The API server, before it sends the reply back</button></li>
+        <li><button type="button" data-correct="false" data-why="A tool definition is only a description the model reads: a name, a purpose and input fields. The implementation is separate code that the harness calls.">The tool definition, once it is placed in context</button></li>
+      </ul>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section id="s2">
+    <h2>The loop and tool execution <span class="section-time">2 min</span></h2>
+    <p>Lesson 1 said the loop exits when a reply has no tool call. But the model does not call itself. So who is "the loop"?</p>
+    <p>The harness is. In CS terms the model is one function, <code>call_model</code>, and the harness is the <code>main</code> that calls it again and again. Here is a minimal version, with each line marked by the duty it serves:</p>
+
+<pre><code>messages = [user(prompt)]
+while True:                                      # LOOP
+    reply = call_model(messages, TOOL_SCHEMAS)   # LOOP: one turn starts here
+    messages.append(assistant(reply.content))    # LOOP: keep the history
+    calls = [b for b in reply.content if b.type == "tool_use"]
+    if not calls:                                # LOOP: the model's exit (caps add more, section 4)
+        break
+    results = []
+    for call in calls:                           # TOOLS: the harness acts
+        output = TOOL_IMPLS[call.name](**call.input)  # TOOLS: your code runs it
+        results.append(tool_result(call.id, output))
+    messages.append(user(results))               # LOOP: feed results back</code></pre>
+
+    <ul>
+      <li>A <dfn>turn</dfn> is one pass: the model produces output, the harness runs any tools it requested, and the results go back to the model, with no control returned to your code in between (<a href="https://code.claude.com/docs/en/agent-sdk/agent-loop">Agent SDK: how the agent loop works</a>).</li>
+    </ul>
+    <p>The real harness adds the other duties around this skeleton, as the next sections show.</p>
+
+    <div class="check" data-check>
+      <span class="label">Check yourself</span>
+      <p>You want the loop above to stop after at most ten turns, whatever the model does. Where does that check belong?</p>
+      <ul class="choices">
+        <li><button type="button" data-correct="false" data-why="A prompt is advice. Nothing guarantees the model obeys it, so the run can go past ten.">In the prompt, by asking the model to stop at ten</button></li>
+        <li><button type="button" data-correct="false" data-why="The model still decides whether to call the tool, so nothing forces the stop.">In a stop tool that the model may call at ten</button></li>
+        <li><button type="button" data-correct="false" data-why="max_tokens caps the length of one reply, not the number of turns.">In max_tokens, by making every reply the model writes shorter</button></li>
+        <li><button type="button" data-correct="true" data-why="The harness owns the loop, so a counter there is the only place a hard limit can live. The SDK's max_turns is that counter.">In the harness, as a counter checked on every loop pass</button></li>
+      </ul>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section id="s3">
+    <h2>Context management <span class="section-time">2 min</span></h2>
+    <p>The tutor has run 40 turns reading big files and the window is nearly full. What happens on turn 41, and what happens to the rule you gave in your first message?</p>
+    <p>The model only sees what the harness puts in front of it. That window does not reset between turns. Everything accumulates: the system prompt, tool definitions, conversation history, and the inputs and outputs of every tool call. Reading one big file can cost thousands of tokens in a single turn (<a href="https://code.claude.com/docs/en/agent-sdk/agent-loop">Agent SDK: how the agent loop works</a>).</p>
+    <p>Near the limit the harness does <dfn>compaction</dfn>: it summarizes older history to free space and emits a <code>compact_boundary</code> message. A summary is lossy, so specific instructions from early in the conversation may not survive (same page).</p>
+
+    <figure>
+      <svg viewBox="0 0 640 470" role="img" aria-labelledby="fig2-title">
+        <title id="fig2-title">Four bars show the context window at turn 1, turn 20 and turn 40, then after compaction. Each bar holds the system prompt, tool definitions, history and tool outputs. Tool outputs grow fastest. At turn 40 the bar is nearly full and compaction fires; afterwards the old history is one short summary, followed by the recent turns.</title>
+        <defs>
+          <pattern id="hatch2" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <rect width="8" height="8" style="fill: var(--accent-soft)"/>
+            <line x1="0" y1="0" x2="0" y2="8" style="stroke: var(--accent)" stroke-width="3"/>
+          </pattern>
+        </defs>
+        <g stroke="currentColor" stroke-width="1">
+          <rect x="20" y="8" width="20" height="20" fill="currentColor" fill-opacity="0.15"/>
+          <rect x="330" y="8" width="20" height="20" fill="currentColor" fill-opacity="0.4"/>
+          <rect x="20" y="40" width="20" height="20" fill="url(#hatch2)"/>
+          <rect x="330" y="40" width="20" height="20" style="fill: var(--accent)"/>
+        </g>
+        <g fill="currentColor" font-family="system-ui, sans-serif" font-size="18">
+          <text x="48" y="25">System prompt</text>
+          <text x="358" y="25">Tool definitions</text>
+          <text x="48" y="57">History</text>
+          <text x="358" y="57">Tool outputs</text>
+          <text x="20" y="100" font-weight="700">Turn 1</text>
+          <text x="20" y="190" font-weight="700">Turn 20</text>
+          <text x="20" y="280" font-weight="700">Turn 40</text>
+          <text x="620" y="280" text-anchor="end" style="fill: var(--accent)">compaction fires</text>
+          <text x="20" y="370" font-weight="700">After compaction</text>
+          <text x="20" y="448">A summary replaces old history; recent turns are kept.</text>
+        </g>
+        <g stroke="currentColor" stroke-width="1">
+          <!-- Turn 1 -->
+          <rect x="20" y="108" width="40" height="40" fill="currentColor" fill-opacity="0.15"/>
+          <rect x="60" y="108" width="50" height="40" fill="currentColor" fill-opacity="0.4"/>
+          <rect x="110" y="108" width="20" height="40" fill="url(#hatch2)"/>
+          <rect x="130" y="108" width="30" height="40" style="fill: var(--accent)"/>
+          <!-- Turn 20 -->
+          <rect x="20" y="198" width="40" height="40" fill="currentColor" fill-opacity="0.15"/>
+          <rect x="60" y="198" width="50" height="40" fill="currentColor" fill-opacity="0.4"/>
+          <rect x="110" y="198" width="110" height="40" fill="url(#hatch2)"/>
+          <rect x="220" y="198" width="170" height="40" style="fill: var(--accent)"/>
+          <!-- Turn 40 -->
+          <rect x="20" y="288" width="40" height="40" fill="currentColor" fill-opacity="0.15"/>
+          <rect x="60" y="288" width="50" height="40" fill="currentColor" fill-opacity="0.4"/>
+          <rect x="110" y="288" width="160" height="40" fill="url(#hatch2)"/>
+          <rect x="270" y="288" width="330" height="40" style="fill: var(--accent)"/>
+          <!-- After compaction -->
+          <rect x="20" y="378" width="40" height="40" fill="currentColor" fill-opacity="0.15"/>
+          <rect x="60" y="378" width="50" height="40" fill="currentColor" fill-opacity="0.4"/>
+          <rect x="110" y="378" width="90" height="40" style="fill: var(--accent-soft); stroke: var(--accent)" stroke-width="2"/>
+          <rect x="200" y="378" width="70" height="40" fill="url(#hatch2)"/>
+          <rect x="270" y="378" width="60" height="40" style="fill: var(--accent)"/>
+        </g>
+        <g fill="none" style="stroke: var(--muted)" stroke-width="1.5">
+          <rect x="20" y="108" width="600" height="40"/>
+          <rect x="20" y="198" width="600" height="40"/>
+          <rect x="20" y="288" width="600" height="40"/>
+          <rect x="20" y="378" width="600" height="40"/>
+        </g>
+        <line x1="600" y1="284" x2="600" y2="332" style="stroke: var(--accent)" stroke-width="3" stroke-dasharray="6 4"/>
+        <text x="155" y="404" text-anchor="middle" fill="currentColor" font-family="system-ui, sans-serif" font-size="18">summary</text>
+      </svg>
+      <figcaption>Figure 2. Tool outputs grow fastest. After compaction, a summary stands in for the early turns, and the recent ones are kept (<a href="https://code.claude.com/docs/en/agent-sdk/agent-loop">Agent SDK: how the agent loop works</a>).</figcaption>
+    </figure>
+
+    <ul>
+      <li><strong>Where to put rules that must last:</strong> in <code>CLAUDE.md</code>, the project instructions file the harness loads into every session. Its content is re-injected on every request, so compaction does not summarize it away. A rule typed in the first message is just history.</li>
+      <li><strong>Remembered is not enforced:</strong> <code>CLAUDE.md</code> keeps a rule in view, but the model can still ignore it. To make a rule hold, block the tool call itself with a permission rule or a hook, your own code that runs before a tool (section 5).</li>
+      <li><strong>How to keep the window small:</strong> use a <dfn>subagent</dfn>, a separate agent the main one starts for a subtask, with its own fresh context. It returns only its final response, so the main context grows by a summary, not by its whole transcript.</li>
+    </ul>
+
+    <div class="check" data-check>
+      <span class="label">Check yourself</span>
+      <p>In turn 1 you told the agent "always cite a source for each claim". After a long run its replies stop citing, as if it forgot. Which change keeps the rule in front of the model?</p>
+      <ul class="choices">
+        <li><button type="button" data-correct="false" data-why="max_turns counts turns, not tokens. A higher cap lets the run go longer, so compaction becomes more likely, not less.">Raise max_turns so the run can never reach compaction</button></li>
+        <li><button type="button" data-correct="false" data-why="Emphasis does not help. The first message is history, and compaction replaces history with a summary however it is worded.">Repeat the rule more loudly in your first message</button></li>
+        <li><button type="button" data-correct="true" data-why="CLAUDE.md is re-injected on every request, so it is not part of the history that compaction summarizes.">Move the rule into CLAUDE.md, which loads every request</button></li>
+        <li><button type="button" data-correct="false" data-why="This cripples the agent instead of fixing the cause: a rule stored in history, where compaction can lose it.">Disable every tool so the run can never grow that long</button></li>
+      </ul>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section id="s4">
+    <h2>Limits <span class="section-time">2 min</span></h2>
+    <p>An agent loops on a failing test overnight, calling tools every turn. What stops it? Without limits the loop runs until the model finishes on its own, and both <code>max_turns</code> and <code>max_budget_usd</code> default to no limit (<a href="https://code.claude.com/docs/en/agent-sdk/agent-loop">Agent SDK: how the agent loop works</a>). If the model never stops calling tools, the SDK does not stop it either.</p>
+    <p>That is why limits are a harness duty. The model sees only the messages the harness sends it; the turn count and the spend live in the harness, so only the harness can enforce a turn or spend cap across calls. (The API's <code>max_tokens</code> caps a single reply, nothing more.) Anthropic notes it is common to include stopping conditions such as a maximum number of iterations to keep control (<a href="https://www.anthropic.com/engineering/building-effective-agents">Building effective agents</a>).</p>
+
+    <table>
+      <thead><tr><th>Cap</th><th>Counts</th><th>Default</th><th>Subtype on hit</th></tr></thead>
+      <tbody>
+        <tr><td><code>max_turns</code></td><td>Tool-calling turns, plus one for the final reply</td><td>No limit</td><td><code>error_max_turns</code></td></tr>
+        <tr><td><code>max_budget_usd</code></td><td>Estimated spend, subagents included</td><td>No limit</td><td><code>error_max_budget_usd</code></td></tr>
+      </tbody>
+    </table>
+
+    <ul>
+      <li>A capped run has no <code>result</code>, so check the subtype first (<a href="0001-how-an-agent-decides-it-is-done.html">lesson 1</a>).</li>
+      <li>The budget is checked after each response arrives, so spend can pass the cap by up to one response, plus subagents still running.</li>
+      <li>Trade-off: a cap that is too low cuts off a good run; none at all costs real usage on your subscription. To choose: read <code>num_turns</code> from a normal run, set <code>max_turns</code> a little above it (the final reply counts too), and leave the budget room for one extra response.</li>
+    </ul>
+
+    <div class="check" data-check>
+      <span class="label">Check yourself</span>
+      <p>Using the Agent SDK with no options set, an agent calls a test tool every turn, and each output is a few lines. What stops it?</p>
+      <ul class="choices">
+        <li><button type="button" data-correct="true" data-why="max_turns and max_budget_usd both default to no limit, so the run goes on until the model ends it or you set a cap.">Nothing in the SDK, since both caps default to none</button></li>
+        <li><button type="button" data-correct="false" data-why="There is no default cap: both max_turns and max_budget_usd default to no limit.">A built-in default turn cap in the SDK stops it</button></li>
+        <li><button type="button" data-correct="false" data-why="The model sees only the messages the harness sends it. Spend is tracked in the harness.">The model sees its own spend and stops calling tools</button></li>
+        <li><button type="button" data-correct="false" data-why="Compaction frees space so the loop can continue. It is not a stop.">Compaction ends the whole run once the context window fills</button></li>
+      </ul>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section id="s5">
+    <h2>Permissions <span class="section-time">2 min</span></h2>
+    <p>The model requests <code>rm -rf build/</code> through <code>Bash</code>. Who decides whether it runs, and what does the model see if the answer is no?</p>
+    <p>The harness decides, before the tool runs. You steer it with these settings (<a href="https://code.claude.com/docs/en/agent-sdk/agent-loop">Agent SDK: how the agent loop works</a>):</p>
+    <ul>
+      <li><code>allowed_tools</code> auto-approves the tools you list.</li>
+      <li><code>disallowed_tools</code> blocks the listed tools, whatever else is set.</li>
+      <li><code>permission_mode</code> sets how much approval is needed, from asking about each call to skipping approval.</li>
+      <li><dfn>Hooks</dfn> are your own code the harness runs at fixed points; a <code>PreToolUse</code> hook runs just before a tool and can block the call. They run in your application process, so they use no context.</li>
+    </ul>
+    <p>Why the model cannot be its own gate: asking it to refuse is advice it may not follow, while a harness that never executes the call is a rule. The gate has to sit in the code that runs the tool.</p>
+    <p>The key behavior: when a tool is denied, Claude receives a rejection message as the tool result and typically tries another approach or reports that it could not proceed. The run goes on.</p>
+
+    <figure>
+      <svg viewBox="0 0 640 520" role="img" aria-labelledby="fig3-title">
+        <title id="fig3-title">A flow from top to bottom. The model emits a tool_use. The harness checks permissions at a gate, where hooks can also block. If allowed, the tool runs and its output goes back as a tool_result. If denied, the tool does not run and a rejection message goes back as the tool_result. Both paths return to the model, and the run goes on.</title>
+        <defs>
+          <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+          </marker>
+        </defs>
+        <g fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="170" y="10" width="300" height="50" rx="8" style="fill: var(--bg)"/>
+          <rect x="140" y="100" width="360" height="70" rx="8" style="fill: var(--accent-soft); stroke: var(--accent)" stroke-width="2.5"/>
+          <rect x="20" y="230" width="280" height="60" rx="8" style="fill: var(--ok-soft); stroke: var(--ok)" stroke-width="2"/>
+          <rect x="340" y="230" width="280" height="60" rx="8" style="fill: var(--warn-soft); stroke: var(--warn)" stroke-width="2"/>
+          <rect x="20" y="340" width="280" height="60" rx="8" style="fill: var(--bg)"/>
+          <rect x="340" y="340" width="280" height="60" rx="8" style="fill: var(--bg)"/>
+          <rect x="170" y="450" width="300" height="50" rx="8" style="fill: var(--bg)"/>
+          <line x1="320" y1="60" x2="320" y2="96" marker-end="url(#a3)"/>
+          <line x1="160" y1="170" x2="160" y2="226" marker-end="url(#a3)"/>
+          <line x1="480" y1="170" x2="480" y2="226" marker-end="url(#a3)"/>
+          <line x1="160" y1="290" x2="160" y2="336" marker-end="url(#a3)"/>
+          <line x1="480" y1="290" x2="480" y2="336" marker-end="url(#a3)"/>
+          <path d="M160,400 V475 H166" marker-end="url(#a3)"/>
+          <path d="M480,400 V475 H474" marker-end="url(#a3)"/>
+        </g>
+        <g fill="currentColor" font-family="system-ui, sans-serif" font-size="18" text-anchor="middle">
+          <text x="320" y="41">Model emits tool_use</text>
+          <text x="320" y="130" font-weight="700">Harness checks permissions</text>
+          <text x="320" y="156">hooks can also block here</text>
+          <text x="160" y="266">Tool runs</text>
+          <text x="480" y="266">Tool does not run</text>
+          <text x="160" y="366">tool_result:</text>
+          <text x="160" y="390">the output</text>
+          <text x="480" y="366">tool_result:</text>
+          <text x="480" y="390">a rejection message</text>
+          <text x="320" y="481">Model reads it; run goes on</text>
+          <g text-anchor="start" font-weight="700">
+            <text x="172" y="204" style="fill: var(--ok)">allowed</text>
+            <text x="492" y="204" style="fill: var(--warn)">denied</text>
+          </g>
+        </g>
+      </svg>
+      <figcaption>Figure 3. A denial is data for the model, not an exception.</figcaption>
+    </figure>
+
+    <p>This reaches your tutor. In a bench run, a tool that would need a prompt is denied, because no one is there to answer. Only the tools in <code>permissions.allow</code> plus <code>Glob</code> and <code>Grep</code> are pre-approved, so a skill that needs <code>Write</code> will have its write rejected and may never produce its file.</p>
+
+    <div class="box misconception">
+      <span class="label">A common mix-up</span>
+      <p>"A denied call ends the run." Programs usually signal refusal with an exception. Here the model reads the rejection and carries on, so the failure shows up later as a missing file, not a crash.</p>
+    </div>
+
+    <div class="check" data-check>
+      <span class="label">Check yourself</span>
+      <p>In a bench run your skill calls <code>Write</code>, but <code>Write</code> is not in <code>permissions.allow</code>. What happens?</p>
+      <ul class="choices">
+        <li><button type="button" data-correct="false" data-why="A denial does not end the run. It is returned to the model as a tool result and the loop continues.">The whole run crashes with a permission error at once</button></li>
+        <li><button type="button" data-correct="true" data-why="Denied calls go back as a rejection message, and the model decides what to do next.">The call is denied and the model sees a rejection</button></li>
+        <li><button type="button" data-correct="false" data-why="Bench runs are headless, so no one is there to answer. A call that needs a prompt is denied instead.">The harness asks you in the terminal to approve it</button></li>
+        <li><button type="button" data-correct="false" data-why="Permissions are enforced by the harness before the tool runs. They are rules, not advice to the model.">Write runs anyway, because permissions only advise the model here</button></li>
+      </ul>
+      <p class="feedback" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section id="practice">
+    <h2>Worked example and practice <span class="section-time">2 min</span></h2>
+    <div class="box worked">
+      <span class="label">Worked example</span>
+      <p>A bench trace: "Teach run. Subtype <code>error_max_turns</code>, <code>num_turns</code> 25; the config sets <code>max_turns</code> to 25. No lesson file. One tool call per turn: 21 <code>Read</code>, 4 <code>Grep</code>, no <code>Write</code>." Which duty explains it?</p>
+      <ol>
+        <li>Read the subtype first: <code>error_max_turns</code>. A limit fired, so the run did not finish and has no <code>result</code>.</li>
+        <li>Name the duty: limits. The cap came from the config (the default is none), and <code>num_turns</code> equals <code>max_turns</code>, so it was reached.</li>
+        <li>Ask why it was reached. Every turn called a tool and none wrote the file, so the cap hit before the final reply. The loop ran as designed; the skill spent its turns on reads.</li>
+        <li>Choose a fix: change the skill so it reads less, or raise <code>max_turns</code> on purpose above a normal run's <code>num_turns</code>.</li>
+      </ol>
+    </div>
+    <div class="check">
+      <span class="label">Your turn</span>
+      <p>A second trace: "In a long session the tutor ignored a rule you typed in your first chat message ('answer in bullets only'). Its <code>Write</code> of <code>lessons/0003.html</code> was denied twice, and it then printed the lesson in chat." Fill the blanks.</p>
+      <ol>
+        <li>Which two duties are involved? The first is given: context, because the first-message rule was only history. The second: <em>(your answer)</em></li>
+        <li>What did the model see when <code>Write</code> was denied? <em>(your answer)</em></li>
+        <li>One change per duty. <em>(your answer)</em></li>
+      </ol>
+      <details>
+        <summary>Show a solution</summary>
+        <ol>
+          <li>Permissions, because <code>Write</code> was denied. (Context was given: compaction can summarize a first-message rule away.)</li>
+          <li>A rejection message as the tool result, not a crash. It tried another approach, which was printing the lesson in chat.</li>
+          <li>Move the rule into <code>CLAUDE.md</code>, which is re-injected every request, so it stays in view, and add <code>Write</code> to <code>permissions.allow</code> if the skill should write files.</li>
+        </ol>
+      </details>
+    </div>
+  </section>
+
+  <section id="summary">
+    <h2>Summary <span class="section-time">1 min</span></h2>
+    <div class="box summary">
+      <p>Why a harness: the model returns text or a tool request, and nothing else. It does not run its tools, keep its own history or enforce its own caps.</p>
+      <table>
+        <thead><tr><th>Duty</th><th>Symptom in a run</th><th>Knob</th></tr></thead>
+        <tbody>
+          <tr><td>Loop and tools</td><td>All turns spent on tool calls, no file written</td><td>The skill's steps; <code>max_turns</code></td></tr>
+          <tr><td>Context</td><td>An early rule stops being followed in a long run</td><td><code>CLAUDE.md</code>; subagents</td></tr>
+          <tr><td>Limits</td><td><code>error_max_turns</code>, <code>error_max_budget_usd</code>, or a run that never ends</td><td><code>max_turns</code>, <code>max_budget_usd</code></td></tr>
+          <tr><td>Permissions</td><td>A call rejected; the work appears elsewhere or not at all</td><td><code>permissions.allow</code>, disallowed tools, hooks</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Say it in your own words:</strong> what does the harness do that the model cannot? Explain it without looking, then check yourself against the four duties.</p>
+    </div>
+  </section>
+
+  <section id="further" class="go-further">
+    <h2>Go further</h2>
+    <p><strong>Read or watch next:</strong> <a href="https://code.claude.com/docs/en/agent-sdk/agent-loop">How the agent loop works</a>, the primary source for this lesson: all four duties with their defaults on one page.</p>
+    <ul>
+      <li><a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview">Tool use with Claude</a>: the model emits <code>tool_use</code> and your code returns the <code>tool_result</code>.</li>
+      <li><a href="https://code.claude.com/docs/en/how-claude-code-works">How Claude Code works</a>: the definition of an agentic harness, and compaction.</li>
+      <li><a href="https://anthropic.com/engineering/effective-harnesses-for-long-running-agents">Effective harnesses for long-running agents</a>: what a harness needs when a task outlasts one context window.</li>
+      <li><a href="https://www.anthropic.com/engineering/building-effective-agents">Building effective agents</a>: why agents need stopping conditions and guardrails.</li>
+    </ul>
+  </section>
+
+  <footer class="closing">
+    <p>Anything unclear? Ask me in the chat; I can explain any part again, another way, or go deeper.</p>
+    <p>A short quiz on this lesson is ready (quiz 0002): ask me for it when you want to check what stuck.</p>
+  </footer>
+
+</main>
+<script>
+  // Practice checks: mark the chosen option and explain it at once.
+  document.querySelectorAll("[data-check]").forEach(function (box) {
+    var buttons = box.querySelectorAll("button[data-correct]");
+    var out = box.querySelector(".feedback");
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        buttons.forEach(function (b) { b.classList.remove("right", "wrong"); });
+        var right = button.getAttribute("data-correct") === "true";
+        button.classList.add(right ? "right" : "wrong");
+        if (out) { out.textContent = (right ? "Yes. " : "Not quite. ") + (button.getAttribute("data-why") || ""); }
+      });
+    });
+  });
+</script>
+</body>
+</html>

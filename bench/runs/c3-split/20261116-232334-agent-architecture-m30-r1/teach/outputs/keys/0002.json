@@ -1,0 +1,51 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "a",
+      "rationale": "The model keeps nothing between calls, so the program re-sends the whole history, including the page, on every later call. Option b shows M3 (each step bills only new text); option c treats the model itself as holding the earlier text (M4).",
+      "distractors": {"b": "M3", "c": "M4"}
+    },
+    {
+      "id": "q2",
+      "answer": 17000,
+      "tolerance": 0,
+      "rationale": "Call 1 sends 1,500; call 2 sends 1,500 + 6,000 = 7,500; call 3 sends 7,500 + 500 = 8,000. Total 17,000. An answer of 8,000 counts only the new text (1,500 + 6,000 + 500), which shows M3."
+    },
+    {
+      "id": "q3",
+      "answer": "c",
+      "rationale": "Each session starts with an empty window; only the program can save the status outside it and load it into the next window. Option a shows M4 (the window persists), b shows M2 (the model learns from chats), d shows the idea that the model can rewrite its own persistent instructions.",
+      "distractors": {"a": "M4", "b": "M2", "d": "M2"}
+    },
+    {
+      "id": "q4",
+      "answer": "It costs tokens on every call, and the model may use the middle of a large context poorly.",
+      "accepted": [
+        "it costs more on every call",
+        "higher cost every call",
+        "you pay for all the tokens on every call",
+        "recall gets worse with more context",
+        "the model may miss relevant text in a large context",
+        "context rot",
+        "lost in the middle",
+        "slower and more expensive",
+        "more tokens billed each step"
+      ],
+      "rationale": "Loaded text is re-sent and billed at every call, and recall tends to degrade as the context grows. Either reason is correct. An answer that says it will not fit is wrong for this stem, which says it fits (M5)."
+    },
+    {
+      "id": "q5",
+      "answer": "Keyword search, because an error code is an exact string that exact-match search finds directly.",
+      "accepted": [
+        "keyword search",
+        "keyword",
+        "exact match search",
+        "keyword (exact-match) search because the code is an exact string",
+        "BM25"
+      ],
+      "rationale": "Error codes carry little meaning, so meaning-based (embedding) search can rank them poorly; keyword search matches the string itself."
+    }
+  ]
+}

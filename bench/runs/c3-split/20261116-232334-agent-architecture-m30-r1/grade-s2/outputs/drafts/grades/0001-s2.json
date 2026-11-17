@@ -1,0 +1,43 @@
+{
+  "quiz": "0001",
+  "submission": "s2",
+  "items": [
+    {
+      "id": "q1",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Correct. The loop (model picks an action, program runs it, result comes back) is what makes it an agent; prompt length, model size and memory don't change the structure."
+    },
+    {
+      "id": "q2",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Correct. The model only outputs a structured request: tool name plus arguments."
+    },
+    {
+      "id": "q3",
+      "verdict": "wrong",
+      "misconception": "M6",
+      "feedback": "- You chose (c), 'it will eventually fix the bug'. This is M6: believing an agent that keeps running will converge, so it needs no stopping condition.\n- Why it is tempting: each step looks like progress, and a person who retries often does get there. Here the agent made the same edit and got the same failing test 40 times, so the next step will most likely repeat the last 40. More steps add nothing.\n- Right answer (b): a step limit in the agent program that ends the loop and reports what happened. Think `while True` with no break or max-iterations counter: it never ends if the exit condition can't be reached.\n- Where to learn it: the workspace has no lesson on stopping conditions yet (learning record 0002 only mentions 'a limit is reached'). I can write one."
+    },
+    {
+      "id": "q4",
+      "verdict": "partial",
+      "misconception": "M4",
+      "feedback": "- Right: 4 = three tool requests + the final answer, one model call each.\n- Off: 'the model ... runs check_calendar, then search_manuals...' is M4. The model never runs a tool. Each call it outputs a request; the program runs the tool and feeds the result back in. This is tempting because the tool names appear in the model's output, so it looks like the model is executing them.\n- Why it matters: if the model ran tools itself you would count 1 call (your s1 answer). The count of 4 only holds because the tool runs are program steps, not model calls: inputs are the question + 3 tool results = 4 calls.\n- Fix: trace the request and label every step 'model' or 'program'. The workspace has no lesson on this split yet; I can write one."
+    },
+    {
+      "id": "q5",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Correct: the result goes back as the next input, and the model uses it to decide its next step."
+    },
+    {
+      "id": "q6",
+      "verdict": "partial",
+      "misconception": null,
+      "feedback": "- Right: the name is part of what the model sees.\n- Missing: the model is given each tool's name, a description of what it does, and its parameters, and picks the tool whose description fits. A name alone can mislead: a vague name like lookup, or two similar names, can't be told apart without descriptions.\n- Why it matters: the description is what you write to steer tool choice for the makerspace assistant (a goal in MISSION.md).\n- No lesson in the workspace covers tool descriptions yet; I can write one."
+    }
+  ],
+  "summary": "You have the loop (q1), what the model outputs on a tool call (q2), and what happens to a tool result (q5). Open items: q3 (wrong: a looping agent needs a stopping condition such as a step limit, not more time), q4 (partial: right count of 4, but the program runs the tools, not the model), q6 (partial: the model uses the whole tool description, not just the name). Core fix: the model only requests; the program runs tools and decides when to stop. Next step: write a trace of the laser-cutter request labelling each step 'model' or 'program', and mark where a step limit sits. The workspace has no lessons on these topics yet; say if you want one."
+}

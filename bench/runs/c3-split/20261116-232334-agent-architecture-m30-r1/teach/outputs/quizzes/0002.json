@@ -1,0 +1,50 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your assistant's tool returns a 12,000-token page of the 3D printer manual at call 2 of a 5-call request. Nothing is removed from the history. Which statement about the later calls is correct?",
+      "options": [
+        {"id": "a", "text": "Calls 3, 4 and 5 each send those 12,000 tokens again as part of the history"},
+        {"id": "b", "text": "Only call 2 pays for those 12,000 tokens, because later calls add new text"},
+        {"id": "c", "text": "The model remembers the page itself, so later calls need not send it again"},
+        {"id": "d", "text": "Calls 3, 4 and 5 send the page only if the student asks about it again"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "A request takes 3 model calls. Call 1 sends 1,500 input tokens. Before call 2, a tool result of 6,000 tokens is added to the history. Before call 3, a result of 500 tokens is added. Nothing is cleared. How many input tokens are sent in total across the 3 calls?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "A student finished their soldering training on Monday in a chat with your assistant. On Friday they open a new chat and ask whether they are cleared. The assistant can answer correctly only if which of these was done?",
+      "options": [
+        {"id": "a", "text": "The program kept Monday's window open and added Friday's question to it"},
+        {"id": "b", "text": "The model learned the student's status from Monday's chat while talking"},
+        {"id": "c", "text": "The program saved the status to storage and loaded it into Friday's window"},
+        {"id": "d", "text": "The model wrote the status into its own instructions for later sessions"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O3",
+      "stem": "Your team's manuals total 150,000 tokens, which fits in the model's window, and you load all of them into the context for every call. Name one cost or risk of doing this."
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O3",
+      "stem": "A student asks about error code F-12 on the vinyl cutter. In one sentence, which kind of search finds the right manual chunk most reliably, and why?"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "duration_api_ms": 11137,
+  "stop_reason": "end_turn",
+  "session_id": "d3e02c4f-64ad-41dd-8304-2356c2937f6a",
+  "total_cost_usd": 0.08235559999999999,
+  "usage": {
+    "input_tokens": 6,
+    "cache_creation_input_tokens": 15818,
+    "cache_read_input_tokens": 57116,
+    "output_tokens": 1336,
+    "output_tokens_details": {
+      "thinking_tokens": 165
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 15818,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 600,
+        "cache_read_input_tokens": 25988,
+        "cache_creation_input_tokens": 456,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 456
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 1336,
+      "cacheReadInputTokens": 57116,
+      "cacheCreationInputTokens": 15818,
+      "webSearchRequests": 0,
+      "costUSD": 0.08235559999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 165,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 15818,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 7,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "**The premise is wrong: more agents do not always give better results.** The 5-versus-10 question assumes they do, so it can't be answered as asked.\n\n- **Why it's tempting:** it looks like dividing work among more people. But agents don't get faster or smarter by being added. Each one is another model call with its own context, and the agents have to pass information to each other.\n- **Costs that grow with each agent:**\n  - Tokens. Every agent re-reads its instructions and whatever context it is handed. Your budget is small, so this matters most.\n  - Handoff errors. Information gets summarized or dropped between agents, like a lossy function call.\n  - Debugging. A wrong answer could come from any of 10 prompts or 10 handoffs.\n  - Latency. Sequential handoffs add up.\n- **When splitting pays off:** the subtasks are independent and can run in parallel, or one agent's context would get too big or confusing (too many tools, too much text). I recall Anthropic's multi-agent research write-up reporting that multi-agent systems used many times more tokens than a single chat, but I haven't verified the exact figure.\n- **Your assistant:** it has three jobs: answer from manuals, check the calendar, and book equipment. That is a small, mostly sequential task.\n  - Start with one agent with 2–3 well-described tools.\n  - Make the booking steps a fixed workflow.\n  - Split only if you measure a real problem, such as the manual text crowding out the booking logic.\n  - Defend it at design review with: \"we added agents only where measurements justified the cost.\"\n- **CS analogy:** it's like microservices. Splitting a small app into ten services gives you network calls and failure modes without any scaling benefit.\n\nQuestion: of your three jobs, which one is the best candidate to split off first, and what specific problem would you have to observe to justify it?",
+  "ttft_ms": 2807,
+  "type": "result",
+  "duration_ms": 13027,
+  "uuid": "1c0c6fd2-0b2d-4c20-af69-222c227a4bb3",
+  "ttft_stream_ms": 2522,
+  "time_to_request_ms": 1872,
+  "first_content_frame_ms": 2522,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 1336,
+      "cacheReadInputTokens": 57116,
+      "cacheCreationInputTokens": 15818,
+      "webSearchRequests": 0,
+      "costUSD": 0.08235559999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 165,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 15818,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "credential_expires_at": "2026-11-19T11:33:49.534Z"
+}

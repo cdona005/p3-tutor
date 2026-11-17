@@ -1,0 +1,122 @@
+{
+  "duration_api_ms": 103087,
+  "stop_reason": "end_turn",
+  "session_id": "f12e6be5-9600-4b44-af25-6963305cea2d",
+  "total_cost_usd": 0.43006859999999997,
+  "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 426,
+    "cache_read_input_tokens": 49626,
+    "output_tokens": 316,
+    "output_tokens_details": {
+      "thinking_tokens": 80
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 426,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 4,
+        "output_tokens": 316,
+        "cache_read_input_tokens": 49626,
+        "cache_creation_input_tokens": 426,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 426
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 40,
+      "outputTokens": 14826,
+      "cacheReadInputTokens": 489721,
+      "cacheCreationInputTokens": 69447,
+      "webSearchRequests": 0,
+      "costUSD": 0.43006859999999997,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 3312,
+      "cacheCreationEphemeral5mInputTokens": 30021,
+      "cacheCreationEphemeral1hInputTokens": 39426,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 2,
+    "requested": {
+      "background": 0,
+      "foreground": 1,
+      "unset": 1
+    },
+    "started_in_background": 1,
+    "max_depth": 1,
+    "spawned_by_subagents": 0,
+    "completed": 2,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {
+      "grade-reviewer": 2
+    }
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 1,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "The grade review loop for 0001-s2 is already finished, so there's nothing more to run.\n\n- **Pass 1:** the reviewer reported 4 findings and I fixed all of them.\n- **Pass 2:** the reviewer reported 3 more findings and I fixed all of them. That was the second and last allowed pass.\n- **Final files:** `grades/0001-s2.json` and `review-records/0001-s2-grade.md` are written. The final grades were not reviewed a third time.\n\nThat wakeup was the one I scheduled earlier to wait for the first reviewer. It fired after the work was done.\n\nDo you want the practice quiz on the model/program split (M4), stopping conditions (M6) and tool descriptions?",
+  "ttft_ms": 1141,
+  "type": "result",
+  "duration_ms": 2608,
+  "uuid": "3a317ab6-f2af-4955-ab57-3b44e307b38e",
+  "ttft_stream_ms": 479,
+  "time_to_request_ms": 11,
+  "first_content_frame_ms": 479,
+  "queued_turn_count": 0,
+  "result_index": 2,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 316,
+      "cacheReadInputTokens": 49626,
+      "cacheCreationInputTokens": 426,
+      "webSearchRequests": 0,
+      "costUSD": 0.009834600000000002,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 80,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 426,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "credential_expires_at": "2026-11-19T11:33:49.534Z"
+}

@@ -1,0 +1,32 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "b",
+      "rationale": "The Messages API is stateless and the model never runs tools itself: unless the harness runs the read and resends the history, the new request carries nothing about config.yaml. Option a shows M3, the belief that the model or API runs its own tools.",
+      "distractors": {"a": "M3"}
+    },
+    {
+      "id": "q2",
+      "answer": "a rejection message",
+      "accepted": ["rejection message", "a rejection", "rejection", "rejection message as the tool result", "a denial message", "denial message", "a permission denied message", "permission denied message", "a denial"],
+      "rationale": "A denied call does not crash the run: the harness returns a rejection message as the tool result and the model can try another approach. An answer such as 'nothing, the run ends' shows M6."
+    },
+    {
+      "id": "q3",
+      "answer": "c",
+      "rationale": "A subagent works in its own fresh context and returns only its final response, so the main context grows by a summary, not by 30 files. The budget, permissions and repeated instructions do not shrink what accumulates in the window; repeating instructions only adds to it."
+    },
+    {
+      "id": "q4",
+      "answer": "a",
+      "rationale": "Permissions are enforced by the harness before a tool runs, so the same settings allow and deny the same calls whatever model sits inside. What the model requests, how it words answers and how many turns it takes all come from the model."
+    },
+    {
+      "id": "q5",
+      "answer": "d",
+      "rationale": "The SDK checks the budget after each response arrives, so the response completes, spend reaches 1.05, and the run ends with error_max_budget_usd. Expecting a mid-response cut-off misreads when the check runs; expecting the run to continue ignores that a set cap does stop the run."
+    }
+  ]
+}

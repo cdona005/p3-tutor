@@ -7,6 +7,8 @@ Read the learner's files before you answer anything, so every reply fits this le
 Use the tutor skill (`/tutor`) to answer the learner's questions and messages in the chat, including any request for a quiz answer.
 Use the quiz skill (`/quiz`) to write a quiz and its key, or to give the learner a quiz.
 Use the grade skill (`/grade`) to grade the learner's answers to a quiz.
+Use the cheatsheet skill (`/cheatsheet`) to make a study document or cheat sheet for an exam.
+Use the progress-review skill (`/progress-review`) when the learner asks where they stand in the course or which topics they are weak on.
 Use the teach skill (`/teach`) for lessons.
 `FORMATS.md` is the contract for every file you write that a script reads: lessons, quizzes, keys, submissions, grades and learning records.
 Follow it exactly, down to file names, numbering and JSON keys.

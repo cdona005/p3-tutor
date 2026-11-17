@@ -80,3 +80,66 @@ An example of a finished entry:
 - With and without: reviews/c2-review.md, Round 3 (without) and Round 4 (with)
 - Review: It found some small errors, but nothing about correctness or covering the learning objective. It did add more information about context and compacting, which I asked for in c1.
 - Kept in final: TODO
+
+### lesson-planner
+
+- Kind: subagent
+- Step added: c3-split
+- Purpose: Plan the lesson before writing anything
+- With and without: reviews/c3-split.md, Round 1 (without) and Round 2 (with)
+- Review: It made the lesson slightly harder to read, but it made the lesson go over the most important topic in more detail.
+- Kept in final: TODO
+
+### cheatsheet
+
+- Kind: skill
+- Step added: c3-split
+- Purpose: Make the student a study guide.
+- With and without: TODO
+- Review: The first pass was bad, it was hard to read and seemed more like a lesson recap than a study guide.
+- Kept in final: TODO
+
+### cheatsheet-planner
+
+- Kind: subagent
+- Step added: c3-split
+- Purpose: TODO
+- With and without: reviews/c3-split.md, the second "Round 2" (without) and the round after it (with)
+- Review: The second agent made the cheat sheet helpful for studying and has all of the necessary information needed from the lesson. I liked that it adds a most important section to the cheatsheet and how the document is layed out.
+- Kept in final: TODO
+
+### lesson-designer
+
+- Kind: subagent
+- Step added: c3-split
+- Purpose: TODO
+- With and without: reviews/c3-split.md, Round 4 (without) and Round 5 (with)
+- Review: TODO
+- Kept in final: TODO
+
+### progress-review
+
+- Kind: skill
+- Step added: c3-split
+- Purpose: TODO
+- With and without: TODO
+- Review: TODO
+- Kept in final: TODO
+
+### lesson-writer
+
+- Kind: subagent
+- Step added: c3-split
+- Purpose: TODO
+- With and without: reviews/c3-split.md, Round 6 (without) and Round 7 (with)
+- Review: TODO
+- Kept in final: TODO
+
+### references-finder
+
+- Kind: subagent
+- Step added: c3-split
+- Purpose: TODO
+- With and without: reviews/c3-split.md, Round 7 (without) and Round 8 (with)
+- Review: TODO
+- Kept in final: TODO

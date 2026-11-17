@@ -1,0 +1,68 @@
+{
+  "id": "0002",
+  "objective": "O4",
+  "title": "Workflows, agents and who owns the control flow",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Which question best separates a workflow from an agent in a system built around a language model?",
+      "options": [
+        {"id": "a", "text": "Does the system call the language model more than once for a request?"},
+        {"id": "b", "text": "Does the model or the program's code decide what happens after each step?"},
+        {"id": "c", "text": "Is the system allowed to call outside tools such as a booking calendar?"},
+        {"id": "d", "text": "Does the system remember earlier requests from the same student's visits?"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "In your assistant, one model call reads each incoming message and labels it \"booking\" or \"question\". Code then sends it down one of two paths whose steps you wrote in advance. How should this design be described?",
+      "options": [
+        {"id": "a", "text": "An agent, because the model's label decides which path the request takes"},
+        {"id": "b", "text": "An agent, because the pipeline calls a model more than once per request"},
+        {"id": "c", "text": "Neither, because a system with a model call in it cannot be a workflow"},
+        {"id": "d", "text": "A workflow, because the model only picks among paths that the code defines"}
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "objective": "O4",
+      "stem": "Your sponsor's budget is counted in model calls, and you may assume every call costs the same. A fixed workflow handles one booking request with 2 model calls. An agent handling the same kind of request makes 6 model calls: 5 that each request a tool, and 1 that writes the final answer. Over 200 booking requests, how many more model calls does the agent use than the workflow?",
+      "unit": "model calls"
+    },
+    {
+      "id": "q4",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Your team wants to keep model costs low and behaviour predictable by building one part of the assistant as a fixed workflow. Which part is best suited to that?",
+      "options": [
+        {"id": "a", "text": "Booking a slot: always check the calendar, check training, save it, then confirm"},
+        {"id": "b", "text": "Diagnosing a failing print, where each check chosen depends on what the last one found"},
+        {"id": "c", "text": "Answering a hard question, where which manuals to search is not known beforehand"},
+        {"id": "d", "text": "Planning a whole project, where the tasks and their order change as the student replies"}
+      ]
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O4",
+      "stem": "A teammate wants the booking steps built as an agent because \"agents are more capable\". The steps are always the same. In one or two sentences, give one reason, based on your budget or reliability, to build them as a fixed workflow instead."
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Your booking agent is told in its prompt to check a student's machine training first, but in testing it sometimes skips the check. The check must run on every booking without exception. Which change guarantees it?",
+      "options": [
+        {"id": "a", "text": "Add a bold line to the prompt telling the model never to skip the check"},
+        {"id": "b", "text": "Switch to a larger model so that it is less likely to skip any step"},
+        {"id": "c", "text": "Make the check a fixed code step that runs before any booking is saved"},
+        {"id": "d", "text": "Give the model a worked example of a booking that includes the check"}
+      ]
+    }
+  ]
+}

@@ -57,6 +57,7 @@ The quiz was easy to read and if you understand the information, you should get 
 **Live tries:**
 Below is a chat I had with the tutor, i copied and pasted a quiz question exactly as written and the tutor just gave me the answer without any questioning or hesitation. I am not sure why the guardrails are worse now, but it will give any quiz question's answer now.
 I beleive that run did not load the tutor skill for some reason, so I tried again and with the exact copy paste it did not give the answer, but when I copied the question and removed all of the json formatting and '/'s, it answered without questioning the quiz. 
+
 "stem": "A harness exits its loop as soon as the reply text contains the word \"done\". The model replies: \"Done reading the file, now fixing the typo\", and the reply includes an edit_file tool call. What happens?",
       "options": [
         {"id": "a", "text": "The loop raises an error for mixed text and tool call"},

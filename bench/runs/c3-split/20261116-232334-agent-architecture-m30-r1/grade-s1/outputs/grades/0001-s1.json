@@ -1,0 +1,43 @@
+{
+  "quiz": "0001",
+  "submission": "s1",
+  "items": [
+    {
+      "id": "q1",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Correct: choose action, run it, feed result back, repeat.\n- Prompt length and context size change what one call can do, not the structure."
+    },
+    {
+      "id": "q2",
+      "verdict": "wrong",
+      "misconception": "M4",
+      "feedback": "- Wrong: the answer is c, not a.\n- The model only outputs text: a structured request naming check_calendar with the machine and date as arguments. Think of it as returning a value like {\"tool\": \"check_calendar\", \"args\": {...}}.\n- The program around it is the dispatcher: it reads that request, calls the real function, and sends the result back.\n- Why a is tempting: the model 'decides' to use the tool and the answer shows up in the reply, so it looks like the model did the lookup. It never touched the booking system.\n- Fix: model = request, program = execution.\n- No lesson here covers this yet (topic: the model outputs a tool request, the program runs it); ask and I will teach it."
+    },
+    {
+      "id": "q3",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Correct: a step limit is a stopping condition.\n- A bigger context or firmer prompt does not end a loop that repeats the same failure."
+    },
+    {
+      "id": "q4",
+      "verdict": "wrong",
+      "misconception": "M4",
+      "feedback": "- Wrong: the answer is 4, not 1.\n- Same error as q2: you had the model run the 3 tools itself inside one call. The program runs them between calls.\n- Each call ends with exactly one tool request or the final answer: 3 tool requests + 1 final answer = 4 calls.\n- Check: one model call per input it receives (the question + 3 tool results = 4).\n- Why 1 is tempting: from the user's side it is one question and one answer, so it looks like one call. Inside, it is a loop of calls.\n- No lesson here covers this yet (topic: one model call per step in the loop); ask and I will teach it."
+    },
+    {
+      "id": "q5",
+      "verdict": "partial",
+      "misconception": null,
+      "feedback": "- Right: it sends the result back to the model (the what).\n- Missing the why: the model needs the result in its next input to decide its next step or write the final answer.\n- Fix: 'adds the result to the model's input and calls it again so it can decide what to do next'.\n- No lesson here covers this yet (topic: why results go back into the model's input); ask and I will teach it."
+    },
+    {
+      "id": "q6",
+      "verdict": "partial",
+      "misconception": "M3",
+      "feedback": "- Right: the model is given tool names and descriptions and picks the one that fits.\n- Wrong: 'it remembers which tool it picked in earlier sessions'. The model keeps no state between calls, like a stateless function; anything it appears to remember is text the program puts in its input.\n- Why it is tempting: chat products seem to remember you, but that memory is built by the program, not held by the model.\n- Fix: the descriptions alone are the answer.\n- No lesson here covers this yet (topic: the model is stateless, memory is built by the program); ask and I will teach it."
+    }
+  ],
+  "summary": "- You have the loop (q1, q3) and know the model picks tools from their descriptions (q6).\n- Work on two separate ideas: (1) the model only writes text, and the program runs the tools (the cause of q2 and q4, M4); (2) the model has no memory of its own between calls (the extra claim in q6, M3). Also state the why in answers like q5.\n- Next step: draw a trace of the q4 laser-cutter request in two columns, model output and program action, and count the model calls. No lesson or cheat sheet in this workspace covers tool calling or model-versus-program roles yet; say if you want a lesson on it."
+}

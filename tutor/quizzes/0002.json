@@ -1,0 +1,61 @@
+{
+  "id": "0002",
+  "objective": "O2",
+  "title": "What an agent harness does",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O2",
+      "stem": "A developer calls the Messages API with a read_file tool defined. The reply has stop_reason tool_use and asks to read config.yaml. The developer's code ignores it and sends a new request holding only the user's next question. What does the model see about config.yaml in that new request?",
+      "options": [
+        {"id": "a", "text": "The file's contents, since the API ran the read already"},
+        {"id": "b", "text": "Nothing, since that exchange was not sent back to it"},
+        {"id": "c", "text": "Its own earlier request, which the server kept in memory"},
+        {"id": "d", "text": "A short summary of the file, which automatic compaction produced"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "short",
+      "objective": "O2",
+      "stem": "In an agent built on the Claude Agent SDK, the model requests a Bash call and the harness denies it. In two or three words, what does the model receive as that call's tool result?"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O2",
+      "stem": "A tutor skill reads 30 large source files in the main conversation, and near the end of the run it follows its instructions poorly. Which change most directly limits how much the main conversation's context grows?",
+      "options": [
+        {"id": "a", "text": "Raise max_budget_usd so the run can afford more tokens"},
+        {"id": "b", "text": "Add every file's path to permissions.allow before the run"},
+        {"id": "c", "text": "Delegate the reading to a subagent that returns a summary"},
+        {"id": "d", "text": "Repeat all of the skill's instructions twice in the prompt"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "mcq",
+      "objective": "O2",
+      "stem": "A team swaps the model behind their agent for a newer one and keeps the same harness and the same harness settings. Which behavior should they expect to stay the same?",
+      "options": [
+        {"id": "a", "text": "Which tool calls are allowed to run at all"},
+        {"id": "b", "text": "Which tool calls the model will choose to request"},
+        {"id": "c", "text": "How the final answer to the user is worded"},
+        {"id": "d", "text": "How many turns the model needs to finish tasks"}
+      ]
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "objective": "O2",
+      "stem": "An Agent SDK run has max_budget_usd set to 1.00. Spend so far is 0.97 when the model starts a response that will cost 0.08. What happens?",
+      "options": [
+        {"id": "a", "text": "The response is cut off at exactly one dollar"},
+        {"id": "b", "text": "The response finishes and the run keeps going freely"},
+        {"id": "c", "text": "The response is refused before it even starts generating"},
+        {"id": "d", "text": "The response finishes, then the run stops over budget"}
+      ]
+    }
+  ]
+}
