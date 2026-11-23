@@ -26,6 +26,8 @@ Updated 2026-11-16. Written by the Builder session.
 
 - c3-split Round 7: built subagent references-finder (tutor/.claude/agents/references-finder.md), two modes: find (teach step 2, before the planner; writes drafts/sources/NNNN.md and RESOURCES.md) and check (teach step 6, after the designer; writes drafts/sources/NNNN-check.md, teach fixes the draft). Teach pipeline now: finder(find) -> planner -> writer -> designer -> finder(check) -> reviewer loop -> final. Student unsure the writer step was worth its cost; the full pipeline cost is ~3M tokens, 10.6 min in the last run (before the finder).
 
+- final Round 1 (optional, reviews/final.md): REMOVED subagent references-finder (file deleted), per the student's c3-split Round 8 thoughts (28.2 vs 10.6 min, +20% tokens). configs/c3-split still holds it. Teach pipeline in final: planner -> writer -> designer -> lesson-reviewer loop -> final; teach does its own source search (step 2). Its entry in reviews/components.md stays for the student (Kept in final: no, because...). Student's Run line and My thoughts under final Round 1 are still TODO. c3-split Round 8's What Changed is still TODO markers.
+
 ## Open points
 - The student's PREFERENCES.md asks for concise feedback; their c1 review says short feedback on missed items was not enough. The checklist in grade-reviewer.md (check 11) encodes the c1 review's wish. PREFERENCES.md is the student's to edit.
 - reviews/components.md: the grade entry says Round 8 (with) but c1-skills.md has only Round 7; the student owns that line.

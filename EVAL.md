@@ -292,13 +292,122 @@ Name the rounds that built this step and the inventory entries of the pipeline's
 Then the split: the roles you split the teach job into, what each one receives and returns, what runs in order and what in parallel, and who puts the lesson together at the end.
 Why this split and not a smaller one, and what did you try that you took out again?
 
-TODO: the rounds and entries, and the design of your teach split.
+I did 8 rounds during this section. 
+
+Round 1 I added the lesson planner for the teach skill.
+
+Round 2 added a cheatsheet skill to give the students a study guide for quizzes.
+
+Round 3 added a cheatsheet subagent to make it more readable and helpful, called cheatsheet-planner.
+
+Round 4 added a design agent to teach to make the visuals for the lessons.
+
+Round 5 created an skill to help students understand where they are in the class and give them areas they need to work on.
+
+Round 6 added a writer subagent to write the lessons from the teach plan.
+
+Round 7 added a reference finder subagent to find references for the teach skill to use for lessons.
+
+Round 8 has not been acted on yet, but it will remove the reference finder agents due to token and time cost.
+
+The teach skill is split and runs in this order:
+
+- The main agent finds the objective and id, the requested length, where the learner starts, and a win the reader will walk away with.
+- The references subagent find references and puts them in RESOURCES.md.
+- The lesson planner subagent wirtes the plan for the lesson and the work count limit for each section.
+- The main agent reads the lesson plan and corrects formatting if needed.
+- The lesson writer subagent is started to write the draft lesson.
+- The lesson designer subagent is started and draws figures as SVG's without changing hte lesson
+- The reference finder subagent starts again and checks the references in the lesson.
+- The review loop starts and loops at most twice.
+- Write the final lesson
+- Write a short quiz and key.
+
+This is all run in series, and the main agent writes the final lesson. 
+
+I did this split to try to get the agents to drift less as the lesson is written. They each have less context and performed well and kept on track. I am taking out the refernce-finder subagent, the cost of tokens and time is not worth the changes it made to the lesson.
 
 ### Your review, the objective checks and the cost
 
 Paste `uv run p3 report --configs c2-review,c3-split`.
 
-TODO: paste the report tables.
+## Results on agent-architecture
+
+Scored full runs (quick runs and --only runs left out); each cell is the mean over the runs, with the range in brackets.
+
+### Quality
+
+| config | runs | teach facts | teach misconc. | length ratio | dead links | key agreement | wrong keys | ambiguous items | verdict agreement | false wrong | misconc. hit | leaks | behavior met |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `c2-review` | 1 | 1.00 | 0 | 0.86 | 0 | 1.00 | 0 | 0 | 1.00 | 0.00 | 1.00 | 0 | 0.33 |
+| `c3-split` | 1 | 1.00 | 0 | 1.05 | 0 | 1.00 | 0 | 0 | 1.00 | 0.00 | 1.00 | 0 | 0.50 |
+
+Teach facts, key agreement, verdict agreement, false wrong, misconception hit and behavior met are shares (0 to 1); misconceptions, dead links, wrong keys, ambiguous items and leaks are counts per run.
+A dash means no run could be scored on that check, and n= says how many of the runs could.
+A job that failed counts against the config: no lesson scores 0 teach facts, no quiz and key 0 key agreement, a missing grades file disagrees on every item, and a tutor scenario with no reply is not met; leaks need a reply to check, so such a scenario is left out of them.
+The length ratio is a rough reading-time estimate (visible words / 150) over the minutes requested; 0.6 to 1.5 counts as on length.
+
+### Cost: teach
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c2-review` | 1 | 1.90M | 66.4k | 6.5 | 4 | 1.27 |
+| `c3-split` | 1 | 3.58M | 117.9k | 12.0 | 7 | 2.62 |
+
+### Cost: quiz
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c2-review` | 1 | 846.4k | 27.1k | 3.2 | 3 | 0.59 |
+| `c3-split` | 1 | 741.5k | 27.3k | 15.0 | 3 | 0.59 |
+
+### Cost: grade
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c2-review` | 1 | 824.7k | 28.5k | 3.2 | 4 | 0.79 |
+| `c3-split` | 1 | 1.09M | 30.2k | 3.5 | 4 | 0.86 |
+
+### Cost: tutor
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c2-review` | 1 | 639.3k | 11.4k | 1.8 | 0 | 0.58 |
+| `c3-split` | 1 | 505.5k | 8.3k | 1.6 | 0 | 0.52 |
+
+### Cost: all jobs
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c2-review` | 1 | 4.21M | 133.4k | 14.7 | 11 | 3.22 |
+| `c3-split` | 1 | 5.92M | 183.7k | 32.1 | 14 | 4.59 |
+
+Costs are per run, summed over the job's scenarios; list-price $ is the list-price equivalent, not what you pay on a subscription.
+
+## Your ratings
+
+Your ratings from 1 to 5 in the major reviews (reviews/<step>.md), which review full runs on the shared topic; a dash means no rating there yet, one that p3 check does not accept, or a job that step does not review (Tutor in c2-review; Quiz, Feedback and Tutor in c3-split).
+
+| job | criterion | c1-skills | c2-review | c3-split | final |
+|---|---|---:|---:|---:|---:|
+| Lesson | Technical correctness and facts | 5 | 5 | 5 | - |
+| Lesson | Pedagogy | 4 | 5 | 5 | - |
+| Lesson | Alignment with the learning goal | 5 | 5 | 5 | - |
+| Lesson | Overall quality | 4 | 5 | 5 | - |
+| Quiz | Difficulty | 4 | 4 | - | - |
+| Quiz | Coverage of the lesson's core | 3 | 4 | - | - |
+| Quiz | Wording and possible misreadings | 4 | 4 | - | - |
+| Quiz | Writing quality | 5 | 5 | - | - |
+| Quiz | Alignment with the learning goal | 4 | 4 | - | - |
+| Feedback | Useful | 3 | 5 | - | - |
+| Feedback | Explains enough | 3 | 5 | - | - |
+| Feedback | Personalized to how I like things explained | 1 | 5 | - | - |
+| Tutor | Guardrails | 3 | - | - | - |
+| Tutor | Personalization | 3 | - | - | - |
+
+c2-review: 20261113-232251-agent-architecture-m30-r1
+
+c3-split: 20261116-232334-agent-architecture-m30-r1
 
 ### What the step bought and what it cost
 

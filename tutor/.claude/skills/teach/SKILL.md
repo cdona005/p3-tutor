@@ -111,15 +111,14 @@ Read `references/LESSONS.md` and `references/lesson-template.html`, then the tit
 
 1. **Pin down the lesson:** the objective and its id, the requested length in minutes, where the learner starts, and the one tangible win they will walk away with.
    When no length is asked for, use the one `PREFERENCES.md` implies, or 15 minutes, declare it in `p3-minutes`, and say in your message that the learner can ask for a shorter or longer lesson.
-2. **Find the references:** start the `references-finder` subagent with the Agent tool in `find` mode.
-   Its task message names the mode, the objective's id and text, the requested length in minutes and the lesson's number (the next number in `lessons/`), and nothing else.
-   Wait for its report before you do anything else; it reads the best sources, writes them with the claims they support to `drafts/sources/NNNN.md`, adds them to `RESOURCES.md`, and names the lesson's primary source.
+2. **Find the knowledge:** search the web for high-trust sources on exactly this objective, read the best two or three, and choose the single best one as the lesson's primary source.
+   Add the sources to `RESOURCES.md` in the format in `references/RESOURCES-FORMAT.md`.
 3. **Plan to the minutes:** start the `lesson-planner` subagent with the Agent tool.
-   Its task message names the objective's id and text, the requested length in minutes, the lesson's number (the next number in `lessons/`), and the primary source the finder named, and nothing else.
+   Its task message names the objective's id and text, the requested length in minutes, the lesson's number (the next number in `lessons/`), and the primary source you chose, and nothing else.
    Wait for its report before you do anything else; the plan it writes to `drafts/plans/NNNN.md` holds the win, the sections in order with a word budget for each, and the example and practice for each.
    Read the plan; if it breaks a rule of `FORMATS.md` or leaves out an idea of the objective with no reason, fix the plan yourself in that file.
 4. **Write the draft lesson:** start the `lesson-writer` subagent with the Agent tool.
-   Its task message names the plan's path, the sources file's path, the draft's path, the objective's id and text, the requested length in minutes and the primary source, and nothing else.
+   Its task message names the plan's path, the draft's path, the objective's id and text, the requested length in minutes and the primary source, and nothing else.
    The draft goes to `drafts/lessons/NNNN-<slug>.html`, not to `lessons/`, with the next number in `lessons/`, in a folder at the same depth as `lessons/`, so its relative links to `../assets/` and `../cheatsheets/` work unchanged.
    Wait for its report before you do anything else; it writes the lesson section by section from the plan to each section's word budget, in the voice a lesson needs, with a placeholder where a figure belongs.
    Read its report; if it says a section came short of its budget or left the plan, have it fixed before the next step.
@@ -127,15 +126,11 @@ Read `references/LESSONS.md` and `references/lesson-template.html`, then the tit
    Its task message names the draft's path, the plan's path and the requested length in minutes, and nothing else.
    Wait for its report before you do anything else; it draws the figures as inline SVG and shapes the layout in the draft, without changing what the lesson says.
    Read its report, and if it names a place that needs a picture it could not add, add the figure's description to the draft yourself.
-6. **Check the references:** start the `references-finder` subagent again, in `check` mode.
-   Its task message names the mode, the draft's path and the sources file's path, and nothing else.
-   Wait for its report before you do anything else; it opens every link in the draft and checks that it works and backs the sentence beside it, and writes its findings to `drafts/sources/NNNN-check.md`.
-   Fix in the draft every link it found broken or not backing its claim, using the replacement it names, and a load-bearing claim with no source by citing one from the sources file or by cutting the claim.
-7. **Review the draft** in a loop of at most two passes, as below.
-8. **Write the final lesson** to `lessons/NNNN-<slug>.html` once, as a copy of the last draft, and the loop's record, as below.
-9. **Write a short quiz and its key** on the lesson's objective, in the same pass: four or five items, as `references/QUIZZES.md` describes, none of them a repeat of the lesson's practice questions.
-10. **Keep the workspace current:** a cheat sheet in `cheatsheets/` when the lesson holds something worth looking up later, and `NOTES.md` for anything you learned about the learner.
-11. **Finish** with a short message: the lesson's path and what it covers, that a quiz is ready when they are, and a reminder that they can ask you anything about it.
+6. **Review the draft** in a loop of at most two passes, as below.
+7. **Write the final lesson** to `lessons/NNNN-<slug>.html` once, as a copy of the last draft, and the loop's record, as below.
+8. **Write a short quiz and its key** on the lesson's objective, in the same pass: four or five items, as `references/QUIZZES.md` describes, none of them a repeat of the lesson's practice questions.
+9. **Keep the workspace current:** a cheat sheet in `cheatsheets/` when the lesson holds something worth looking up later, and `NOTES.md` for anything you learned about the learner.
+10. **Finish** with a short message: the lesson's path and what it covers, that a quiz is ready when they are, and a reminder that they can ask you anything about it.
    Never put a quiz answer in the message.
 
 ### The review loop

@@ -95,7 +95,7 @@ An example of a finished entry:
 - Kind: skill
 - Step added: c3-split
 - Purpose: Make the student a study guide.
-- With and without: TODO
+- With and without: revies/c3-split, round 2(without), round 3(with)
 - Review: The first pass was bad, it was hard to read and seemed more like a lesson recap than a study guide.
 - Kept in final: TODO
 
@@ -103,7 +103,7 @@ An example of a finished entry:
 
 - Kind: subagent
 - Step added: c3-split
-- Purpose: TODO
+- Purpose: Make the plan for the cheatsheet
 - With and without: reviews/c3-split.md, the second "Round 2" (without) and the round after it (with)
 - Review: The second agent made the cheat sheet helpful for studying and has all of the necessary information needed from the lesson. I liked that it adds a most important section to the cheatsheet and how the document is layed out.
 - Kept in final: TODO
@@ -112,34 +112,34 @@ An example of a finished entry:
 
 - Kind: subagent
 - Step added: c3-split
-- Purpose: TODO
+- Purpose: Design the visuals for the lessons
 - With and without: reviews/c3-split.md, Round 4 (without) and Round 5 (with)
-- Review: TODO
+- Review: The visuals are better, but I am not sure it is worth the cost to keep.
 - Kept in final: TODO
 
 ### progress-review
 
 - Kind: skill
 - Step added: c3-split
-- Purpose: TODO
-- With and without: TODO
-- Review: TODO
+- Purpose: Give the student their weak areas and where they are in the course.
+- With and without: reviews/c3-split.md, Round 5 (without) and Round 6 (with)
+- Review: It is not very helpful in this project with only 1 lesson and quiz, but I think it would be much more helpful in a real class.
 - Kept in final: TODO
 
 ### lesson-writer
 
 - Kind: subagent
 - Step added: c3-split
-- Purpose: TODO
+- Purpose: Write the lesson from the plan
 - With and without: reviews/c3-split.md, Round 6 (without) and Round 7 (with)
-- Review: TODO
+- Review: The lesson might be a little better, but not worth the cost to have the extra agent.
 - Kept in final: TODO
 
 ### references-finder
 
 - Kind: subagent
 - Step added: c3-split
-- Purpose: TODO
+- Purpose: Find references for the lesson
 - With and without: reviews/c3-split.md, Round 7 (without) and Round 8 (with)
 - Review: TODO
 - Kept in final: TODO

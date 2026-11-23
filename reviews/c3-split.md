@@ -109,9 +109,9 @@ The lesson seems slightly better, I am not sure if it is worth the cost though. 
 This skill raised the time from 10.6 to 28.2 minutes and used 20% more tokens. Ensuring the sources are correct is important, but for the cost the subagent is not worth the time.
 
 **What Changed:**
-- Kind: TODO
-- Files: TODO
-- Why: TODO
+- Kind: other
+- Files: tutor/.claude/agents/references-finder.md (deleted), tutor/.claude/agents/lesson-writer.md, tutor/.claude/skills/teach/SKILL.md
+- Why: Your c3-split Round 8 found the references finder not worth raising the teach run from 10.6 to 28.2 minutes and its tokens by 20%, so final drops it: teach searches for and chooses its own sources again, the check step is gone, and the writer cites from RESOURCES.md.
 
 ## Major review
 
