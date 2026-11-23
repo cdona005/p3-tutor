@@ -46,7 +46,7 @@ TODO: your answer to prompt 2.
 Did the lesson get better by your own ratings, and what did the split cost against `c2-review`?
 Say in one sentence whether you would pay that price again.
 
-TODO: your answer to prompt 3.
+The lesson was better than c2's lesson. It was easier to read, had better visuals, and went from a 0.33 to 0.50 in behavior met. However, the cost is not worth this small of a change. Behavior met is the only statistic that changed in the Quality table, and the cost went from 1.90M tokens and $1.27 to 3.58M tokens and $2.62. I could notice a difference, but I do not think I would be able to if I was reading the lessons without context.
 
 ---
 

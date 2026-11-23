@@ -22,9 +22,9 @@ TODO
 
 **What changed:**
 
-- Kind: other
-- Files: tutor/.claude/agents/references-finder.md (deleted), tutor/.claude/agents/lesson-writer.md, tutor/.claude/skills/teach/SKILL.md
-- Why: Your c3-split Round 8 found the references finder not worth raising the teach run from 10.6 to 28.2 minutes and its tokens by 20%, so final drops it: teach searches for and chooses its own sources again, the check step is gone, and the writer cites from RESOURCES.md.
+- Kind:
+- Files:
+- Why:
 
 ## Major review
 

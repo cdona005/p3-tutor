@@ -1,0 +1,18 @@
+{
+  "quiz": "0001",
+  "learner": "TODO: the learner's name",
+  "answers": [
+    {
+      "id": "q1",
+      "response": "a"
+    },
+    {
+      "id": "q2",
+      "response": "TODO: the learner's number"
+    },
+    {
+      "id": "q3",
+      "response": "TODO: the learner's answer, partly right"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "quiz": "0001",
+  "submissions": {
+    "s1": [
+      {
+        "id": "q1",
+        "verdict": "wrong",
+        "misconception": "M1",
+        "why": "TODO: why this verdict is the right one"
+      },
+      {
+        "id": "q2",
+        "verdict": "correct",
+        "misconception": null,
+        "why": "TODO: why this verdict is the right one"
+      },
+      {
+        "id": "q3",
+        "verdict": "partial",
+        "misconception": null,
+        "why": "TODO: why this verdict is the right one"
+      }
+    ]
+  }
+}

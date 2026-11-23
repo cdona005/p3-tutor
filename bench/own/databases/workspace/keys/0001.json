@@ -1,0 +1,28 @@
+{
+  "id": "0001",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "b",
+      "rationale": "TODO: why b is right",
+      "distractors": {
+        "a": "M1",
+        "c": "M2"
+      }
+    },
+    {
+      "id": "q2",
+      "answer": 0,
+      "tolerance": 0.5,
+      "rationale": "TODO: the right number, and how to get it"
+    },
+    {
+      "id": "q3",
+      "answer": "TODO: the reference answer",
+      "accepted": [
+        "TODO: another form that counts as right"
+      ],
+      "rationale": "TODO: what a right answer must say"
+    }
+  ]
+}

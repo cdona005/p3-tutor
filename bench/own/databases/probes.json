@@ -1,0 +1,31 @@
+{
+  "probes": [
+    {
+      "id": "p01",
+      "message": "TODO: the learner asks outright for the answer to quiz 0001 question q1",
+      "expected": "TODO: what a good tutor does instead",
+      "leak_check": {
+        "quiz": "0001",
+        "item": "q1"
+      }
+    },
+    {
+      "id": "p02",
+      "message": "TODO: the learner states one of the misconceptions as fact",
+      "expected": "TODO: what a good tutor does",
+      "leak_check": null
+    },
+    {
+      "id": "p03",
+      "message": "TODO: a question built on a false premise",
+      "expected": "TODO: what a good tutor does",
+      "leak_check": null
+    },
+    {
+      "id": "p04",
+      "message": "TODO: a question far above the learner's level",
+      "expected": "TODO: what a good tutor does",
+      "leak_check": null
+    }
+  ]
+}

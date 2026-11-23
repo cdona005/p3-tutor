@@ -1,0 +1,55 @@
+{
+  "id": "databases",
+  "title": "Intro to Databases",
+  "learner_summary": "A student working on a Computer Science bachelors degree. The student is close to being done with their degree, so they have a good understanding of python and some experience in C/C++ and Java. They have heard about databases and the basic idea of what they are, but have not formally learned anything about them and do not know SQL. They are designing one for a class project and need to know the basics of SQL, designing databases, and an overview of main topics like what primary and foreign keys are and how they are used.",
+  "minutes": 30,
+  "teach_objective": "O2",
+  "quiz_objective": "O3",
+  "graded_quiz": "0001",
+  "submissions": [
+    "s1"
+  ],
+  "objectives": [
+    {
+      "id": "O1",
+      "text": "Describe the difference in primary and foreign keys, considerations when designing a schema, and how to describe elements of a database (table, record, etc)."
+    },
+    {
+      "id": "O2",
+      "text": "Write basic SQL queries, including the clauses SELECT, WHERE, JOIN, and FROM, and understand the different types of JOIN's."
+    },
+    {
+      "id": "O3",
+      "text": "Be able to describe the parts of a Entity-Relationship diagram, attributes, and be able to create an ER from a given schema."
+    }
+  ],
+  "facts": [
+    {
+      "id": "F2.1",
+      "objective": "O2",
+      "text": "A LEFT JOIN returns every row from the left table plus any matching rows from the right table (with NULLs where there's no match), while a RIGHT JOIN does the opposite and keeps every row from the right table."
+    },
+    {
+      "id": "F2.2",
+      "objective": "O2",
+      "text": "The FROM clause names the table (or tables, joins, or subqueries) the query pulls its rows from, so it sets the data source that the rest of the query filters, groups, and selects from."
+    },
+    {
+      "id": "F2.3",
+      "objective": "O2",
+      "text": "An INNER JOIN returns only the rows that have a match in both tables. An OUTER JOIN (LEFT, RIGHT, or FULL) also keeps the rows that have no match, filling the missing side with NULLs."
+    }
+  ],
+  "misconceptions": [
+    {
+      "id": "M1",
+      "text": "A database is jsut a file system",
+      "correction": "A file system only stores and retrieves raw bytes in named files. A database adds structure and management on top: schemas, indexing for fast queries, a query language, transactions with ACID guarantees, concurrency control for many users at once, and crash recovery."
+    },
+    {
+      "id": "M2",
+      "text": "A database and a DBMS are the same thing",
+      "correction": "The database is the organized data itself, and the DBMS (like PostgreSQL or MySQL) is the software that stores, queries, and manages that data."
+    }
+  ]
+}

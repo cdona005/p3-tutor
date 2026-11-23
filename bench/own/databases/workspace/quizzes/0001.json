@@ -1,0 +1,40 @@
+{
+  "id": "0001",
+  "objective": "O1",
+  "title": "Database Basics",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O1",
+      "stem": "TODO: a multiple-choice question",
+      "options": [
+        {
+          "id": "a",
+          "text": "TODO: a wrong option tied to M1"
+        },
+        {
+          "id": "b",
+          "text": "TODO: the right option"
+        },
+        {
+          "id": "c",
+          "text": "TODO: a wrong option tied to M2"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "objective": "O1",
+      "stem": "TODO: a question with a number for its answer",
+      "unit": "TODO: the unit"
+    },
+    {
+      "id": "q3",
+      "type": "short",
+      "objective": "O1",
+      "stem": "TODO: a question with a short written answer"
+    }
+  ]
+}
