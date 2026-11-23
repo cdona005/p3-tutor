@@ -6,19 +6,37 @@
         "id": "q1",
         "verdict": "wrong",
         "misconception": "M1",
-        "why": "TODO: why this verdict is the right one"
+        "why": "The learner chose a, which describes a database as any folder of files on a computer. The correct answer is b: a database is an organized collection of data built to be stored, searched, and updated easily. Option a is the distractor for M1, treating a database as just a file system."
       },
       {
         "id": "q2",
-        "verdict": "correct",
+        "verdict": "wrong",
         "misconception": null,
-        "why": "TODO: why this verdict is the right one"
+        "why": "The learner answered 75, which is outside the tolerance of 0.5 around the correct answer of 25. With one student per row, 25 students means 25 rows. The learner seems to have multiplied 25 students by 3 columns, mixing up the number of rows with the number of individual values in the table."
       },
       {
         "id": "q3",
         "verdict": "partial",
         "misconception": null,
-        "why": "TODO: why this verdict is the right one"
+        "why": "The learner correctly says a primary key uniquely identifies each row in its table. The foreign key part is too vague, though. Saying it is 'from another table' does not explain that a foreign key is a column that references another table's primary key to link the two tables, and the rationale requires both keys to be explained."
+      },
+      {
+        "id": "q4",
+        "verdict": "correct",
+        "misconception": null,
+        "why": "The learner chose c, the correct answer: a single row is one record, such as all the information about one student."
+      },
+      {
+        "id": "q5",
+        "verdict": "correct",
+        "misconception": null,
+        "why": "The learner chose a, the correct answer: SQL is the language used to ask a database for data and to change it."
+      },
+      {
+        "id": "q6",
+        "verdict": "wrong",
+        "misconception": null,
+        "why": "The learner chose a, claiming databases always use less disk space than files. That is false, since a database often uses extra space for indexes and metadata. The correct answer is c: a database lets many users safely find and update the same data at the same time."
       }
     ]
   }

@@ -1,6 +1,6 @@
 {
   "quiz": "0001",
-  "learner": "TODO: the learner's name",
+  "learner": "Jordan",
   "answers": [
     {
       "id": "q1",
@@ -8,11 +8,23 @@
     },
     {
       "id": "q2",
-      "response": "TODO: the learner's number"
+      "response": 75
     },
     {
       "id": "q3",
-      "response": "TODO: the learner's answer, partly right"
+      "response": "A primary key is a unique id for each row in the table so no two rows are the same. A foreign key is a key that's from another table."
+    },
+    {
+      "id": "q4",
+      "response": "c"
+    },
+    {
+      "id": "q5",
+      "response": "a"
+    },
+    {
+      "id": "q6",
+      "response": "a"
     }
   ]
 }

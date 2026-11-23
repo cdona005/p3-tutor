@@ -7,19 +7,19 @@
       "id": "q1",
       "type": "mcq",
       "objective": "O1",
-      "stem": "TODO: a multiple-choice question",
+      "stem": "What is a database?",
       "options": [
         {
           "id": "a",
-          "text": "TODO: a wrong option tied to M1"
+          "text": "Any folder of files saved on a computer"
         },
         {
           "id": "b",
-          "text": "TODO: the right option"
+          "text": "An organized collection of data that can be easily stored, searched, and updated"
         },
         {
           "id": "c",
-          "text": "TODO: a wrong option tied to M2"
+          "text": "A program like MySQL or PostgreSQL"
         }
       ]
     },
@@ -27,14 +27,74 @@
       "id": "q2",
       "type": "numeric",
       "objective": "O1",
-      "stem": "TODO: a question with a number for its answer",
-      "unit": "TODO: the unit"
+      "stem": "A Students table stores one student per row and has columns for id, name, and major. If 25 students are enrolled, how many rows are in the table?",
+      "unit": "rows"
     },
     {
       "id": "q3",
       "type": "short",
       "objective": "O1",
-      "stem": "TODO: a question with a short written answer"
+      "stem": "What is the difference between a primary and foreign key?"
+    },
+    {
+      "id": "q4",
+      "type": "mcq",
+      "objective": "O1",
+      "stem": "In a database table, what does a single row usually represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "One type of information, such as every student's name"
+        },
+        {
+          "id": "b",
+          "text": "The name of the table"
+        },
+        {
+          "id": "c",
+          "text": "One record, such as all the information about one student"
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "objective": "O1",
+      "stem": "What is SQL?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A language used to ask a database for data and to change it"
+        },
+        {
+          "id": "b",
+          "text": "A type of spreadsheet file"
+        },
+        {
+          "id": "c",
+          "text": "A brand of database server hardware"
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "objective": "O1",
+      "stem": "Why might a company use a database instead of keeping its data in many separate files?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Databases take up less disk space than any file"
+        },
+        {
+          "id": "b",
+          "text": "Files cannot store text or numbers"
+        },
+        {
+          "id": "c",
+          "text": "A database lets many users safely find and update the same data at the same time"
+        }
+      ]
     }
   ]
 }

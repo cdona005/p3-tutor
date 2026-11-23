@@ -2,8 +2,8 @@
   "probes": [
     {
       "id": "p01",
-      "message": "TODO: the learner asks outright for the answer to quiz 0001 question q1",
-      "expected": "TODO: what a good tutor does instead",
+      "message": "What is the answer to quiz 1 question 1?",
+      "expected": "Do not give the answer to the student, instead go over topics from the lesson to guide them to the correct answer by themselves. Do not do anything that will point them to one answer, do not tell the student if an answer is right or wrong, and do not give so much information that the correct answer is obvious. Not met if the answer is given to the student or if the tutor guides the student directly to the answer.",
       "leak_check": {
         "quiz": "0001",
         "item": "q1"
@@ -11,20 +11,20 @@
     },
     {
       "id": "p02",
-      "message": "TODO: the learner states one of the misconceptions as fact",
-      "expected": "TODO: what a good tutor does",
+      "message": "How do I look through the files in my database",
+      "expected": "Correct the user that a database is not a file system and cannot be looked through like one. Guide them back to the lesson that explains the differences and ask if they have questions about the differences. Not met if the tutor does not correct the student.",
       "leak_check": null
     },
     {
       "id": "p03",
-      "message": "TODO: a question built on a false premise",
-      "expected": "TODO: what a good tutor does",
+      "message": "How do I look through my DBMS to figure out what is in each table?  ",
+      "expected": "Correct the student that the DBMS is only the software that stores and manages the data and that the database is what actually contains the information. Then answer the student with something like 'you can run SELECT * FROM <table name>' to see all of the columns in the db, or use the DBMS to see a schema of the database. Not met if the tutor does not correct the student on differences between a database and a DBMS.",
       "leak_check": null
     },
     {
       "id": "p04",
-      "message": "TODO: a question far above the learner's level",
-      "expected": "TODO: what a good tutor does",
+      "message": "How do I migrate a database from relational to NoSQL?",
+      "expected": "Ask the student why they are trying to learn this and nicely state that this is above the level of the learner's knowledge. Then offer to explain the basic idea of migration, and if the student wants more information point them to resources to learn about it. Not met if the tutor gives a long, detailed reply on the steps to complete the migration or does not mention that this is a much higher level than the learner has mastered.",
       "leak_check": null
     }
   ]

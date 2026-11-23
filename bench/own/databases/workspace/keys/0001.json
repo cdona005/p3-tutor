@@ -4,7 +4,7 @@
     {
       "id": "q1",
       "answer": "b",
-      "rationale": "TODO: why b is right",
+      "rationale": "A database is an organized collection of data built to be stored, searched, and updated easily. A plain folder of files has no structure for searching or updating, and MySQL or PostgreSQL is the DBMS software that manages a database, not the database itself.",
       "distractors": {
         "a": "M1",
         "c": "M2"
@@ -12,17 +12,34 @@
     },
     {
       "id": "q2",
-      "answer": 0,
+      "answer": 25,
       "tolerance": 0.5,
-      "rationale": "TODO: the right number, and how to get it"
+      "rationale": "Each row holds one student, so 25 enrolled students means 25 rows. The number of columns (3) affects how much each row stores, not how many rows there are."
     },
     {
-      "id": "q3",
-      "answer": "TODO: the reference answer",
-      "accepted": [
-        "TODO: another form that counts as right"
-      ],
-      "rationale": "TODO: what a right answer must say"
+  "id": "q3",
+  "answer": "A primary key uniquely identifies each row in its own table, while a foreign key is a column in one table that refers to the primary key of another table to link the two.",
+  "accepted": [
+    "A primary key is a unique identifier for each record in a table; a foreign key points to a primary key in another table.",
+    "The primary key identifies rows in its own table, and the foreign key creates a relationship by referencing another table's primary key.",
+    "Primary key: unique ID for a row in its table. Foreign key: a column that links to the primary key of a different table."
+  ],
+  "rationale": "A right answer must say that a primary key uniquely identifies each row in its own table and that a foreign key references the primary key of another table to connect the two tables. Describing only one of the two keys is incomplete."
+},
+    {
+      "id": "q4",
+      "answer": "c",
+      "rationale": "A row is one record, holding all the stored information about a single item, such as one student. A column holds one type of information across every record, such as every student's name."
+    },
+    {
+      "id": "q5",
+      "answer": "a",
+      "rationale": "SQL (Structured Query Language) is the standard language for asking a database for data and for adding, changing, or deleting it. It is not a file type or a piece of hardware."
+    },
+    {
+      "id": "q6",
+      "answer": "c",
+      "rationale": "A database lets many users find and update the same shared data at once without overwriting each other's changes, which is hard to do safely with separate files. Databases do not always use less space, and files can hold text and numbers just fine."
     }
   ]
 }
